@@ -45,8 +45,9 @@
 <div class="inquiry-head"><div><p class="eyebrow blue">ONLINE INQUIRY</p><h2>온라인 인증 문의</h2><p>홈페이지에서 문의를 남겨주시면 확인 후 연락드리겠습니다.</p></div></div>
 <table class="inquiry-table">
 <thead><tr><th style="width:90px">번호</th><th>제목</th><th style="width:130px">작성자</th><th style="width:130px">등록일</th></tr></thead>
-<tbody><tr><td colspan="4" class="private-row">문의글은 개인정보 보호를 위해 공개되지 않습니다. 아래 글쓰기를 이용해 주세요.</td></tr></tbody>
+<tbody id="inquiryList"><tr><td colspan="4" class="private-row">문의 목록을 불러오는 중입니다.</td></tr></tbody>
 </table>
+<p class="formnote">※ 목록에는 제목, 마스킹된 작성자, 등록일만 표시되며 연락처·이메일·회사명·제품명·문의내용은 공개되지 않습니다.</p>
 <div class="board-actions"><button type="button" class="board-btn" id="writeOpen">글쓰기</button></div>
 <div class="inquiry-formbox" id="inquiryFormBox">
 <h3>인증 문의 작성</h3>
@@ -77,6 +78,34 @@
 <script>
 const SUPABASE_URL="https://xjpirjjhiptvnzwmiwuu.supabase.co";
 const SUPABASE_KEY="sb_publishable_zI2OPfJwlvdDXLBp7LqIGQ_-DZImkh3";
+
+function escapeHtml(value){
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
+}
+function formatDate(value){
+  const d=new Date(value);
+  if(Number.isNaN(d.getTime())) return "";
+  return new Intl.DateTimeFormat("ko-KR",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(d).replace(/\. /g,"-").replace(".","");
+}
+async function loadInquiries(){
+  const tbody=document.getElementById("inquiryList");
+  try{
+    const res=await fetch(SUPABASE_URL+"/rest/v1/inquiry_public?select=id,title,writer,created_at&order=id.desc&limit=30",{
+      headers:{"apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY}
+    });
+    if(!res.ok) throw new Error(await res.text());
+    const rows=await res.json();
+    if(!rows.length){
+      tbody.innerHTML='<tr><td colspan="4" class="private-row">등록된 문의가 없습니다.</td></tr>';
+      return;
+    }
+    tbody.innerHTML=rows.map(row=>`<tr><td>${escapeHtml(row.id)}</td><td>${escapeHtml(row.title)}</td><td>${escapeHtml(row.writer)}</td><td>${escapeHtml(formatDate(row.created_at))}</td></tr>`).join("");
+  }catch(err){
+    console.error(err);
+    tbody.innerHTML='<tr><td colspan="4" class="private-row">문의 목록을 불러오지 못했습니다.</td></tr>';
+  }
+}
+
 const box=document.getElementById("inquiryFormBox");
 document.getElementById("writeOpen").onclick=()=>{box.classList.add("open");box.scrollIntoView({behavior:"smooth",block:"start"})};
 document.getElementById("writeCancel").onclick=()=>{box.classList.remove("open")};
@@ -88,9 +117,10 @@ const data=Object.fromEntries(new FormData(this).entries());
 try{
 const res=await fetch(SUPABASE_URL+"/rest/v1/inquiries",{method:"POST",headers:{"apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify(data)});
 if(!res.ok)throw new Error(await res.text());
-this.reset();msg.className="formmsg ok";msg.textContent="문의가 정상적으로 접수되었습니다. 확인 후 연락드리겠습니다. 감사합니다.";
+this.reset();msg.className="formmsg ok";msg.textContent="문의가 정상적으로 접수되었습니다. 아래 목록에서 등록 여부를 확인할 수 있습니다.";await loadInquiries();
 }catch(err){console.error(err);msg.className="formmsg err";msg.textContent="문의 등록 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."}
 finally{btn.disabled=false;btn.textContent="문의 등록"}
 });
+loadInquiries();
 </script>
 </body></html>
