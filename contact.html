@@ -117,7 +117,7 @@ const data=Object.fromEntries(new FormData(this).entries());
 try{
 const res=await fetch(SUPABASE_URL+"/rest/v1/inquiries",{method:"POST",headers:{"apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify(data)});
 if(!res.ok)throw new Error(await res.text());
-this.reset();msg.className="formmsg ok";msg.textContent="문의가 정상적으로 접수되었습니다. 아래 목록에서 등록 여부를 확인할 수 있습니다.";await loadInquiries();
+this.reset();msg.className="formmsg ok";msg.textContent="문의가 정상적으로 접수되었습니다. 등록된 문의는 상단 문의 목록에서 확인할 수 있습니다.";await loadInquiries();
 }catch(err){console.error(err);msg.className="formmsg err";msg.textContent="문의 등록 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."}
 finally{btn.disabled=false;btn.textContent="문의 등록"}
 });
