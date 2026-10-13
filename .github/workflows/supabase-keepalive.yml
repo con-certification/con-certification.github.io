@@ -29,6 +29,7 @@ jobs:
             --max-time 30 \
             -H "apikey: $SUPABASE_KEY" \
             -H "Authorization: Bearer $SUPABASE_KEY" \
-            "$SUPABASE_URL/rest/v1/" > /dev/null
+            "$SUPABASE_URL/rest/v1/inquiries?select=id&limit=1" \
+            > /dev/null
 
           echo "Supabase API request completed"
