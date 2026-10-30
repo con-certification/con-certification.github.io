@@ -51,6 +51,7 @@
 .promo-popup-dots{display:flex;gap:7px;align-items:center}.promo-popup-dot{width:9px;height:9px;border:0;padding:0;border-radius:50%;background:#b8c7d8;cursor:pointer}.promo-popup-dot.active{background:#0969da;width:20px;border-radius:8px}
 @media(max-width:650px){.promo-popup{width:calc(100vw - 32px);right:16px;top:25%}.promo-popup-slide{min-height:240px;padding:20px 16px}.promo-popup-copy{max-width:70%}.promo-popup-slide h3{font-size:19px}.promo-popup-art{width:33%}.promo-popup-bottom{flex-wrap:wrap;justify-content:center}}
 @media(prefers-reduced-motion:reduce){.promo-popup-track{transition:none}}
+ .hero.hero-with-rf .hero-rf.rf-floating{position:fixed;z-index:1200;right:auto;bottom:auto;width:min(340px,calc(100vw - 24px));}
 </style>
 </head>
 <body>
@@ -158,43 +159,41 @@ async function loadHomeInquiries(){
 loadHomeInquiries();
 </script>
 <script>
-/* 사용자가 영상 상단 제목을 잡고 대표 이미지 안에서 위치를 이동 */
+/* RF 시험 영상: 처음에는 대표 이미지에 표시, 드래그하면 화면 전체에서 이동 */
 (function(){
- const hero=document.querySelector('.hero.hero-with-rf');
  const panel=document.getElementById('draggableRf');
  const handle=document.getElementById('rfDragHandle');
  const close=document.getElementById('rfClose');
+ if(!panel||!handle||!close)return;
+ const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+ let drag=null;
  close.addEventListener('pointerdown',e=>e.stopPropagation());
  close.addEventListener('click',e=>{e.stopPropagation();panel.querySelector('video').pause();panel.hidden=true;panel.style.display='none';});
- if(!hero||!panel||!handle)return;
- let dragging=false,startX=0,startY=0,originX=0,originY=0;
- const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
- function begin(e){
-  if(e.button!==undefined&&e.button!==0)return;
-  const parent=hero.getBoundingClientRect(),r=panel.getBoundingClientRect();
-  originX=r.left-parent.left;originY=r.top-parent.top;
-  panel.style.left=originX+'px';panel.style.top=originY+'px';
+ handle.addEventListener('pointerdown',e=>{
+  if(e.target.closest('button')||(e.button!==undefined&&e.button!==0))return;
+  const r=panel.getBoundingClientRect();
+  if(!panel.classList.contains('rf-floating')){
+   document.body.appendChild(panel);
+   panel.classList.add('rf-floating');
+  }
+  panel.style.left=r.left+'px';panel.style.top=r.top+'px';
   panel.style.right='auto';panel.style.bottom='auto';
-  startX=e.clientX;startY=e.clientY;dragging=true;
+  drag={startX:e.clientX,startY:e.clientY,left:r.left,top:r.top};
   handle.setPointerCapture(e.pointerId);
   e.preventDefault();
- }
- function move(e){
-  if(!dragging)return;
-  const maxX=Math.max(0,hero.clientWidth-panel.offsetWidth);
-  const maxY=Math.max(0,hero.clientHeight-panel.offsetHeight);
-  panel.style.left=clamp(originX+e.clientX-startX,0,maxX)+'px';
-  panel.style.top=clamp(originY+e.clientY-startY,0,maxY)+'px';
- }
- function end(){dragging=false;}
- handle.addEventListener('pointerdown',begin);
- handle.addEventListener('pointermove',move);
+ });
+ handle.addEventListener('pointermove',e=>{
+  if(!drag)return;
+  panel.style.left=clamp(drag.left+e.clientX-drag.startX,0,Math.max(0,window.innerWidth-panel.offsetWidth))+'px';
+  panel.style.top=clamp(drag.top+e.clientY-drag.startY,0,Math.max(0,window.innerHeight-panel.offsetHeight))+'px';
+ });
+ const end=()=>{drag=null};
  handle.addEventListener('pointerup',end);
  handle.addEventListener('pointercancel',end);
  window.addEventListener('resize',()=>{
-  if(!panel.style.left)return;
-  panel.style.left=clamp(parseFloat(panel.style.left)||0,0,Math.max(0,hero.clientWidth-panel.offsetWidth))+'px';
-  panel.style.top=clamp(parseFloat(panel.style.top)||0,0,Math.max(0,hero.clientHeight-panel.offsetHeight))+'px';
+  if(!panel.classList.contains('rf-floating'))return;
+  panel.style.left=clamp(parseFloat(panel.style.left)||0,0,Math.max(0,window.innerWidth-panel.offsetWidth))+'px';
+  panel.style.top=clamp(parseFloat(panel.style.top)||0,0,Math.max(0,window.innerHeight-panel.offsetHeight))+'px';
  });
 })();
 </script>
