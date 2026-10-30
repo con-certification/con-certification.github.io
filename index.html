@@ -51,7 +51,7 @@
 .promo-popup-dots{display:flex;gap:7px;align-items:center}.promo-popup-dot{width:9px;height:9px;border:0;padding:0;border-radius:50%;background:#b8c7d8;cursor:pointer}.promo-popup-dot.active{background:#0969da;width:20px;border-radius:8px}
 @media(max-width:650px){.promo-popup{width:calc(100vw - 32px);right:16px;top:25%}.promo-popup-slide{min-height:240px;padding:20px 16px}.promo-popup-copy{max-width:70%}.promo-popup-slide h3{font-size:19px}.promo-popup-art{width:33%}.promo-popup-bottom{flex-wrap:wrap;justify-content:center}}
 @media(prefers-reduced-motion:reduce){.promo-popup-track{transition:none}}
- .hero.hero-with-rf .hero-rf.rf-floating{position:fixed;z-index:1200;right:auto;bottom:auto;width:min(340px,calc(100vw - 24px));}
+ .hero-rf.rf-floating{position:fixed;z-index:1200;right:auto;bottom:auto;width:min(340px,calc(100vw - 24px));}
 </style>
 </head>
 <body>
@@ -201,14 +201,11 @@ loadHomeInquiries();
 <aside class="promo-popup" id="promoPopup" aria-label="주식회사 시온 홍보 배너" hidden>
  <div class="promo-popup-top" id="promoDragHandle" title="잡고 이동"><strong>주식회사 시온 · 인증 안내 · ↔ 드래그하여 이동</strong><button type="button" class="promo-popup-close" id="promoClose" aria-label="배너 닫기">×</button></div>
  <div class="promo-popup-window"><div class="promo-popup-track" id="promoTrack"></div></div>
- <div class="promo-popup-bottom"><label><input type="checkbox" id="promoToday"> 오늘 하루 보지 않기</label><div class="promo-popup-nav"><button type="button" class="promo-popup-arrow" id="promoPrev" aria-label="이전 배너">‹</button><span class="promo-popup-dots" id="promoDots" aria-label="배너 선택"></span><button type="button" class="promo-popup-arrow" id="promoNext" aria-label="다음 배너">›</button></div></div>
+ <div class="promo-popup-bottom"><label><input type="checkbox" id="promoToday"> 이번 접속에서 보지 않기</label><div class="promo-popup-nav"><button type="button" class="promo-popup-arrow" id="promoPrev" aria-label="이전 배너">‹</button><span class="promo-popup-dots" id="promoDots" aria-label="배너 선택"></span><button type="button" class="promo-popup-arrow" id="promoNext" aria-label="다음 배너">›</button></div></div>
 </aside>
 <script>
 (function(){
  const popup=document.getElementById('promoPopup');
- const today=new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Seoul'});
- const key='conPromoDismissDate';
- try{if(localStorage.getItem(key)===today)return;}catch(e){}
  const slides=[
   {title:'KC · CE · FCC 인증 상담',desc:'제품명 또는 사양서만 보내주셔도 인증 대상·절차·기간·비용을 안내해 드립니다. 비교견적도 환영합니다.',label:'무료 인증 상담하기',url:'contact.html#inquiry-board'},
   {title:'네이버 블로그 인증정보',desc:'KC·CE·FCC·EMC 인증 절차와 실무 정보를 주식회사 시온 블로그에서 확인해 보세요.',label:'네이버 블로그 방문하기',url:'https://blog.naver.com/con_certification',external:true},
@@ -239,8 +236,9 @@ loadHomeInquiries();
  function stop(){if(timer!==null){clearInterval(timer);timer=null;}}
  function start(){stop();if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.hidden)timer=setInterval(()=>{idx=(idx+1)%slides.length;render();},3000);}
  function go(i){idx=(i+slides.length)%slides.length;render();start();}
- function close(){if(document.getElementById('promoToday').checked){try{localStorage.setItem(key,today)}catch(e){}}popup.hidden=true;stop();}
+ function close(){popup.hidden=true;stop();}
  document.getElementById('promoClose').addEventListener('click',close);
+ document.getElementById('promoToday').addEventListener('change',e=>{if(e.target.checked)close();});
  document.getElementById('promoPrev').addEventListener('click',()=>go(idx-1));
  document.getElementById('promoNext').addEventListener('click',()=>go(idx+1));
  const drag=document.getElementById('promoDragHandle');
