@@ -15,20 +15,23 @@
 <link rel="stylesheet" href="style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"주식회사 시온","alternateName":"Con Certification","url":"https://con-certification.github.io/","description":"KC·CE·FCC 인증 컨설팅 및 인증대행, EMC 시험 지원","email":"jhkim@coon.co.kr","telephone":"+82-10-2804-2207","sameAs":["https://blog.naver.com/con_certification"]}</script>
 <style>
-/* 메인 대표 이미지 위 RF 영상: 기존 메뉴·문의 게시판·배경 이미지 유지 */
-.hero.hero-with-rf{display:flex;align-items:center;justify-content:space-between;gap:clamp(20px,4vw,64px);padding:clamp(44px,6vw,90px) max(5%,calc((100vw - 1180px)/2));min-height:410px;box-sizing:border-box;position:relative}
-.hero.hero-with-rf .heroText{position:relative;z-index:2;flex:1 1 56%;min-width:0;max-width:650px;margin:0;text-align:left;transform:none;left:auto;top:auto;right:auto;bottom:auto}
-.hero.hero-with-rf .hero-rf{position:relative;z-index:2;flex:0 1 420px;min-width:0;max-width:420px;padding:12px;background:rgba(7,22,45,.82);border:1px solid rgba(255,255,255,.27);border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.28);color:#fff}
-.hero-rf-label{margin:0 0 8px;color:#d8e8ff;font-size:12px;font-weight:700;letter-spacing:.04em}
-.hero-rf video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:#0b1423}
-.hero-rf-caption{margin:9px 0 0;font-size:13px;color:#e5eefb;text-align:center}
-@media(max-width:820px){.hero.hero-with-rf{flex-direction:column;align-items:stretch;padding:48px 6% 36px;gap:28px}.hero.hero-with-rf .heroText{flex:auto;max-width:none}.hero.hero-with-rf .hero-rf{flex:auto;width:100%;max-width:480px;align-self:center;box-sizing:border-box}}
+/* 대표 이미지 유지 + 오른쪽 하단 이동형 RF 시험 영상 */
+.hero.hero-with-rf{position:relative;min-height:440px;box-sizing:border-box;overflow:hidden}
+.hero.hero-with-rf .heroText{position:relative;z-index:2;max-width:52%;margin-left:0;text-align:left;transform:none;left:auto;top:auto;right:auto;bottom:auto}
+.hero.hero-with-rf .hero-rf{position:absolute;right:5%;bottom:20px;z-index:5;width:min(32%,340px);box-sizing:border-box;background:rgba(6,20,39,.86);border:1px solid rgba(255,255,255,.18);border-radius:10px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.27);color:white}
+.hero-rf-label{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 11px;margin:0;font-size:12px;font-weight:700;color:#e9f3ff;cursor:grab;touch-action:none;user-select:none;background:rgba(0,0,0,.2)}
+.hero-rf-label:active{cursor:grabbing}
+.hero-rf-hint{font-size:10px;font-weight:400;opacity:.75;white-space:nowrap}
+.hero-rf video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#0b1423;pointer-events:none}
+.hero-rf-caption{display:none}
+@media(max-width:820px){.hero.hero-with-rf{min-height:650px;padding-bottom:270px}.hero.hero-with-rf .heroText{max-width:100%}.hero.hero-with-rf .hero-rf{right:5%;bottom:20px;width:min(80%,340px)}}
+@media(max-width:430px){.hero.hero-with-rf{min-height:680px}.hero.hero-with-rf .hero-rf{width:min(88%,320px)}}
 </style>
 </head>
 <body>
 <header><div class="nav"><a class="brand" href="index.html"><span>C•on</span><b>주식회사 시온</b></a><nav><a href="about.html">회사소개</a><a href="kc.html">KC 인증</a><a href="ce.html">CE 인증</a><a href="fcc.html">FCC 인증</a><a href="emc.html">시험서비스</a><a href="cases.html">인증 사례</a><a href="https://blog.naver.com/con_certification" target="_blank" rel="noopener">인증정보</a><a href="contact.html">상담문의</a></nav></div></header>
 <main>
-<section class="hero hero-with-rf"><div class="shade"></div><div class="heroText"><p class="eyebrow">PRODUCT CERTIFICATION CONSULTING</p><h1>주식회사 시온</h1><h2>국내 · 해외 제품인증 컨설팅 및 인증대행</h2><p class="tags">KC · CE · FCC · EMC · RF · 전기안전 · 신뢰성 · 환경시험</p><p class="lead2">시험 진행부터 인증 취득까지 <strong>One-Stop 지원</strong></p><a class="cta" href="contact.html">인증 상담하기</a></div><div class="hero-rf"><p class="hero-rf-label">실제 RF 시험 진행 영상</p><video autoplay muted loop playsinline preload="metadata" aria-label="RF 점유주파수대역폭 측정 과정"><source src="rf_test_video.mp4" type="video/mp4">동영상 재생을 지원하지 않는 브라우저입니다.</video><p class="hero-rf-caption">RF 점유주파수대역폭 시험</p></div></section>
+<section class="hero hero-with-rf"><div class="shade"></div><div class="heroText"><p class="eyebrow">PRODUCT CERTIFICATION CONSULTING</p><h1>주식회사 시온</h1><h2>국내 · 해외 제품인증 컨설팅 및 인증대행</h2><p class="tags">KC · CE · FCC · EMC · RF · 전기안전 · 신뢰성 · 환경시험</p><p class="lead2">시험 진행부터 인증 취득까지 <strong>One-Stop 지원</strong></p><a class="cta" href="contact.html">인증 상담하기</a></div><div class="hero-rf" id="draggableRf"><div class="hero-rf-label" id="rfDragHandle" aria-label="동영상 위치 이동">RF 점유주파수대역폭 시험 과정 <span class="hero-rf-hint">↔ 드래그하여 이동</span></div><video autoplay muted loop playsinline preload="metadata" aria-label="RF 점유주파수대역폭 측정 과정"><source src="rf_test_video.mp4" type="video/mp4">동영상 재생을 지원하지 않는 브라우저입니다.</video><p class="hero-rf-caption">RF 점유주파수대역폭 시험</p></div></section>
 
 <section class="section inquiry-home">
 <style>
@@ -56,5 +59,43 @@ function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,ch=>({"&"
 function formatDate(value){const d=new Date(value);if(Number.isNaN(d.getTime()))return "";return new Intl.DateTimeFormat("ko-KR",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(d).replace(/\. /g,"-").replace(".","");}
 async function loadHomeInquiries(){const tbody=document.getElementById("homeInquiryList");try{const res=await fetch(SUPABASE_URL+"/rest/v1/inquiry_public?select=id,title,writer,created_at&order=id.desc&limit=8",{headers:{"apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY}});if(!res.ok)throw new Error(await res.text());const rows=await res.json();if(!rows.length){tbody.innerHTML='<tr><td colspan="4" class="home-inquiry-empty">등록된 문의가 없습니다.</td></tr>';return;}tbody.innerHTML=rows.map(row=>`<tr><td>${escapeHtml(row.id)}</td><td>${escapeHtml(row.title)}</td><td>${escapeHtml(row.writer)}</td><td>${escapeHtml(formatDate(row.created_at))}</td></tr>`).join("");}catch(err){console.error(err);tbody.innerHTML='<tr><td colspan="4" class="home-inquiry-empty">최근 문의를 불러오지 못했습니다.</td></tr>';}}
 loadHomeInquiries();
+</script>
+<script>
+/* 사용자가 영상 상단 제목을 잡고 대표 이미지 안에서 위치를 이동 */
+(function(){
+ const hero=document.querySelector('.hero.hero-with-rf');
+ const panel=document.getElementById('draggableRf');
+ const handle=document.getElementById('rfDragHandle');
+ if(!hero||!panel||!handle)return;
+ let dragging=false,startX=0,startY=0,originX=0,originY=0;
+ const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+ function begin(e){
+  if(e.button!==undefined&&e.button!==0)return;
+  const parent=hero.getBoundingClientRect(),r=panel.getBoundingClientRect();
+  originX=r.left-parent.left;originY=r.top-parent.top;
+  panel.style.left=originX+'px';panel.style.top=originY+'px';
+  panel.style.right='auto';panel.style.bottom='auto';
+  startX=e.clientX;startY=e.clientY;dragging=true;
+  handle.setPointerCapture(e.pointerId);
+  e.preventDefault();
+ }
+ function move(e){
+  if(!dragging)return;
+  const maxX=Math.max(0,hero.clientWidth-panel.offsetWidth);
+  const maxY=Math.max(0,hero.clientHeight-panel.offsetHeight);
+  panel.style.left=clamp(originX+e.clientX-startX,0,maxX)+'px';
+  panel.style.top=clamp(originY+e.clientY-startY,0,maxY)+'px';
+ }
+ function end(){dragging=false;}
+ handle.addEventListener('pointerdown',begin);
+ handle.addEventListener('pointermove',move);
+ handle.addEventListener('pointerup',end);
+ handle.addEventListener('pointercancel',end);
+ window.addEventListener('resize',()=>{
+  if(!panel.style.left)return;
+  panel.style.left=clamp(parseFloat(panel.style.left)||0,0,Math.max(0,hero.clientWidth-panel.offsetWidth))+'px';
+  panel.style.top=clamp(parseFloat(panel.style.top)||0,0,Math.max(0,hero.clientHeight-panel.offsetHeight))+'px';
+ });
+})();
 </script>
 </body></html>
