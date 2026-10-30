@@ -29,6 +29,8 @@
 .inquiry-table{width:100%;border-collapse:collapse;border-top:2px solid #10203b;background:#fff}
 .inquiry-table th,.inquiry-table td{padding:14px 12px;border-bottom:1px solid #e2e8f0;text-align:center;font-size:14px}
 .inquiry-table th{background:#f5f8fc}.inquiry-table td:nth-child(2){text-align:left}
+.inquiry-table-header,.inquiry-table-body{table-layout:fixed}.inquiry-table-body{border-top:0}.inquiry-viewport{height:270px;overflow:hidden;position:relative}.inquiry-table-body tr{height:54px}.inquiry-table-body td{box-sizing:border-box}.inquiry-pagination{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:18px}.inquiry-pagination button{padding:7px 12px;border:1px solid #ccd6e3;border-radius:6px;background:#fff;color:#10203b;cursor:pointer}.inquiry-pagination button[aria-current="page"]{background:#0969da;color:#fff;border-color:#0969da;font-weight:700}
+@media(max-width:850px){.inquiry-table-header col:first-child,.inquiry-table-body col:first-child{width:0!important}.inquiry-table-header col:nth-child(3),.inquiry-table-body col:nth-child(3){width:76px!important}.inquiry-table-header col:nth-child(4),.inquiry-table-body col:nth-child(4){width:96px!important}.inquiry-table-body td{font-size:12px;padding:9px 5px}}
 .private-row{color:#607089;padding:35px 12px!important;text-align:center!important}
 .board-actions{display:flex;justify-content:flex-end;margin-top:16px}
 .board-btn{border:0;border-radius:7px;background:#0969da;color:#fff;padding:12px 20px;font-weight:800;cursor:pointer}
@@ -43,10 +45,9 @@
 @media(max-width:850px){.formgrid{grid-template-columns:1fr}.formfield.full{grid-column:auto}.inquiry-head{align-items:flex-start;flex-direction:column}.inquiry-table th:first-child,.inquiry-table td:first-child{display:none}}
 </style>
 <div class="inquiry-head"><div><p class="eyebrow blue">ONLINE INQUIRY</p><h2>온라인 인증 문의</h2><p>홈페이지에서 문의를 남겨주시면 확인 후 연락드리겠습니다.</p></div></div>
-<table class="inquiry-table">
-<thead><tr><th style="width:90px">번호</th><th>제목</th><th style="width:130px">작성자</th><th style="width:130px">등록일</th></tr></thead>
-<tbody id="inquiryList"><tr><td colspan="4" class="private-row">문의 목록을 불러오는 중입니다.</td></tr></tbody>
-</table>
+<table class="inquiry-table inquiry-table-header"><colgroup><col style="width:90px"><col><col style="width:130px"><col style="width:130px"></colgroup><thead><tr><th>번호</th><th>제목</th><th>작성자</th><th>등록일</th></tr></thead></table>
+<div class="inquiry-viewport" id="inquiryViewport"><table class="inquiry-table inquiry-table-body"><colgroup><col style="width:90px"><col><col style="width:130px"><col style="width:130px"></colgroup><tbody id="inquiryList"><tr><td colspan="4" class="private-row">문의 목록을 불러오는 중입니다.</td></tr></tbody></table></div>
+<nav id="inquiryPagination" class="inquiry-pagination" aria-label="상담문의 페이지"></nav>
 <p class="formnote">※ 목록에는 제목, 마스킹된 작성자, 등록일만 표시되며 연락처·이메일·회사명·제품명·문의내용은 공개되지 않습니다.</p>
 <div class="board-actions"><button type="button" class="board-btn" id="writeOpen">글쓰기</button></div>
 <div class="inquiry-formbox" id="inquiryFormBox">
@@ -87,23 +88,77 @@ function formatDate(value){
   if(Number.isNaN(d.getTime())) return "";
   return new Intl.DateTimeFormat("ko-KR",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(d).replace(/\. /g,"-").replace(".","");
 }
+const INQUIRY_PAGE_SIZE=5;
+const INQUIRY_ROW_HEIGHT=54;
+const INQUIRY_SCROLL_SPEED=18;
+let inquiryRows=[];
+let inquiryFixed=false;
+let inquiryFrame=null;
+let inquiryLastFrame=null;
+let inquiryScrollY=0;
+function inquiryRowHtml(row){
+ return `<tr><td>${escapeHtml(row.id)}</td><td>${escapeHtml(row.title)}</td><td>${escapeHtml(row.writer)}</td><td>${escapeHtml(formatDate(row.created_at))}</td></tr>`;
+}
+function renderInquiryPages(selected){
+ const nav=document.getElementById("inquiryPagination");nav.replaceChildren();
+ const count=Math.ceil(inquiryRows.length/INQUIRY_PAGE_SIZE);
+ if(count<=1)return;
+ for(let i=1;i<=count;i++){
+  const button=document.createElement("button");button.type="button";button.textContent=String(i);
+  if(i===selected)button.setAttribute("aria-current","page");
+  button.addEventListener("click",()=>fixInquiryPage(i));nav.appendChild(button);
+ }
+}
+function fixInquiryPage(page){
+ inquiryFixed=true;
+ if(inquiryFrame!==null)cancelAnimationFrame(inquiryFrame);
+ inquiryFrame=null;
+ const start=(page-1)*INQUIRY_PAGE_SIZE;
+ document.getElementById("inquiryList").innerHTML=inquiryRows.slice(start,start+INQUIRY_PAGE_SIZE).map(inquiryRowHtml).join("");
+ document.querySelector(".inquiry-table-body").style.transform="none";
+ renderInquiryPages(page);
+}
+function animateInquiryScroll(timestamp){
+ if(inquiryFixed)return;
+ if(inquiryLastFrame===null)inquiryLastFrame=timestamp;
+ const delta=Math.min(timestamp-inquiryLastFrame,100);inquiryLastFrame=timestamp;
+ if(!document.hidden){
+  inquiryScrollY+=delta*INQUIRY_SCROLL_SPEED/1000;
+  const loopHeight=inquiryRows.length*INQUIRY_ROW_HEIGHT;
+  if(inquiryScrollY>=loopHeight)inquiryScrollY%=loopHeight;
+  document.querySelector(".inquiry-table-body").style.transform=`translateY(${-inquiryScrollY}px)`;
+ }
+ inquiryFrame=requestAnimationFrame(animateInquiryScroll);
+}
+function showInquiryRows(){
+ if(inquiryFrame!==null)cancelAnimationFrame(inquiryFrame);
+ inquiryFrame=null;inquiryFixed=false;
+ const tbody=document.getElementById("inquiryList");
+ document.querySelector(".inquiry-table-body").style.transform="none";
+ if(!inquiryRows.length){tbody.innerHTML='<tr><td colspan="4" class="private-row">등록된 문의가 없습니다.</td></tr>';renderInquiryPages(null);return;}
+ if(inquiryRows.length<=INQUIRY_PAGE_SIZE){fixInquiryPage(1);return;}
+ tbody.innerHTML=inquiryRows.map(inquiryRowHtml).join("")+inquiryRows.map(inquiryRowHtml).join("");
+ inquiryScrollY=0;inquiryLastFrame=null;
+ renderInquiryPages(null);
+ inquiryFrame=requestAnimationFrame(animateInquiryScroll);
+}
 async function loadInquiries(){
-  const tbody=document.getElementById("inquiryList");
-  try{
-    const res=await fetch(SUPABASE_URL+"/rest/v1/inquiry_public?select=id,title,writer,created_at&order=id.desc&limit=30",{
-      headers:{"apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY}
-    });
-    if(!res.ok) throw new Error(await res.text());
-    const rows=await res.json();
-    if(!rows.length){
-      tbody.innerHTML='<tr><td colspan="4" class="private-row">등록된 문의가 없습니다.</td></tr>';
-      return;
-    }
-    tbody.innerHTML=rows.map(row=>`<tr><td>${escapeHtml(row.id)}</td><td>${escapeHtml(row.title)}</td><td>${escapeHtml(row.writer)}</td><td>${escapeHtml(formatDate(row.created_at))}</td></tr>`).join("");
-  }catch(err){
-    console.error(err);
-    tbody.innerHTML='<tr><td colspan="4" class="private-row">문의 목록을 불러오지 못했습니다.</td></tr>';
-  }
+ const tbody=document.getElementById("inquiryList");
+ try{
+  const res=await fetch(SUPABASE_URL+"/rest/v1/inquiry_public?select=id,title,writer,created_at&order=created_at.desc&limit=1000",{
+   headers:{"apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY}
+  });
+  if(!res.ok)throw new Error(await res.text());
+  const rows=await res.json();
+  if(!Array.isArray(rows))throw new Error("잘못된 응답");
+  inquiryRows=rows;showInquiryRows();
+ }catch(err){
+  console.error(err);
+  if(inquiryFrame!==null)cancelAnimationFrame(inquiryFrame);
+  document.getElementById("inquiryPagination").replaceChildren();
+  document.querySelector(".inquiry-table-body").style.transform="none";
+  tbody.innerHTML='<tr><td colspan="4" class="private-row">문의 목록을 불러오지 못했습니다.</td></tr>';
+ }
 }
 
 const box=document.getElementById("inquiryFormBox");
