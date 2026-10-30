@@ -21,6 +21,8 @@
 .hero.hero-with-rf .hero-rf{position:absolute;right:5%;bottom:20px;z-index:5;width:min(32%,340px);box-sizing:border-box;background:rgba(6,20,39,.86);border:1px solid rgba(255,255,255,.18);border-radius:10px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.27);color:white}
 .hero-rf-label{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 11px;margin:0;font-size:12px;font-weight:700;color:#e9f3ff;cursor:grab;touch-action:none;user-select:none;background:rgba(0,0,0,.2)}
 .hero-rf-label:active{cursor:grabbing}
+.hero-rf-close{flex:none;display:grid;place-items:center;width:25px;height:25px;border:0;border-radius:5px;background:rgba(255,255,255,.16);color:#fff;font-size:21px;line-height:1;cursor:pointer;touch-action:manipulation}
+.hero-rf-close:hover,.hero-rf-close:focus-visible{background:rgba(255,255,255,.32)}
 .hero-rf-hint{font-size:10px;font-weight:400;opacity:.75;white-space:nowrap}
 .hero-rf video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#0b1423;pointer-events:none}
 .hero-rf-caption{display:none}
@@ -31,7 +33,7 @@
 <body>
 <header><div class="nav"><a class="brand" href="index.html"><span>C•on</span><b>주식회사 시온</b></a><nav><a href="about.html">회사소개</a><a href="kc.html">KC 인증</a><a href="ce.html">CE 인증</a><a href="fcc.html">FCC 인증</a><a href="emc.html">시험서비스</a><a href="cases.html">인증 사례</a><a href="https://blog.naver.com/con_certification" target="_blank" rel="noopener">인증정보</a><a href="contact.html">상담문의</a></nav></div></header>
 <main>
-<section class="hero hero-with-rf"><div class="shade"></div><div class="heroText"><p class="eyebrow">PRODUCT CERTIFICATION CONSULTING</p><h1>주식회사 시온</h1><h2>국내 · 해외 제품인증 컨설팅 및 인증대행</h2><p class="tags">KC · CE · FCC · EMC · RF · 전기안전 · 신뢰성 · 환경시험</p><p class="lead2">시험 진행부터 인증 취득까지 <strong>One-Stop 지원</strong></p><a class="cta" href="contact.html">인증 상담하기</a></div><div class="hero-rf" id="draggableRf"><div class="hero-rf-label" id="rfDragHandle" aria-label="동영상 위치 이동">RF 점유주파수대역폭 시험 과정 <span class="hero-rf-hint">↔ 드래그하여 이동</span></div><video autoplay muted loop playsinline preload="metadata" aria-label="RF 점유주파수대역폭 측정 과정"><source src="rf_test_video.mp4" type="video/mp4">동영상 재생을 지원하지 않는 브라우저입니다.</video><p class="hero-rf-caption">RF 점유주파수대역폭 시험</p></div></section>
+<section class="hero hero-with-rf"><div class="shade"></div><div class="heroText"><p class="eyebrow">PRODUCT CERTIFICATION CONSULTING</p><h1>주식회사 시온</h1><h2>국내 · 해외 제품인증 컨설팅 및 인증대행</h2><p class="tags">KC · CE · FCC · EMC · RF · 전기안전 · 신뢰성 · 환경시험</p><p class="lead2">시험 진행부터 인증 취득까지 <strong>One-Stop 지원</strong></p><a class="cta" href="contact.html">인증 상담하기</a></div><div class="hero-rf" id="draggableRf"><div class="hero-rf-label" id="rfDragHandle" aria-label="동영상 위치 이동">RF 점유주파수대역폭 시험 과정 <span class="hero-rf-hint">↔ 드래그하여 이동</span><button type="button" class="hero-rf-close" id="rfClose" aria-label="RF 시험 동영상 닫기" title="닫기">×</button></div><video autoplay muted loop playsinline preload="metadata" aria-label="RF 점유주파수대역폭 측정 과정"><source src="rf_test_video.mp4" type="video/mp4">동영상 재생을 지원하지 않는 브라우저입니다.</video><p class="hero-rf-caption">RF 점유주파수대역폭 시험</p></div></section>
 
 <section class="section inquiry-home">
 <style>
@@ -66,6 +68,9 @@ loadHomeInquiries();
  const hero=document.querySelector('.hero.hero-with-rf');
  const panel=document.getElementById('draggableRf');
  const handle=document.getElementById('rfDragHandle');
+ const close=document.getElementById('rfClose');
+ close.addEventListener('pointerdown',e=>e.stopPropagation());
+ close.addEventListener('click',e=>{e.stopPropagation();panel.querySelector('video').pause();panel.hidden=true;panel.style.display='none';});
  if(!hero||!panel||!handle)return;
  let dragging=false,startX=0,startY=0,originX=0,originY=0;
  const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
