@@ -42,7 +42,7 @@
 .home-inquiry-header,.home-inquiry-body{table-layout:fixed}.home-inquiry-body{border-top:0}.home-inquiry-viewport{height:270px;overflow:hidden;position:relative}.home-inquiry-body tr{height:54px}.home-inquiry-body td{box-sizing:border-box}.home-inquiry-header th{box-sizing:border-box}@media(max-width:850px){.home-inquiry-header col:first-child,.home-inquiry-body col:first-child{width:0!important}.home-inquiry-header col:nth-child(3),.home-inquiry-body col:nth-child(3){width:76px!important}.home-inquiry-header col:nth-child(4),.home-inquiry-body col:nth-child(4){width:96px!important}.home-inquiry-body td{font-size:12px;padding:9px 5px}}
 </style>
 <div class="home-inquiry-head"><div><p class="eyebrow blue">RECENT INQUIRIES</p><h2>제품인증 문의 (완료 사례)</h2><p>제품인증 문의 내역과 실제 인증 완료 사례를 함께 확인하실 수 있습니다.</p></div></div>
-<table class="home-inquiry-table home-inquiry-header"><colgroup><col style="width:90px"><col><col style="width:130px"><col style="width:130px"></colgroup><thead><tr><th>번호</th><th>문의 및 인증 사례 제목</th><th>작성자</th><th>등록일</th></tr></thead></table><div class="home-inquiry-viewport" id="homeInquiryViewport"><table class="home-inquiry-table home-inquiry-body"><colgroup><col style="width:90px"><col><col style="width:130px"><col style="width:130px"></colgroup><tbody id="homeInquiryList"><tr><td colspan="4" class="home-inquiry-empty">최근 문의를 불러오는 중입니다.</td></tr></tbody></table></div>
+<table class="home-inquiry-table home-inquiry-header"><colgroup><col style="width:90px"><col><col style="width:130px"><col style="width:130px"></colgroup><thead><tr><th>번호</th><th>문의 및 인증사례</th><th>작성자</th><th>등록일</th></tr></thead></table><div class="home-inquiry-viewport" id="homeInquiryViewport"><table class="home-inquiry-table home-inquiry-body"><colgroup><col style="width:90px"><col><col style="width:130px"><col style="width:130px"></colgroup><tbody id="homeInquiryList"><tr><td colspan="4" class="home-inquiry-empty">최근 문의를 불러오는 중입니다.</td></tr></tbody></table></div>
 <nav id="homeInquiryPagination" class="home-inquiry-pagination" aria-label="문의 및 인증 사례 페이지"></nav>
 <div class="home-inquiry-actions"><a class="home-inquiry-btn secondary" href="contact.html#inquiry-board">전체 문의 보기</a><a class="home-inquiry-btn primary" href="contact.html#inquiry-board">인증 문의하기</a></div>
 </section>
@@ -64,7 +64,7 @@ function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,ch=>({"&"
 function formatDate(value){const d=new Date(value);if(Number.isNaN(d.getTime()))return "";return new Intl.DateTimeFormat("ko-KR",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(d).replace(/\. /g,"-").replace(".","");}
 const HOME_PAGE_SIZE=5;
 const HOME_ROW_HEIGHT=54;
-const HOME_SCROLL_SPEED=14; // 초당 이동 픽셀: 끊김 없이 천천히 올라감
+const HOME_SCROLL_SPEED=18; // 초당 이동 픽셀: 끊김 없이 천천히 올라감
 let homePageFixed=false;
 let homeItems=[];
 let homeAnimationFrame=null;
