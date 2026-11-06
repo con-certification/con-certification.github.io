@@ -158,13 +158,13 @@ function startHomeScroll(){
 async function loadHomeInquiries(){
  const headers={"apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY};
  const [inquiryResult,blogResult]=await Promise.allSettled([
-  fetch(SUPABASE_URL+"/rest/v1/inquiry_public?select=id,title,writer,created_at&order=created_at.desc&limit=1000",{headers}).then(r=>{if(!r.ok)throw Error("문의 조회 실패");return r.json()}),
+  fetch(SUPABASE_URL+"/rest/v1/inquiry_list?select=id,title,writer_masked,created_at&order=created_at.desc&limit=1000",{headers}).then(r=>{if(!r.ok)throw Error("문의 조회 실패");return r.json()}),
   fetch("blog_cases.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("블로그 데이터 없음");return r.json()})
  ]);
  const inquiries=inquiryResult.status==="fulfilled"&&Array.isArray(inquiryResult.value)?inquiryResult.value:[];
  const cases=blogResult.status==="fulfilled"&&Array.isArray(blogResult.value)?blogResult.value:[];
  homeItems=[
-  ...inquiries.map(x=>({title:x.title,writer:x.writer||"문의",date:x.created_at,id:x.id,kind:"inquiry"})),
+  ...inquiries.map(x=>({title:x.title,writer:x.writer_masked||"문의",date:x.created_at,id:x.id,kind:"inquiry"})),
   ...cases.map(x=>({title:x.title,writer:"인증 사례",date:x.date,url:x.url,kind:"blog"}))
  ].filter(x=>x.title&&x.date).sort((a,b)=>new Date(b.date)-new Date(a.date));
  startHomeScroll();
