@@ -42,7 +42,7 @@ body{margin:0;background:#f5f8fc;color:#172b45;font-family:Arial,'Malgun Gothic'
 <main class="diag-wrap">
 <p class="diag-kicker">PRODUCT CERTIFICATION QUICK CHECK</p>
 <h1>30초 제품인증 자가진단</h1>
-<p class="diag-intro">제품명과 전원·무선 기능을 바탕으로 국내 KC 인증의 검토 필요성을 안내합니다. CE·FCC 등 해외인증 진단은 준비 중이며, 상담으로 문의하실 수 있습니다. 시험규격이나 세부 시험항목은 표시하지 않습니다.</p>
+<p class="diag-intro">제품명·용도·전원·무선 기능을 바탕으로 국내 KC 인증 대상 여부를 1차 판단합니다. CE·FCC 등 해외인증 진단은 준비 중이며, 상담으로 문의하실 수 있습니다. 시험규격이나 세부 시험항목은 표시하지 않습니다.</p>
 <form class="diag-card" id="diagForm">
  <div class="diag-field"><label for="product">제품명 또는 제품 종류 *</label><input id="product" name="product" required maxlength="120" placeholder="예: 블루투스 키보드, 신발건조기"></div>
  <div class="diag-field"><label for="purpose">제품 용도 *</label><select id="purpose" required><option value="">선택해 주세요</option><option>가정용·생활가전</option><option>정보통신·사무기기</option><option>산업용 장비</option><option>조명·전기용품</option><option>의료·전문 장비</option><option>부품·액세서리</option><option>기타·잘 모르겠음</option></select></div>
@@ -59,8 +59,8 @@ body{margin:0;background:#f5f8fc;color:#172b45;font-family:Arial,'Malgun Gothic'
 <h2>제품인증 자가진단 결과</h2>
 <p class="diag-note" id="resultProduct"></p>
 <div id="resultItems"></div>
-<p class="diag-warning">입력하신 정보에 따른 예비 안내입니다. 실제 인증 대상과 절차는 제품의 상세 사양, 구성품 및 현행 법령 확인 후 달라질 수 있습니다. 이 결과만으로 인증 대상 제외 또는 인증 취득을 확정할 수 없습니다.</p>
-<a id="consultLink" class="diag-primary" style="display:block;text-align:center;text-decoration:none" href="contact.html">진단 내용으로 무료 상담 신청하기 →</a>
+<p class="diag-warning">본 결과는 입력하신 제품 정보를 바탕으로 한 1차 판단입니다. 최종 인증 대상 여부는 주식회사 시온에 문의해 주시면 제품 사양과 현행 법령을 검토하여 안내해 드립니다. 특히 구성품·정격·사용 목적에 따라 판단이 달라질 수 있습니다.</p>
+<a id="consultLink" class="diag-primary" style="display:block;text-align:center;text-decoration:none" href="contact.html">최종 인증 대상 여부 문의하기 →</a>
 <a href="#diagForm" class="diag-secondary">입력 내용 수정하기</a>
 </section>
 </main>
@@ -168,8 +168,37 @@ form.addEventListener('submit',e=>{
   {"terms": ["무선충전기", "무선 충전기"], "category": "전원·충전기기 · 무선충전기", "emc": "무선 전력전송 기능과 제품 분류를 확인합니다.", "safety": "입출력 정격 및 동봉 어댑터 구성 확인이 필요합니다."},
   {"terms": ["충전기", "어댑터", "전원공급장치"], "category": "전원·충전기기", "emc": "입출력 방식·정격 및 사용 목적을 확인합니다.", "safety": "전원공급장치 세부 품목과 정격 확인이 필요합니다."}
  ];
+ // 품목별 별칭을 먼저 정규화하여 일부 예시 제품에만 의존하지 않도록 합니다.
+ const productFamilies=[
+  {terms:['헤어드라이어','헤어드라이기','헤어드라이','드라이어','드라이기','헤어드라이어기'],category:'가정용 전기기기 · 모발건조기',emc:'전자파 적합성평가 대상 품목 여부는 제품의 전기적 구성과 현행 대상 기자재 분류를 확인합니다.',safety:'가정용 모발건조기는 전기용품 안전관리 품목에 해당할 수 있습니다.'},
+  {terms:['고데기','헤어아이론','전기머리인두','헤어스타일러'],category:'가정용 전기기기 · 모발관리기'},
+  {terms:['전기면도기','면도기','전동칫솔','구강세정기'],category:'가정용 전기기기 · 개인위생기기'},
+  {terms:['전기장판','전기매트','전기담요','온열매트','전기요'],category:'가정용 전기기기 · 전열매트'},
+  {terms:['전기히터','전기난로','온풍기','전기스토브'],category:'가정용 전기기기 · 난방기'},
+  {terms:['가습기','초음파가습기','살균기','소독기'],category:'가정용 전기기기 · 가습·살균기'},
+  {terms:['식기세척기','음식물처리기','음식물분쇄기'],category:'가정용 전기기기 · 주방기기'},
+  {terms:['전기레인지','인덕션','전기그릴','핫플레이트'],category:'가정용 전기기기 · 조리기기'},
+  {terms:['텔레비전','스마트tv','tv수상기','tv'],category:'영상·정보기기 · TV'},
+  {terms:['프로젝터','빔프로젝터','영상투사기'],category:'영상·정보기기 · 프로젝터'},
+  {terms:['서버','워크스테이션','nas','저장장치','외장하드','ssd'],category:'정보기기 · 저장·처리기기'},
+  {terms:['네트워크스위치','허브','모뎀','게이트웨이','방화벽'],category:'통신기기 · 네트워크 장비'},
+  {terms:['led전광판','전광판','디지털사이니지','전자게시판'],category:'영상·정보기기 · 전광판'},
+  {terms:['led조명','led등','전등','조명기구','스탠드조명','다운라이트'],category:'조명·전기용품 · 조명기구'},
+  {terms:['led컨버터','led드라이버','안정기'],category:'조명·전기용품 · 전원장치'},
+  {terms:['멀티탭','연장코드','콘센트','플러그','전원코드','전원케이블'],category:'부품·액세서리 · 전기접속부품'},
+  {terms:['usb케이블','충전케이블','hdmi케이블','랜케이블','케이블'],category:'부품·액세서리 · 케이블'},
+  {terms:['usb-c커넥터','type-c커넥터','c타입커넥터','커넥터'],category:'부품·액세서리 · 커넥터'},
+  {terms:['보조배터리','파워뱅크','배터리팩'],category:'전원·충전기기 · 배터리팩'},
+  {terms:['무선이어폰','이어버드','블루투스이어폰','이어폰'],category:'음향기기 · 이어폰'},
+  {terms:['cctv','감시카메라','ip카메라','웹캠'],category:'영상·정보기기 · 카메라'},
+  {terms:['도어락','전자도어록','디지털도어락'],category:'가정용 전기기기 · 전자잠금장치'},
+  {terms:['무전기','워키토키','송수신기','rf송신기'],category:'통신기기 · 무선 송수신기'},
+  {terms:['산업용로봇','산업용제어반','plc','인버터','모터드라이브'],category:'산업용 장비 · 제어기기'},
+  {terms:['의료용모니터','환자감시장치','의료기기','심전도계'],category:'의료·전문 장비'},
+  {terms:['장난감','완구','rc카','드론'],category:'완구·무선기기'},
+ ];
  const normalized=product.toLowerCase().replace(/\s+/g,'');
- const matched=catalog.find(x=>x.terms.some(t=>normalized.includes(t.toLowerCase().replace(/\s+/g,''))));
+ const matched=[...productFamilies,...catalog].find(x=>x.terms.some(t=>normalized.includes(t.toLowerCase().replace(/\s+/g,''))));
  const category=matched?matched.category:'품목 미분류';
  const inferred=detectWireless(product);
  const conflict=Boolean(inferred&&wireless==='없음');
@@ -183,45 +212,59 @@ form.addEventListener('submit',e=>{
  const powerSupply=matched&&/전원·충전기기/.test(category);
  const ac=power==='AC 전원';
  const isComputer=matched&&category==='정보기기 · 컴퓨터';
- if(isPassive&&!inferred&&wireless==='없음'){
-  addResult(items,'전자파 적합성평가','대상 아닐 가능성 높음','무전원·수동 제품으로 입력됐습니다. 전자회로 또는 능동 기능이 없는 경우를 전제로 한 예비 판단입니다.');
- }else if(isComputer){
-  addResult(items,'전자파 적합성평가','대상','일반적인 컴퓨터는 KC 전자파 적합성평가 대상 기자재입니다. 적용 절차 및 법령상 예외는 실제 제품의 구성과 용도에 따라 확인합니다.');
- }else if(matched){
-  addResult(items,'전자파 적합성평가','대상 가능성 높음',infoDevice?'정보·통신 기능을 가진 제품군입니다. 제품 구성에 따른 적합성평가 대상 여부를 확인해야 합니다.':appliance?'모터·가열·전자제어 기능이 있는 제품군으로 전자파 적합성평가 대상 가능성이 높습니다.':'전기·전자 기능이 있는 제품군으로 전자파 적합성평가 대상 가능성이 높습니다.');
+ // 판정은 시험규격 선정이 아닌 대상 여부 1차 분류에만 사용합니다.
+ // 품목 근거가 없는 경우 전원 종류만으로 대상을 확정하지 않습니다.
+ const electricConnection=/전기접속부품/.test(category);
+ const passiveAccessory=/케이블|커넥터/.test(category);
+ const knownEmc=/정보기기|정보·사무기기|영상·정보기기|통신기기|음향기기/.test(category);
+ const homeAppliance=/가정용 전기기기/.test(category);
+ const safetyHousehold=/모발건조기|모발관리기|전열매트|난방기|팬류|세탁기|냉장기기|냉방·제습기|조리기기|액체 가열기기|전기밥솥|다리미|청소기|주방용 전동기기|공기청정기|개인위생기기|가습·살균기|주방기기|신발건조기/.test(category);
+ const safetySupply=/전원·충전기기|전원장치|전기접속부품/.test(category);
+ const lowVoltageBody=/키보드|마우스|이어폰|헤드폰|헤드셋/.test(category)&&!ac&&power!=='DC 어댑터';
+ // EMC 1차 분류: 제품명 동의어/제품군/전원/무선 기능을 종합합니다.
+ // 발진 주파수는 소비자에게 질문하거나 단독 법적 판정 조건으로 쓰지 않습니다.
+ // 현행 법정 제외품목 여부를 확정할 수 없는 경우에는 추가 확인 필요로 표시합니다.
+ const electronicCategory=Boolean(knownEmc||homeAppliance||powerSupply||/조명·전기용품|산업용 장비|의료·전문 장비|완구·무선기기/.test(category));
+ const ordinaryElectric=/건조기|드라이어|드라이기|선풍기|가습기|제습기|공기청정기|청소기|전기밥솥|전기포트|전기주전자|커피머신|믹서기|다리미|전기히터|난방기|에어프라이어|식기세척기|살균기|소독기|전기드릴|전동공구|전광판|디스플레이|모니터|프린터|스캐너|컴퓨터|노트북|태블릿|충전기|어댑터|인버터|제어기|컨트롤러|측정기|계측기|플라즈마|로봇/.test(normalized);
+ const likelyElectronic=Boolean(electronicCategory||ordinaryElectric||inferred||wireless==='있음');
+ let emcTarget=false;
+ if(conflict){
+  addResult(items,'전자파 적합성평가','추가 확인 필요','제품명과 무선 기능 입력이 일치하지 않습니다. 제품 사양을 확인해 주세요.');
+ }else if(isPassive&&!inferred&&wireless==='없음'&&!electricConnection&&!passiveAccessory&&!likelyElectronic){
+  addResult(items,'전자파 적합성평가','비대상 (1차 판단)','전자회로·능동 기능이 없는 순수 수동 제품이라는 입력을 전제로 합니다.');
+ }else if(!isPassive&&!electricConnection&&!passiveAccessory&&likelyElectronic){
+  emcTarget=true;
+  addResult(items,'전자파 적합성평가','대상 (1차 판단)','제품명과 기능을 바탕으로 일반적인 전기·전자 기자재에 해당하는 것으로 분류했습니다. 정확한 고시상 대상 품목과 제외·면제 조건은 제품 사양으로 최종 확인합니다.');
  }else{
-  addResult(items,'전자파 적합성평가','추가 정보 필요','제품명만으로 해당 품목을 분류하기 어렵습니다. 제품 기능 및 회로 구성 확인이 필요합니다.');
+  addResult(items,'전자파 적합성평가','추가 확인 필요','입력한 제품명·전원·기능만으로 고시상 기자재 분류 또는 제외 조건을 확정하기 어렵습니다. 상세 사양 확인이 필요합니다.');
  }
- const keyboardMouse=/키보드|마우스/.test(normalized);
- if(keyboardMouse&&!ac&&power!=='DC 어댑터'){
-  addResult(items,'전기안전','본체는 대상 아닐 가능성 높음','저전압 배터리식 일반 키보드·마우스 본체를 전제로 한 예비 판단입니다. 내장 배터리, 충전기 및 동봉 어댑터는 별도 안전관리 대상인지 확인해야 합니다.');
- }else if(appliance&&ac){
-  addResult(items,'전기안전','대상 가능성 높음','AC 전원을 사용하는 가정용 전기기기입니다. 세부 품목·정격에 따라 안전인증, 안전확인 또는 공급자적합성확인 적용 여부가 달라집니다.');
- }else if(powerSupply&&ac){
-  addResult(items,'전기안전','대상 가능성 높음','AC 입력 전원장치로 입력돼 전기용품 안전관리 대상 가능성이 높습니다. 제품 종류와 정격 확인이 필요합니다.');
- }else if(isPassive){
-  addResult(items,'전기안전','추가 정보 필요','무전원 제품이라도 플러그·커넥터 등 안전관리 대상 부품일 수 있어 품목 확인이 필요합니다.');
- }else if(infoDevice&&!ac){
-  addResult(items,'전기안전','본체·구성품 구분 필요','저전압 정보기기 본체와 배터리·외부 전원장치의 안전관리 적용 여부를 각각 확인해야 합니다.');
+ if(lowVoltageBody){
+  addResult(items,'전기안전','비대상 (1차 판단)','일반적인 저전압 본체를 기준으로 합니다. 배터리·충전기·동봉 어댑터는 별도 확인 대상입니다.');
+ }else if(safetyHousehold&&ac){
+  addResult(items,'전기안전','대상 (1차 판단)','일반적인 AC 전원 '+category+' 제품을 기준으로 합니다. 정격·용도 및 세부 안전관리 품목을 최종 확인합니다.');
+ }else if(safetySupply&&ac){
+  addResult(items,'전기안전','대상 (1차 판단)','AC 전원 관련 제품의 일반적인 안전관리 품목을 기준으로 합니다. 제품별 적용 조건과 예외를 확인합니다.');
+ }else if(isPassive&&!electricConnection&&!passiveAccessory){
+  addResult(items,'전기안전','비대상 (1차 판단)','안전관리 대상 전기부품이 없는 단순 수동 제품이라는 전제입니다.');
  }else{
-  addResult(items,'전기안전','추가 정보 필요','제품의 세부 품목, 정격, 사용 목적 및 동봉 전원장치 확인이 필요합니다.');
+  addResult(items,'전기안전','추가 확인 필요','제품군·정격·사용 목적 및 별도 구성품에 따라 전기용품 안전관리 대상 여부가 달라질 수 있습니다.');
  }
  if(conflict){
-  addResult(items,'무선 인증','입력 정보 재확인 필요','제품명과 선택한 무선 기능이 서로 다릅니다.');
+  addResult(items,'무선 인증','추가 확인 필요','제품명과 무선 기능 입력이 서로 다릅니다.');
  }else if(moduleStatus==='예'&&(wireless==='있음'||inferred)){
-  addResult(items,'무선 인증','별도 RF 인증 대상 아님(조건부)','기존 KC 인증 무선 모듈을 인증 조건에 맞게 사용하고 무선부에 영향을 주는 변경이 없다면 해당 무선부에 대한 별도 RF 인증을 진행하지 않을 수 있습니다. 실제 인증서(필증) 및 시험성적서 제출 시 RF·REMC 시험 이력과 인증 조건을 확인하여 최종 적용 여부를 판단합니다. 완제품의 EMC·REMC 적용 여부는 별도로 확인합니다.');
+  addResult(items,'무선 인증','별도 RF 인증 비대상 (1차 판단·조건부)','기존 KC 인증 모듈을 인증 조건대로 사용하고 RF부 변경이 없는 경우를 전제로 합니다. 모듈 인증서(필증)와 시험성적서를 확인해야 하며 완제품의 EMC·REMC는 별도 검토합니다.');
  }else if(wireless==='있음'||inferred){
-  addResult(items,'무선 인증','대상 가능성 높음',(inferred||wirelessType)+' 송신 기능이 있는 제품으로 입력됐습니다. 주파수·출력·모듈 및 완제품 구성에 따라 적용 절차를 확인해야 합니다.');
+  addResult(items,'무선 인증','대상 (1차 판단)',(inferred||wirelessType)+' 무선 송신 기능이 있는 제품을 기준으로 합니다. 실제 주파수·출력·구성에 따라 적용 대상과 절차를 최종 확인합니다.');
  }else if(wireless==='없음'){
-  addResult(items,'무선 인증','대상 아닐 가능성 높음','입력하신 내용에 무선 송신 기능이 없습니다. 실제 제품에 무선 송신 기능이 없다는 전제이며, 유선·전자파 적합성평가 여부는 별도입니다.');
+  addResult(items,'무선 인증','비대상 (1차 판단)','무선 송신 기능이 없다는 입력을 전제로 합니다.');
  }else{
-  addResult(items,'무선 인증','추가 정보 필요','무선 송신 기능 유무를 확인해 주세요.');
+  addResult(items,'무선 인증','추가 확인 필요','무선 송신 기능 유무를 확인해야 합니다.');
  }
  // 인증 대상 가능성에 따라 고객에게 준비서류를 간단하게 안내합니다.
- if(!(isPassive&&!inferred&&wireless==='없음') && (matched||wireless==='있음')){
+ if(emcTarget){
   addDocuments(items,'전자파(EMC) 기본 준비서류',['사용자설명서(기술사양 포함)']);
  }
- if(!(keyboardMouse&&!ac&&power!=='DC 어댑터') && ((appliance&&ac)||(powerSupply&&ac))){
+ if(!lowVoltageBody && ((safetyHousehold&&ac)||(safetySupply&&ac))){
   addDocuments(items,'전기안전 준비자료 안내',['제품 사양서','회로도','주요 부품 목록 및 관련 인증자료'],'제품과 인증 유형에 따라 추가 자료가 필요하며 세부 서류는 별도 안내합니다.');
  }
  if(!conflict&&(wireless==='있음'||inferred)){
