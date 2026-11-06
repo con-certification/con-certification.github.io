@@ -126,7 +126,7 @@ function animateInquiryScroll(timestamp){
   inquiryScrollY+=delta*INQUIRY_SCROLL_SPEED/1000;
   const loopHeight=inquiryRows.length*INQUIRY_ROW_HEIGHT;
   if(inquiryScrollY>=loopHeight)inquiryScrollY%=loopHeight;
-  document.querySelector(".inquiry-table-body").style.transform=`translateY(${-inquiryScrollY}px)`;
+  document.querySelector(".inquiry-table-body").style.transform=`translateY(${inquiryScrollY-loopHeight}px)`;
  }
  inquiryFrame=requestAnimationFrame(animateInquiryScroll);
 }
@@ -139,7 +139,8 @@ function showInquiryRows(){
  if(inquiryRows.length<=INQUIRY_PAGE_SIZE){fixInquiryPage(1);return;}
  tbody.innerHTML=inquiryRows.map(inquiryRowHtml).join("")+inquiryRows.map(inquiryRowHtml).join("");
  inquiryScrollY=0;inquiryLastFrame=null;
- renderInquiryPages(null);
+  document.querySelector(".inquiry-table-body").style.transform=`translateY(${-inquiryRows.length*INQUIRY_ROW_HEIGHT}px)`;
+  renderInquiryPages(null);
  inquiryFrame=requestAnimationFrame(animateInquiryScroll);
 }
 async function loadInquiries(){

@@ -58,7 +58,7 @@
 <body>
 <header><div class="nav"><a class="brand" href="index.html"><span>C•on</span><b>주식회사 시온</b></a><nav><a href="about.html">회사소개</a><a href="kc.html">KC 인증</a><a href="ce.html">CE 인증</a><a href="fcc.html">FCC 인증</a><a href="emc.html">시험서비스</a><a href="https://blog.naver.com/con_certification" target="_blank" rel="noopener noreferrer">인증 사례</a><a href="https://blog.naver.com/con_certification" target="_blank" rel="noopener">인증정보</a><a href="contact.html">상담문의</a></nav></div></header>
 <main>
-<section class="hero hero-with-rf"><div class="shade"></div><div class="heroText"><div class="hero-kicker"><span class="hero-kicker-dot"></span> ENGINEERING-LED CERTIFICATION PARTNER</div><p class="eyebrow">PRODUCT CERTIFICATION CONSULTING</p><h1>제품의 가능성을<br><em>인증의 확신으로.</em></h1><h2>국내 · 해외 제품인증 컨설팅 및 인증대행</h2><p class="tags">KC · CE · FCC · EMC · RF · 전기안전 · 신뢰성 · 환경시험</p><p class="lead2">시험 진행부터 인증 취득까지 <strong>One-Stop 지원</strong></p><div class="hero-actions"><a class="cta" href="contact.html">인증 상담하기 <span aria-hidden="true">↗</span></a><a class="hero-secondary" href="diagnosis.html">30초 제품인증 자가진단 →</a></div><div class="hero-credentials"><span>KC · CE · FCC</span><span>EMC · RF · 전기안전</span><span>시험 실무 기반 기술 지원</span></div></div><div class="hero-rf" id="draggableRf"><div class="hero-rf-label" id="rfDragHandle" aria-label="동영상 위치 이동">RF 점유주파수대역폭 시험 과정 <span class="hero-rf-hint">↔ 드래그하여 이동</span><button type="button" class="hero-rf-close" id="rfClose" aria-label="RF 시험 동영상 닫기" title="닫기">×</button></div><video autoplay muted loop playsinline preload="metadata" aria-label="RF 점유주파수대역폭 측정 과정"><source src="rf_test_video.mp4" type="video/mp4">동영상 재생을 지원하지 않는 브라우저입니다.</video><p class="hero-rf-caption">RF 점유주파수대역폭 시험</p><label class="rf-session-bar"><input type="checkbox" id="rfSessionHide"> 이번 접속에서 보지 않기</label></div></section>
+<section class="hero hero-with-rf"><div class="shade"></div><div class="heroText"><div class="hero-kicker"><span class="hero-kicker-dot"></span> ENGINEERING-LED CERTIFICATION PARTNER</div><p class="eyebrow">PRODUCT CERTIFICATION CONSULTING</p><h1>제품의 가능성을<br><em>인증의 확신으로.</em></h1><h2>국내 · 해외 제품인증 컨설팅 및 인증대행</h2><p class="tags">KC · CE · FCC · EMC · RF · 전기안전 · 신뢰성 · 환경시험</p><p class="lead2">시험 진행부터 인증 취득까지 <strong>One-Stop 지원</strong></p><div class="hero-actions"><a class="cta" href="contact.html">인증 상담하기 <span aria-hidden="true">↗</span></a><a class="hero-secondary" href="diagnosis.html">30초 제품인증 자가진단 →</a></div><div class="hero-credentials"><span>KC · CE · FCC</span><span>EMC · RF · 전기안전</span><span>시험 실무 기반 기술 지원</span></div></div><div class="hero-rf" id="draggableRf"><div class="hero-rf-label" id="rfDragHandle" aria-label="동영상 위치 이동">RF 점유주파수대역폭 시험 과정 <span class="hero-rf-hint">↔ 드래그하여 이동</span><button type="button" class="hero-rf-close" id="rfClose" aria-label="RF 시험 동영상 닫기" title="닫기">×</button></div><video autoplay muted loop playsinline preload="metadata" aria-label="RF 점유주파수대역폭 측정 과정"><source src="rf_test_video.mp4" type="video/mp4">동영상 재생을 지원하지 않는 브라우저입니다.</video><p class="hero-rf-caption">RF 점유주파수대역폭 시험</p><label class="rf-session-bar"><input type="checkbox" id="rfSessionHide"> 오늘 하루 보지 않기</label></div></section>
 
 
 <section class="section" id="kc-self-check" >
@@ -101,7 +101,7 @@ function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,ch=>({"&"
 function formatDate(value){const d=new Date(value);if(Number.isNaN(d.getTime()))return "";return new Intl.DateTimeFormat("ko-KR",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(d).replace(/\. /g,"-").replace(".","");}
 const HOME_PAGE_SIZE=5;
 const HOME_ROW_HEIGHT=54;
-const HOME_SCROLL_SPEED=18; // 초당 이동 픽셀: 끊김 없이 천천히 올라감
+const HOME_SCROLL_SPEED=18; // 초당 이동 픽셀: 위에서 아래로 자동 이동
 let homePageFixed=false;
 let homeItems=[];
 let homeAnimationFrame=null;
@@ -141,7 +141,7 @@ function animateHomeScroll(timestamp){
   homeScrollY+=delta*HOME_SCROLL_SPEED/1000;
   const loopHeight=homeItems.length*HOME_ROW_HEIGHT;
   if(homeScrollY>=loopHeight)homeScrollY%=loopHeight;
-  document.querySelector(".home-inquiry-body").style.transform=`translateY(${-homeScrollY}px)`;
+  document.querySelector(".home-inquiry-body").style.transform=`translateY(${homeScrollY-loopHeight}px)`;
  }
  homeAnimationFrame=requestAnimationFrame(animateHomeScroll);
 }
@@ -152,7 +152,8 @@ function startHomeScroll(){
  // 첫 목록을 한 번 복제하여 끝에서 처음으로 넘어갈 때 끊김 방지
  tbody.innerHTML=homeItems.map(homeRowHtml).join("")+homeItems.map(homeRowHtml).join("");
  homeScrollY=0;homeLastFrame=null;
- renderHomePagination(null);
+  document.querySelector(".home-inquiry-body").style.transform=`translateY(${-homeItems.length*HOME_ROW_HEIGHT}px)`;
+  renderHomePagination(null);
  homeAnimationFrame=requestAnimationFrame(animateHomeScroll);
 }
 async function loadHomeInquiries(){
@@ -179,9 +180,12 @@ loadHomeInquiries();
  const close=document.getElementById('rfClose');
  const hide=document.getElementById('rfSessionHide');
  if(!panel||!handle||!close)return;
- const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+  const today=()=>{const d=new Date();return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;};
+  const rfHideKey='con_rf_hide_today';
+  if(localStorage.getItem(rfHideKey)===today()){panel.hidden=true;panel.querySelector('video').pause();}
+  const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
  let drag=null;
- hide.addEventListener('change',()=>{if(hide.checked){panel.querySelector('video').pause();panel.hidden=true;panel.style.display='none';}});
+ hide.addEventListener('change',()=>{if(hide.checked){localStorage.setItem(rfHideKey,today());panel.querySelector('video').pause();panel.hidden=true;panel.style.display='none';}});
  close.addEventListener('pointerdown',e=>e.stopPropagation());
  close.addEventListener('click',e=>{e.stopPropagation();panel.querySelector('video').pause();panel.hidden=true;panel.style.display='none';});
  handle.addEventListener('pointerdown',e=>{
@@ -216,11 +220,13 @@ loadHomeInquiries();
 <aside class="promo-popup" id="promoPopup" aria-label="주식회사 시온 홍보 배너" hidden>
  <div class="promo-popup-top" id="promoDragHandle" title="잡고 이동"><strong>주식회사 시온 · 인증 안내 · ↔ 드래그하여 이동</strong><button type="button" class="promo-popup-close" id="promoClose" aria-label="배너 닫기">×</button></div>
  <div class="promo-popup-window"><div class="promo-popup-track" id="promoTrack"></div></div>
- <div class="promo-popup-bottom"><label><input type="checkbox" id="promoToday"> 이번 접속에서 보지 않기</label><div class="promo-popup-nav"><button type="button" class="promo-popup-arrow" id="promoPrev" aria-label="이전 배너">‹</button><span class="promo-popup-dots" id="promoDots" aria-label="배너 선택"></span><button type="button" class="promo-popup-arrow" id="promoNext" aria-label="다음 배너">›</button></div></div>
+ <div class="promo-popup-bottom"><label><input type="checkbox" id="promoToday"> 오늘 하루 보지 않기</label><div class="promo-popup-nav"><button type="button" class="promo-popup-arrow" id="promoPrev" aria-label="이전 배너">‹</button><span class="promo-popup-dots" id="promoDots" aria-label="배너 선택"></span><button type="button" class="promo-popup-arrow" id="promoNext" aria-label="다음 배너">›</button></div></div>
 </aside>
 <script>
 (function(){
  const popup=document.getElementById('promoPopup');
+  const today=()=>{const d=new Date();return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;};
+  const promoHideKey='con_promo_hide_today';
  const slides=[
   {title:'KC · CE · FCC 인증 상담',desc:'제품명 또는 사양서만 보내주셔도 인증 대상·절차·기간·비용을 안내해 드립니다. 비교견적도 환영합니다.',label:'무료 인증 상담하기',url:'contact.html#inquiry-board'},
   {title:'네이버 블로그 인증정보',desc:'KC·CE·FCC·EMC 인증 절차와 실무 정보를 주식회사 시온 블로그에서 확인해 보세요.',label:'네이버 블로그 방문하기',url:'https://blog.naver.com/con_certification',external:true},
@@ -253,7 +259,7 @@ loadHomeInquiries();
  function go(i){idx=(i+slides.length)%slides.length;render();start();}
  function close(){popup.hidden=true;stop();}
  document.getElementById('promoClose').addEventListener('click',close);
- document.getElementById('promoToday').addEventListener('change',e=>{if(e.target.checked)close();});
+ document.getElementById('promoToday').addEventListener('change',e=>{if(e.target.checked){localStorage.setItem(promoHideKey,today());close();}});
  document.getElementById('promoPrev').addEventListener('click',()=>go(idx-1));
  document.getElementById('promoNext').addEventListener('click',()=>go(idx+1));
  // 처음 배치는 대표 이미지 우측, 안내 팝업은 중앙 상단에 두어 글자를 덜 가림
@@ -277,7 +283,7 @@ loadHomeInquiries();
  popup.addEventListener('mouseenter',stop);popup.addEventListener('mouseleave',start);
  popup.addEventListener('focusin',stop);popup.addEventListener('focusout',e=>{if(!popup.contains(e.relatedTarget))start();});
  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else if(!popup.hidden)start();});
- render();popup.hidden=false;start();
+ render();if(localStorage.getItem(promoHideKey)!==today()){popup.hidden=false;start();}
 })();
 </script>
 </body></html>
