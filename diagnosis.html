@@ -57,7 +57,7 @@ body{margin:0;background:#f5f8fc;color:#172b45;font-family:Arial,'Malgun Gothic'
 <h2>KC 인증 자가진단 결과</h2>
 <p class="diag-note" id="resultProduct"></p>
 <div id="resultItems"></div>
-<p class="diag-warning">이 결과는 입력된 정보만으로 생성된 사전 검토 안내이며, 법적 인증 대상 여부를 확정하지 않습니다. 제품의 구조·정격·용도·무선 사양과 현행 법령·고시를 확인해야 합니다. '추가 검토 필요'는 인증 대상 제외를 의미하지 않습니다.</p>
+<p class="diag-warning">이 결과는 2021년 제품군별 전자파적합성 시험방법 V5의 일부 품목 예시와 입력 정보에 기초한 참고 안내이며, 현행 고시 대조 및 전기안전·무선 세부 판정 로직은 아직 완료되지 않았습니다. 따라서 법적 인증 대상 여부를 확정하지 않습니다. 제품의 구조·정격·용도·무선 사양과 현행 법령·고시를 확인해야 합니다. '추가 검토 필요'는 인증 대상 제외를 의미하지 않습니다.</p>
 <a id="consultLink" class="diag-primary" style="display:block;text-align:center;text-decoration:none" href="contact.html">진단 내용으로 무료 상담 신청하기 →</a>
 <a href="#diagForm" class="diag-secondary">입력 내용 수정하기</a>
 </section>
@@ -82,23 +82,38 @@ form.addEventListener('submit',e=>{
  const wireless=form.elements.wireless.value;
  const wirelessType=wireless==='있음'?document.getElementById('wirelessType').value:'해당 없음';
  const items=document.getElementById('resultItems');items.replaceChildren();
- document.getElementById('resultProduct').textContent='제품: '+product;
- if(power==='무전원·수동'){
-  addResult(items,'전자파 적합성평가','추가 검토 필요','능동 전자회로 유무, 연결되는 기기 및 제품 분류를 확인해야 합니다.');
+ // 2021년 제품별 전자파적합성 시험방법 V5의 품목 예시를 토대로 한 제한적 제품명 분류.
+ // 이 분류는 현행 법령에 따른 인증 확정 판정이 아닙니다.
+ const catalog=[
+  {terms:['블루투스 키보드','무선 키보드','무선키보드','키보드'],category:'정보기기(키보드)',emc:'전자파 적합성평가 관련 검토 필요',safety:'키보드 본체와 함께 제공되는 충전기·어댑터 등의 구성품 확인 필요'},
+  {terms:['신발건조기','신발 건조기'],category:'가정용 전기기기(신발건조기)',emc:'전자파 적합성평가 관련 검토 필요',safety:'전기용품 안전관리 대상 품목 해당 여부를 별도로 검토해야 함'},
+  {terms:['공기청정기','공기 청정기'],category:'가정용 전기기기(공기청정기)',emc:'전자파 적합성평가 관련 검토 필요',safety:'제품 정격·기능에 따른 전기용품 안전관리 품목 검토 필요'},
+  {terms:['선풍기','서큘레이터'],category:'가정용 전기기기(선풍기)',emc:'전자파 적합성평가 관련 검토 필요',safety:'제품 정격·용도에 따른 전기용품 안전관리 품목 검토 필요'},
+  {terms:['전기밥솥','전기 보온밥솥'],category:'가정용 전기기기(전기밥솥)',emc:'전자파 적합성평가 관련 검토 필요',safety:'전기용품 안전관리 대상 품목 해당 여부 검토 필요'},
+  {terms:['모니터','디스플레이'],category:'정보·영상기기(모니터)',emc:'전자파 적합성평가 관련 검토 필요',safety:'전원 구성과 제품 분류에 따른 전기안전 검토 필요'},
+  {terms:['무선충전기','무선 충전기'],category:'충전기(무선충전기)',emc:'전자파 적합성평가 관련 검토 필요',safety:'충전기 본체 및 전원공급장치의 안전관리 품목 검토 필요'},
+  {terms:['충전기','어댑터'],category:'전원공급장치·충전기',emc:'전자파 적합성평가 관련 검토 필요',safety:'출력·입력 정격 및 용도에 따른 안전관리 품목 검토 필요'}
+ ];
+ const normalized=product.toLowerCase().replace(/\s+/g,'');
+ const matched=catalog.find(x=>x.terms.some(t=>normalized.includes(t.toLowerCase().replace(/\s+/g,''))));
+ const recognized=Boolean(matched);
+ const category=matched?matched.category:'품목 미분류';
+ document.getElementById('resultProduct').textContent='제품: '+product+' / 분류: '+category;
+ if(matched){
+  addResult(items,'전자파 적합성평가','제품군 확인 · 검토 필요',matched.emc+' (참고자료 V5 기준의 품목 예시이며 현행 대상 구분·예외조건은 미확정)');
+  addResult(items,'전기안전','제품군별 추가 검토 필요',matched.safety+' 안전인증·안전확인·공급자적합성확인 구분은 아직 판정하지 않습니다.');
  }else{
-  addResult(items,'전자파 적합성평가','대상 가능성 있음','전기·전자 기능과 제품 분류에 따라 적용 여부를 확인해야 합니다.');
- }
- if(power==='AC 전원'){
-  addResult(items,'전기안전','대상 가능성 있음','AC 전원 사용 제품입니다. 품목 분류, 정격, 용도 및 관련 법령에 따른 확인이 필요합니다.');
- }else{
-  addResult(items,'전기안전','추가 검토 필요','전원 방식만으로 대상 여부를 판단할 수 없습니다. 제품 종류와 전원 구성 확인이 필요합니다.');
+  addResult(items,'전자파 적합성평가','품목 확인 필요','현재 제품명 사전에 일치하는 품목이 없습니다. 제품 사양을 확인해 적용 대상과 예외조건을 검토해야 합니다.');
+  addResult(items,'전기안전','품목 확인 필요','전원 방식만으로 판단하지 않습니다. 제품 품목, 용도, 정격과 구성품 확인이 필요합니다.');
  }
  if(wireless==='있음'){
-  addResult(items,'무선 인증','대상 가능성 있음','무선 기능이 있습니다. 주파수, 출력, 모듈 인증 및 완제품 구성 확인이 필요합니다.');
+  addResult(items,'무선 인증','무선 기능 확인 · 검토 필요','입력된 '+wirelessType+' 기능의 주파수·출력·모듈 인증상태·완제품 구성 확인이 필요합니다. 무선 기능이 있다고 모든 제품의 인증 절차가 동일하지는 않습니다.');
+ }else if(wireless==='없음'){
+  addResult(items,'무선 인증','입력상 무선 기능 없음','입력 내용상 무선 기능이 없지만 실제 제품 구성 및 통신 기능 확인 전에는 대상 제외로 확정하지 않습니다.');
  }else{
-  addResult(items,'무선 인증','추가 검토 필요',wireless==='없음'?'입력상 무선 기능은 없지만 제품 구성과 통신 기능을 확인해야 합니다.':'무선 기능 여부와 통신 사양을 확인해야 합니다.');
+  addResult(items,'무선 인증','추가 검토 필요','무선 송수신 기능과 통신 사양을 먼저 확인해야 합니다.');
  }
- const summary=['[KC 인증 자가진단]','제품명: '+product,'용도: '+purpose,'전원 방식: '+power,'정격전압: '+voltage,'무선 기능: '+wireless,'무선 방식: '+wirelessType].join('\n');
+ const summary=['[KC 인증 자가진단]','제품명: '+product,'참고 제품군: '+category,'용도: '+purpose,'전원 방식: '+power,'정격전압: '+voltage,'무선 기능: '+wireless,'무선 방식: '+wirelessType].join('\n');
  // 상담 페이지에서 진단 정보를 활용할 수 있도록 동일 출처 세션에 저장합니다.
  try{sessionStorage.setItem('con_kc_diagnosis',summary);}catch(_){}
  const link=document.getElementById('consultLink');
