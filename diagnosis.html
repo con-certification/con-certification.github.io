@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>30초 KC 인증 자가진단 | 주식회사 시온</title>
-<meta name="description" content="주식회사 시온 KC 인증 자가진단. 전자파·전기안전·무선 인증 검토 필요성을 확인하고 상담을 신청하세요.">
+<title>30초 제품인증 자가진단 | 주식회사 시온</title>
+<meta name="description" content="주식회사 시온 제품인증 자가진단. 현재 국내 KC 분야 예비 검토를 제공합니다. 전자파·전기안전·무선 인증 검토 필요성을 확인하고 상담을 신청하세요.">
 <link rel="stylesheet" href="style.css">
 <style>
 *{box-sizing:border-box}
@@ -40,9 +40,9 @@ body{margin:0;background:#f5f8fc;color:#172b45;font-family:Arial,'Malgun Gothic'
 <body>
 <header class="diag-header"><a href="index.html">C•on &nbsp; 주식회사 시온</a><a href="index.html">← 홈페이지</a></header>
 <main class="diag-wrap">
-<p class="diag-kicker">KC CERTIFICATION QUICK CHECK</p>
-<h1>30초 KC 인증 자가진단</h1>
-<p class="diag-intro">제품의 기본 정보를 입력하면 인증 분야별 검토 필요성을 안내합니다. 시험규격이나 세부 시험항목은 표시하지 않습니다.</p>
+<p class="diag-kicker">PRODUCT CERTIFICATION QUICK CHECK</p>
+<h1>30초 제품인증 자가진단</h1>
+<p class="diag-intro">제품의 기본 정보를 입력하면 국내 KC 인증의 검토 필요성을 안내합니다. CE·FCC 등 해외인증 진단은 준비 중이며, 상담으로 문의하실 수 있습니다. 시험규격이나 세부 시험항목은 표시하지 않습니다.</p>
 <form class="diag-card" id="diagForm">
  <div class="diag-field"><label for="product">제품명 또는 제품 종류 *</label><input id="product" name="product" required maxlength="120" placeholder="예: 블루투스 키보드, 신발건조기"></div>
  <div class="diag-field"><label for="purpose">제품 용도 *</label><select id="purpose" required><option value="">선택해 주세요</option><option>가정용·생활가전</option><option>정보통신·사무기기</option><option>산업용 장비</option><option>조명·전기용품</option><option>의료·전문 장비</option><option>부품·액세서리</option><option>기타·잘 모르겠음</option></select></div>
@@ -54,7 +54,7 @@ body{margin:0;background:#f5f8fc;color:#172b45;font-family:Arial,'Malgun Gothic'
  <p class="diag-note">개인정보 입력 없이 이용할 수 있습니다. 입력 내용은 상담 버튼을 누르기 전까지 서버에 제출되지 않습니다.</p>
 </form>
 <section id="results" class="diag-card diag-results" hidden aria-live="polite">
-<h2>KC 인증 자가진단 결과</h2>
+<h2>제품인증 자가진단 결과</h2>
 <p class="diag-note" id="resultProduct"></p>
 <div id="resultItems"></div>
 <p class="diag-warning">이 결과는 2021년 제품군별 전자파적합성 시험방법 V5의 일부 품목 예시와 입력 정보에 기초한 참고 안내이며, 현행 고시 대조 및 전기안전·무선 세부 판정 로직은 아직 완료되지 않았습니다. 따라서 법적 인증 대상 여부를 확정하지 않습니다. 제품의 구조·정격·용도·무선 사양과 현행 법령·고시를 확인해야 합니다. '추가 검토 필요'는 인증 대상 제외를 의미하지 않습니다.</p>
@@ -113,7 +113,7 @@ form.addEventListener('submit',e=>{
  }else{
   addResult(items,'무선 인증','추가 검토 필요','무선 송수신 기능과 통신 사양을 먼저 확인해야 합니다.');
  }
- const summary=['[KC 인증 자가진단]','제품명: '+product,'참고 제품군: '+category,'용도: '+purpose,'전원 방식: '+power,'정격전압: '+voltage,'무선 기능: '+wireless,'무선 방식: '+wirelessType].join('\n');
+ const summary=['[제품인증 자가진단 · 국내 KC 예비 검토]','제품명: '+product,'참고 제품군: '+category,'용도: '+purpose,'전원 방식: '+power,'정격전압: '+voltage,'무선 기능: '+wireless,'무선 방식: '+wirelessType].join('\n');
  // 상담 페이지에서 진단 정보를 활용할 수 있도록 동일 출처 세션에 저장합니다.
  try{sessionStorage.setItem('con_kc_diagnosis',summary);}catch(_){}
  const link=document.getElementById('consultLink');
