@@ -26,7 +26,13 @@ html{scroll-behavior:smooth}body{margin:0;background:#f5f8fc;color:#172b45;font-
 .diag-note{font-size:13px;color:#64758b;line-height:1.65}
 .diag-primary{width:100%;padding:15px;border:0;border-radius:9px;background:#0969da;color:white;font-weight:800;font-size:16px;cursor:pointer}
 .diag-primary:hover{background:#0756b6}
-.diag-results{margin-top:24px}
+.diag-results{margin-top:24px;animation:diagReveal .35s ease-out}
+@keyframes diagReveal{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+.diag-progress{margin-top:24px;text-align:center}
+.diag-progress[hidden]{display:none}
+.diag-spinner{width:27px;height:27px;margin:0 auto 13px;border:3px solid #dbe7f5;border-top-color:#0969da;border-radius:50%;animation:diagSpin .75s linear infinite}
+@keyframes diagSpin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.diag-spinner,.diag-results{animation:none}}
 .diag-results[hidden]{display:none}
 .diag-results h2{margin:0 0 16px;font-size:23px}
 .diag-result{padding:15px 17px;border:1px solid #dce6f0;border-radius:10px;margin-bottom:10px;background:#fbfdff}
@@ -42,7 +48,7 @@ html{scroll-behavior:smooth}body{margin:0;background:#f5f8fc;color:#172b45;font-
 <main class="diag-wrap">
 <p class="diag-kicker">PRODUCT CERTIFICATION QUICK CHECK</p>
 <h1>30초 제품인증 자가진단</h1>
-<p class="diag-intro">제품명·용도·전원·무선 기능을 바탕으로 국내 KC 인증 대상 여부를 간단히 1차 판단합니다. 실제 회로·기능·사용설명서 확인 전의 참고 결과이며, 최종 판단은 상담을 통해 안내합니다. CE·FCC 등 해외인증은 별도 문의해 주세요. </p>
+<p class="diag-intro">제품명·용도·전원·무선 기능을 바탕으로 국내 KC 인증 대상 여부를 간단히 1차 판단합니다. 제품 매뉴얼 및 실제 기능 확인 전의 참고 결과이며, 최종 판단은 상담을 통해 안내합니다. CE·FCC 등 해외인증은 별도 문의해 주세요. </p>
 <form class="diag-card" id="diagForm">
  <div class="diag-field"><label for="product">제품명 또는 제품 종류 *</label><input id="product" name="product" required maxlength="120" placeholder="예: 블루투스 키보드, 신발건조기"></div>
  <div class="diag-field"><label for="purpose">제품 용도 *</label><select id="purpose" required><option value="">선택해 주세요</option><option>가정용·생활가전</option><option>정보통신·사무기기</option><option>산업용 장비</option><option>조명·전기용품</option><option>의료·전문 장비</option><option>부품·액세서리</option><option>기타·잘 모르겠음</option></select></div>
@@ -53,19 +59,40 @@ html{scroll-behavior:smooth}body{margin:0;background:#f5f8fc;color:#172b45;font-
  <div class="diag-field" id="wirelessTypeWrap" hidden><label for="wirelessType">무선 방식</label><select id="wirelessType"><option>잘 모름</option><option>Bluetooth</option><option>Wi-Fi</option><option>LTE·5G</option><option>RF 리모컨·기타 무선</option><option>복수 무선 방식</option></select></div>
  <div class="diag-field" id="moduleWrap" hidden><fieldset><legend>기존 KC 인증 무선 모듈을 사용하나요?</legend><div class="diag-options"><label><input type="radio" name="certModule" value="예">예</label><label><input type="radio" name="certModule" value="아니요">아니요</label><label><input type="radio" name="certModule" value="잘 모름">잘 모르겠습니다</label></div></fieldset><p class="diag-note">인증번호를 직접 입력할 필요는 없습니다. 인증 모듈의 적용 조건은 상담 시 확인합니다.</p><div class="diag-field" id="moduleHistoryWrap" hidden><fieldset><legend>기존 무선 모듈의 시험 이력 (알고 계신 경우)</legend><div class="diag-options"><label><input type="radio" name="moduleHistory" value="RF만">RF만</label><label><input type="radio" name="moduleHistory" value="RF+REMC">RF + REMC</label><label><input type="radio" name="moduleHistory" value="잘 모름" checked>잘 모름</label></div></fieldset><p class="diag-note">시험 이력은 상담 시 확인합니다.</p></div></div>
  <button type="submit" class="diag-primary">자가진단 결과 확인하기</button>
- <p class="diag-note">개인정보 입력 없이 이용할 수 있습니다. 입력 내용은 상담 버튼을 누르기 전까지 서버에 제출되지 않습니다.</p>
+ <p class="diag-note">이름·연락처는 수집하지 않습니다. 인증 결과에 ‘확인 필요’가 포함되면 입력하신 제품 정보와 진단 결과가 서비스 개선을 위해 저장됩니다. 자세한 내용은 하단 안내를 확인해 주세요.</p>
+<p class="diag-note" style="margin:16px 0 0">진단 결과 중 ‘확인 필요’ 항목이 있으면 제품명·용도·전원·무선 기능·인증별 결과·진단 시각을 기록합니다. 고객의 이름·연락처는 수집하지 않으며, 기록은 관리자만 조회할 수 있습니다. 입력란에 개인정보나 영업비밀을 적지 마세요.</p>
 </form>
+<section id="progress" class="diag-card diag-progress" role="status" aria-live="polite" hidden><div class="diag-spinner" aria-hidden="true"></div><strong>자가진단 결과를 정리하고 있습니다...</strong><p class="diag-note">입력 정보를 바탕으로 1차 결과를 표시합니다.</p></section>
 <section id="results" class="diag-card diag-results" hidden aria-live="polite">
 <h2>제품인증 자가진단 결과</h2>
 <p class="diag-note" id="resultProduct"></p>
 <div id="resultItems"></div>
-<p class="diag-warning">본 결과는 입력하신 제품명·용도·전원·무선 기능만으로 판단한 참고용 1차 결과입니다. 실제 회로 구성, 주요 기능 및 사용설명서에 따라 결과가 달라질 수 있습니다. 정확한 인증 대상 여부는 주식회사 시온에 문의해 확인하시기 바랍니다.</p>
+<p class="diag-warning">본 결과는 입력하신 제품명·용도·전원·무선 기능만으로 판단한 참고용 1차 결과입니다. 제품 매뉴얼 및 실제 기능에 따라 결과가 달라질 수 있습니다. 정확한 인증 대상 여부는 주식회사 시온에 문의해 확인하시기 바랍니다.</p>
 <a id="consultLink" class="diag-primary" style="display:block;text-align:center;text-decoration:none" href="contact.html">최종 인증 대상 여부 문의하기 →</a>
 <a href="#diagForm" class="diag-secondary">입력 내용 수정하기</a>
 </section>
 </main>
 <script>
 const form=document.getElementById('diagForm');
+const progress=document.getElementById('progress');
+const results=document.getElementById('results');
+const submitButton=form.querySelector('button[type=submit]');
+let pendingReveal=null;
+const DIAG_DB_URL='https://xjpirjjhiptvnzwmiwuu.supabase.co';
+const DIAG_DB_KEY='sb_publishable_zI2OPfJwlvdDXLBp7LqIGQ_-DZImkh3';
+async function saveReviewCase(payload){
+ try{
+  const response=await fetch(DIAG_DB_URL+'/rest/v1/diagnosis_reviews',{
+   method:'POST',headers:{'apikey':DIAG_DB_KEY,'Authorization':'Bearer '+DIAG_DB_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+   body:JSON.stringify(payload),keepalive:true
+  });
+  if(!response.ok)console.warn('자가진단 검토 기록 저장 실패:',response.status);
+ }catch(e){console.warn('자가진단 검토 기록 연결 실패');}
+}
+
+function cancelPending(){if(pendingReveal!==null){clearTimeout(pendingReveal);pendingReveal=null;}progress.hidden=true;submitButton.disabled=false;submitButton.textContent='자가진단 결과 확인하기';}
+form.addEventListener('input',()=>{if(pendingReveal!==null)cancelPending();});
+form.addEventListener('change',()=>{if(pendingReveal!==null)cancelPending();});
 const wrap=document.getElementById('wirelessTypeWrap');
 const moduleWrap=document.getElementById('moduleWrap');
 const wirelessQuestion=document.getElementById('wirelessQuestion');
@@ -139,6 +166,7 @@ form.addEventListener('submit',e=>{
  e.preventDefault();
  if(!form.reportValidity())return;
  if(!selectedPowers().length){alert('전원 방식을 하나 이상 선택해 주세요.');form.querySelector('input[name="power"]').focus();return;}
+ cancelPending();results.hidden=true;
  const product=document.getElementById('product').value.trim();
  const purpose=document.getElementById('purpose').value;
  const powers=selectedPowers();
@@ -149,6 +177,8 @@ form.addEventListener('submit',e=>{
  const moduleStatus=wireless==='있음'?(form.elements.certModule.value||'잘 모름'):'해당 없음';
  const moduleHistory=moduleStatus==='예'?form.elements.moduleHistory.value:'해당 없음';
  const items=document.getElementById('resultItems');items.replaceChildren();
+ const judgments=[];
+ const resultAdd=(target,title,status,description)=>{judgments.push({title,status});addResult(target,title,status,description);};
  // 공식 고시 + 2021년 V5 품목명 참고 + 시중 제품명 동의어 기반 1차 분류. 참고표 자체는 현행 고시가 아닙니다.
  // 이 분류는 현행 법령에 따른 인증 확정 판정이 아닙니다.
  const catalog=[
@@ -208,8 +238,6 @@ form.addEventListener('submit',e=>{
   {terms:['장난감','완구','rc카','드론'],category:'완구·무선기기'},
  ];
 
- // 전파연구원 2021년 V5 참고자료에서 추출한 시험방법 표의 품목명.
- // 이 자료는 시험방법 참고표이며 현행 인증대상 고시 자체가 아닙니다.
  // 제품명 전체 일치가 아닌 기능/용도 중심의 넓은 분류(개별 키워드 패치 방지).
  const functionalFamilies=[
   {terms:['자가진단','자동진단','진단시스템','진단장치','진단기','판독시스템','판정시스템','정보처리','정보분석','데이터처리','연산장치','처리시스템','분석시스템','검사시스템','판정장치'],category:'정보기기 · 진단·정보처리'},
@@ -224,7 +252,6 @@ form.addEventListener('submit',e=>{
   {terms:['출입통제','근태관리','인식장치','인식단말','결제단말','키오스크','발권기','정보단말','정보처리'],category:'정보기기 · 단말·처리'},
   {terms:['초음파발생','초음파구동','초음파장치','초음파기기','초음파퇴치','해충퇴치','모기퇴치','해충기피'],category:'가정용 전기기기 · 초음파·퇴치기기'}
  ];
- const pdfV5Products=["주전송 장치 3) 디지털변조기 (64QAM, 256QAM, QPSK)","LED 줄자 (LED light tape measure)","단 장치류 2)초고속, 기가급 디지털 가입자 회선종단장치","설비의 기기 2) 자동음성처리 시스템 및 전자사서함시스템","재예방, 소 가스 누설 검지기 (Gas Detector)","선박국 1)국제 항해 가) 표시면의 유효직경 32㎝이상","는 시각정보 Professional Amplifier","조명기구용 컨버터 (직관형 LED램프- 컨버터외장형)","(IP카메라, 폐쇄회로TV, 네트워크 비디오 녹화기","LED 램프 (직관형 LED 램프 (컨버터외장형))","아이피실링스피커(IP Ceiling Speaker)","터리 충전기 전원공급장치 (가전기기 및 전동기구용)","기 및 전기 승강장안전문 (PSD) 구동부 시스템","용 무선표지 2) 간이 항해자료 기록장치 미부착형","회선종 1) 채널서비스유닛(CSU)기능을 가진기기","스터, 전기프라이팬, 전기고기구이기, 와플기기,","털 단말장치 (VoIP 게이트웨이 기능을 내장한","폐장치 및 연스위치, 타이머·타이머스위치 포함)","58조제1항 심음계 (저주파 및 고주파 사용)","LED 등기구 (실내용 LED 등기구-매입형)","근거리데이터채널 모뎀 (원격통신용, LADC)","기, 착신표시기, 통화감지기, 통화시간기록기,","다기능복합기기(복사기,팩시밀리,프린터,스캐너)","를 주거나 학․의료용 산업용 마이크로파 발열기","무선방 1) 의무비치 가) 중파무선방위 측정기","실내용 LED 등기구 (매입형 LED 등기구)","용도미 1) 262㎒ ~ 264㎒ 주파수 대역","전기오븐기기 (스팀오븐,전자레인지, 그릴겸용)","전자레인지 (전기오븐, 전기거치식 그릴 겸용)","한 음성 및 9) 앰프(앰프내장형스피커 포함)","LED 등기구 (실외용 LED등기구-가로등)","고압방전등기구 (메탈할라이드램프 / 고정형)","다기능 복합기기(팩스,스캐너,프린터,복사기)","따라 형식승 영업용 가스누설경보기 (분리형)","레벨측 1) 차폐된 구조물에서 사용하는 기기","불꽃식 감지기 (FLAME DETECTOR)","융단말기기, 정보검색용 단말기기, 현금자동취","직관형 LED 램프용 등기구 (컨버터외장형)","터 영향을 하는 고주파 고전압 테슬라 변압기","형광램프 대체형 LED 램프 (컨버터내장형)","휴대전화 배 전원공급장치 (멀티미디어기기용)","- 멀티미디어 기능을 포함한 산업용 기기류","LED 다운라이트 (매입형 LED 등기구)","LED 실내조명등 (고정형 LED 등기구)","Silent Violin (전자 바이올린)","모발관리기와 유사기기 (애견용 모발건조기)","자동폐쇄장치 창문용 (미닫이)_DC 24V","전기보온기[전기냉장냉동기기 (전기보냉기)]","전기액체가열기기와 유사한 기기 (멀티쿠커)","- 단순 모터만 제어하는 산업용 기자재류","LED 실내조명 (매입형 LED 등기구)","등기구 / 실외용 LED등기구 (터널등)","별장치용 무 2) 항로표지용 자동식별장치","비대면 Multi Card 결제용 단말기","선택호출 전 2) MF·HF 전용 수신기","설비의 기기 선 방송국 2) 주파수변조기","수신기 3) 확성기 및 가청경보기 동작형","안면사우나 전기표면세척기(주름펴기 겸용)","위 측정기 용 나) 중단파무선방위 측정기","전기뜸질기, 전기표면세척기 (스팀다리미)","조명기구 (매입형 고정형 LED 등기구)","지상파 초고화질 텔레비전 방송 신호처리기","초정압방전램프용 전자식 안정기 (UCD)","LED 등기구 (실내용 LED 등기구)","가스검지기 수신반 (Multicase)","고압방전등용 안정기 (메탈할라이드램프)","기 3) 57㎓ ~ 66㎓ 주파수 대역","기동용 수압개폐장치 (기동용압력스위치)","다기능 복합기기(스캐너,프린터,복사기)","다기능복합기기 (복사기,프린터,스캐너)","램프용 전자식안정기 (무전극형광램프용)","방송제작 및 공연지원용 무선설비의 기기","선설비의 기 3) 해안국용 자동식별장치","실외용 LED 등기구 (LED 가로등)","실외용 LED 등기구 (LED 보안등)","실외용 LED 등기구 (LED 터널등)","아날로그 통신망에 사용되는 데이터보호기","이미용기기와 유사한 기기 (피부관리기)","입력이 10㎾ 고압세척기 (스팀청소기)","전기냉장냉동기기 (냉장냉동용 쇼케이스)","트리밍기 및 기타 이와 유사한 전동공구","팬코일유닛 (Fan coil unit)","매입형 비방수 형광천장등3회로 LED","방송수신기 Curved QLED TV","설비는 제 의료용 고주파 열상 발생기","어 기기류: Curved UHD TV","일반조명기구 (고정형 LED 등기구)","일반조명기구 (매입형 LED 등기구)","직관형 LED 램프 (컨버터 외장형)","폐열회수 환기장치 (공기청정기 겸용)","해상업무용 가. 디지털 1) 선박국용","회선용 무선 2) 26㎓ 주파수 대역","DALI 기능을 갖는 LED 컨버터","LED 등기구 (매입형 및 고정형)","LED 지중매입등기구(컨버터내장형)","거주로조명설비 (LED 보안등기구)","디지털 지상파텔레비전방송 신호처리기","램프용 자기식안정기 (나트륨램프용)","램프용 전자식안정기 (무전극램프용)","보안등기구 (실외용 LED 등기구)","소방용품 1) 누전경보기 (수신부)","외) 의료용 고주파 열상 온도감지기","위한 기기 배터리 구동식 음향 앰프","일반조명등기구 (고정형 형광등기구)","전기골절기 및 기타 주방용 전동기기","전기냉수기 (순간온수, 제빙기겸용)","정보·사무 텔레비전 내장형 전자칠판","증기조리기 등 기타 전기액체가열기기","직관형 LED 램프(컨버터 외장형)","초음파세척기 (과일야채세척기 포함)","한다. 무선물걸레청소기 (아쿠아젯)","화경보 자동 2) 가청경보기 동작형","- 컴퓨터 제어로 동작하는 기기류","122㎓ ~ 123㎓ 주파수 대역","244㎓ ~ 246㎓ 주파수 대역","365 무인코너 비상전화기 주장치","MCU (LED 전광판 제어장치)","PC에 장착되는 정보통신 단말기기","가입자 1) 2.3㎓ 주파수 대역","금전등록기 (멀티미디어기능 포함)","기철도차량, 차상/휴대용 검측장치","램프용 전자식안정기 (형광램프용)","아날로그 광전식 스포트형 열감지기","아날로그 정온식 스포트형 열감지기","용수신기 3) VHF 전용 수신기","이미용기기 (피부 및 모발관리기)","일반조명기구 (LED 가로등기구)","일반조명기구 (LED 보안등기구)","일반조명기구 (LED 터널등기구)","일반조명기구 (LED 투광등기구)","일반조명기구 (고정형 형광등기구)","임의비치 가) 중파무선방위 측정기","전기솥(전기압력솥), 전기보온밥솥","조명기구용 컨버터 (LED 램프)","피부관리기, 진공청소기 (충전식)","협대역 직접 인쇄 전신장치의 기기","GR형 복합식 수신기 (자립형)","IoT 화재감지기 (Sub-1)","LED 램프 (형광램프 대체형)","LED 매입형 및 고정형 등기구","LED 모듈 전원 공급용 컨버터","LED 실외등기구 (가로등기구)","가스검지기 수신반 (Panel)","각 호에 따 치과용 전기 수술기","내압방폭형 정온식스포트형 감지기","른 전파응용 의료용 전기 소작기","매입형 LED 등기구 (실내용)","매입형 및 고정형 LED 등기구","메탈할라이드램프용 안정기(디밍)","무선데이타통신용 무선설비의 기기","법률｣ 제2조 MOTOR KIT","스마트태양광 독립형 LED 조명","안정기 내장형 램프 (LED용)","엔터테이먼트용 조명(무대 조명)","위치기반서비스용 무선설비의 기기","전기스탠드 (LED 조명확대경)","초단파대 해상이동업무용 무선설비","팩시밀리 모뎀 (모듈형식 포함)","폐열회수 환기장치 (전기집진기)","DOCSIS 3.0 케이블모뎀","GR형 중계기 (4000회로)","IoT무선 Co2온습도 모니터","LED 가로등 및 보안등 기구","LED 램프 (형광램프대체형)","LED 모듈 전원 공급용컨버터","LED 실외등기구(터널등기구)","가스자동소화장치 등급제 제어반","고정형 및 매입형 LED등기구","등기구 / 실내용 LED등기구","등기구 / 실외용 LED등기구","디지털 1) MF 전용 수신기","디지털 지상파 재전송용 변조기","매입등 및 고정형 led등기구","매입형 및 고정형 LED등기구","모기퇴치기 휴대용 미니 선풍기","무선충전기 (멀티미디어기기용)","물수건 마는 기기 및 포장기기","범위 내의 7) 디스크플레이어","서 제외) 오디오 올인원 앰프","성화에 관한 LED LIGHT","슈퍼콘덴서 장착 태양광 보안등","실내용 LED등기구 (고정형)","실외용 LED등기구 (터널등)","실외용 LED등기구 (투광등)","용 나) 중단파무선방위 측정기","음질조절기 (이퀄라이저 포함)","자동식 1) 선박 자동식별장치","전기냉장냉동기기 (와인냉장고)","조명기구(고정형 LED등기구)","조명기구용 컨버터 (LED용)","주방용전열기구 (에어프라이어)","지상파 UHD TV 신호처리기","차동식스포트형감지기 (방수형)","출입문용,DC24V도어릴리즈형","통신설비 유지 보수용 시험기기","핫플레이트 (전자유도가열방식)","해상이동전화용 무선설비의 기기","해상조난자 위치발신용 무선설비","ISDN 망종단기기(NTE)","LED 가로등 및 보안등기구","LED 센서등기구 (실내용)","LED 투광등기구 (실내용)","MODBUS RTU 통신모듈","UWB 기술을 사용하는 기기","간이 항해자료기록장치 부착형","것은 대상에 앰프내장형스피커","능인증 대상 GR형복합수신기","보행자작동신호기용 안내전광판","유사정보를 8) 라디오수신기","이동멀티미디어방송 신호처리기","이미용기기 (미세전류발생기)","일반조명기구 (터널조명기구)","일반조명기구 (투광조명기구)","전기맛사지기 (소용돌이욕조)","전기식기건조기 (전기소독기)","전기오븐기기 (에어프라이어)","전기온수기 (이동형수중히터)","전기훈증기 (전기방향확산기)","주방용전열기구 (전기튀김기)","직관형 LED 램프용 등기구","초단파대 양방향 무선전화장치","컨버터내장형램프 (LED용)","합성평가 대 로봇물걸레청소기","핫플레이트 (인덕션 레인지)","후드믹서 (기타액체가열기기)","ESS (에너지 저장장치)","IoT무선 Co화재감시장치","LED 다운라이트 (사각)","R형용 출력 6회로 중계기","나 이를 부 고주파 자극기","량 내 기기, 방송연동장치","무선전 1) 확성기 동작형","무선호출용 무선설비의 기기","무정전전원공급장치(UPS)","방송 또는 DVD 플레이어","분적으로 이 초단파 자극기","신설비의 기 CATV증폭기","에프엠라디오방송 신호처리기","오디오․비디 LED 전광판","용하도록 설 고주파 수술기","위한 신호기 승강장 조작반","자기공명영상장치 (MRI)","자동화재 속보설비의 속보기","장거리 자동전화발신 제어기","전기오븐기기 (공기튀김기)","전기휴대용그릴 (와플기기)","전기휴대형그릴 (전기냄비)","전원공 전기차 급속 충전기","정용으로 고 유전체 가열기","제1의2호의 모터 컨트롤러","주방용 전동기기 (채유기)","주방용전열기구 (멀티쿠커)","주파에너지 크림 예비가열기","컨버터 내장형 LED 램프","콘센트 (직류전원장치겸용)","특수구조인 액티브 서브우퍼","핫플레이트 (인덕션 겸용)","혈당 및 콜레스테롤 측정기","4세대 충전식 투광작업등","AC객실등 (1500㎜)","CLASS A/B 중계기","GR형 중계기 (2회로)","GR형 중계기 (4회로)","LED 가로등 및 보안등","LED 가로등 및 투광등","LED 등기구 (가로등)","LED 등기구 (경관등)","LED 등기구 (고정형)","LED 등기구 (매입형)","LED 등기구 (보안등)","LED 등기구 (센서등)","LED 등기구 (실외등)","LED 등기구 (이동형)","LED 안정기내장형 램프","LED 전원공급용 컨버터","LED 조명기구용 컨버터","P형 복합식 화재 수신기","USB 조이스틱 콘트롤러","가스누설경보기 (수신부)","가스누설경보기 (일반용)","가스누설경보기 (탐지부)","고정형 LED 센서등기구","고체에어로졸식자동소화장치","급장치 및 전기차 충전기","기 무선충전기 (가정용)","기, 적외선‧ 진공청소기","나 재생하기 라디오 앰프","네온변압기조명기구용컨버터","네트워크 오디오 플레이어","다) 겸용무선방위 측정기","대형 단면 피난구 유도등","따른 의료기 바지프레스기","매입형 및 고정형 등기구","멀티센서 스포트형 감지기","모니터 내장형 전자테이블","무선충전기 (조명기기용)","방송 공동수 가. 증폭기","사우나기기와 유사한 기기","산업용 고정식 가스감지기","수신하기 위 충전 라디오","스마트 분전반 게이트웨이","안정기 내장형 LED램프","외장 하드디스크 드라이브","이미용기기 (광선조사기)","이미용기기 (피부관리기)","자동차압·과압조절형 댐퍼","전기매트, 전기표면세척기","전기소독기 (전기건조기)","전기온수기 (핫플레이트)","전기온풍기 (선풍기겸용)","전기자전 1) 전기자전거","전기철도 차 통신용정류기","전자식 기동용 압력스위치","조명기구용 LED 컨버터","조제1항에 전기건조다리미","주방용전열기구 (로스터)","주행제어를 냉방장치제어기","진공청소기 (전기소독기)","천체촬영용 CCD 카메라","크리스마스트리용 조명기구","크림거품기 (계란반죽기)","해당하는 경 물흡입청소기","휴대용 월경컵 살균소독기","CCTV 스마트 안내판","CD 플레이어 턴테이블","LED 전원 공급 장치","UPS(무정전전원장치)","가구내장형 LED 모듈","기인 것 다림질프레스기","내소내 (NESONE)","느 하나에 물걸레청소기","다기능 잉크젯 복합기기","멀티태스킹 휴대폰케이스","모니터 내장형 전자칠판","방전램프 (무전극램프)","버튼 대리콜 유선전화기","복합기(프린터/복사기)","비디오 스트리밍 시스템","상업용주방자동 소화장치","새싹 및 콩나물 재배기","선상 통신국의 무선설비","수족관용 자동먹이급여기","신용카드 조회 단말기기","실내 공기질 진단 장비","열 가소성 도관 용접기","재 중 정격 고압세척기","전기기기 및 전동기기류","전기냉난방기 (실내기)","전기냉난방기 (실외기)","전기주전자 (전기포트)","전동공구 (드릴연마기)","전원공급장치 (산업용)","전자레인지 (전기오븐)","조 중「의료 전기다리미","중계기 (3520회로)","지능형 (R형) 수신기","캐비넷형 간이스프링클러","커피메이커 (후드믹서)","컨테이너 위치 추적장치","태양광발전용 전력변환기","통신기기, 전자연동장치","투명 LED 디스플레이","핸들바 그립 (속도계)","형광램프용 전자식안정기","후드믹서 (진공믹서기)","휴대전화 배터리 충전기","GNSS 통합 단말기","GR형복합식화재수신기","HDD (하드디스크)","Hi-Fi 변환 모듈","LED 매입형 등기구","LED 모듈 (램프)","LED 실내조명등기구","LED 주차장 등기구","LED 지중매입등기구","LED 충전식 투광등","P형 1급복합식수신기","RTK GNSS 키트","고정형 LED 등기구","고화질 영상 전송장치","광 송신기 및 수신기","광오디오 AV 컨버터","나트륨 램프용 안정기","내부조명식 도로표지판","라디오, 휴대용라디오","를 생성하거 기타앰프","매입형 LED 등기구","메탈할라이드램프안정기","무선충전기 (차량용)","백열등기구 (고정형)","비디오 게임 컨트롤러","비디오테이프 플레이어","비상통화장치용 전화기","상업용오븐 (가스식)","상업용오븐 (전기식)","신용카드조회 단말기기","실내용 LED 등기구","실외용 LED 등기구","아날로그 연기 감지기","아날로그식 연기감지기","아날로그식 열식감지기","영상수신기 및 변환기","오 관련 기 전자액자","와이기그 무선랜 모듈","우는 제외 미니청소기","저주파 전기 마사지기","전기 방전기(EDM)","전기냉방기 (난방기)","전기냉방기 (실내기)","전기냉방기 (제습기)","전기온풍기 (환풍기)","전기철도 전기철도차량","주거용주방자동소화장치","지폐 및 동전 교환기","진동칫솔 (전동칫솔)","차량 인터페이스 장치","컴퓨터용 전원공급장치","케이블 카드 (젠더)","클라우드프린팅키오스크","포르셔 (보플제거용)","프린터(다기능복합기)","피부관리기(이미용기)","형광등기구 (고정형)","형광등기구 (매입형)","형광등기구 (이동형)","후드믹서 (미니쵸퍼)","휴대용 LED 스탠드","휴대용 자동차 진단기","CCTV 설치안내판","HD수신 오버레이어","LED 경관조명기구","LED 고정형등기구","LED 매입형등기구","LED 투광조명기구","ODD (광디스크)","SIGNAL 중계기","UHD 레벨 조정기","VOIP 긴급전화기","가정용 칫솔 살균기","감열식 영수 프린터","관상어용 기포발생기","관상어용·식물용히터","광전식스포트형감지기","광증폭기(EDFA)","냉장냉동용 쇼케이스","디지털 컬러 복합기","라이트닝 포트 젠더","램프용 자기식안정기","모니터 캘리브레이션","무선호출망 중계장치","무정전 전원 시스템","및 내연기관 사륜차","사우나기기용 전열기","소방용 비상 전원반","수족관용 안개발생기","슬라이스기전기칼갈이","신용카드 결재단말기","아크 스터드 용접기","안정기 내장형 램프","열연복합 화재감지기","오디오 채널 스위치","원격검침용 통신기기","음성인식 비상전화기","자동세정건조식 변기","자동회전 꼬치구이기","저주파 전기마사지기","적외선 불꽃식감지기","전기세탁기 (드럼)","전기솥/전기보온밥솥","정온식스포트형감지기","즉석식 필름 사진기","직관형 LED 램프","질량유량계 제어기기","차동식스포트형감지기","카메라 컨트롤 박스","캐비닛형자동소화장치","태양광 LED 조명","폐열회수형 환기장치","플라즈마 피부미용기","한 법률」에 수신반","휴대용 칫솔 살균기","A/V 신호수신기","DMB 신호처리기","Hi-Fi 오디오","LED MR 램프","LED 가로등기구","LED 경관등기구","LED 다운라이트","LED 라이팅스틱","LED 모듈 램프","LED 방폭등기구","LED 보안등기구","LED 센서등기구","LED 수중조명등","LED 시선유도등","LED 실내조명등","LED 지중매입등","LED 집어등기구","LED 충전작업등","LED 터널등기구","LED 투광등기구","UHD 신호처리기","USB 메모리스틱","가스 자동소화장치","가정용 전동재봉기","관상어용 전기어항","광전식 연기감지기","광전식분리형감지기","구동기기류 삼륜차","궐련담배 가열기기","기 구내전송증폭기","디지털 신호처리기","레이저 거리측정기","매입형 형광등기구","멀티미디어 기기류","무선호출망 기지국","무정전 전원 장치","무정전전원공급장치","미용기기 (전동)","발신번호표시 기기","방화문자동폐쇄장치","범용 전기 수술기","사업의 방송 등)","수족관용 조명기구","음성안내보조시스템","음이온 공기청정기","일산화탄소 감지기","적외선 피부관리기","전기냉장.냉동기기","전기마사지 청소기","전기자전거용 키드","전기찜질기(DC)","전동 임팩트 드릴","조명기구용 컨버터","주방용 오물분쇄기","중계기 (2:2)","중계기 (2회로)","중계기 (4:4)","중계기 (4회로)","차동식분포형감지기","채굴용 라이저카드","키패드형 서명패드","필름스트립 투영기","호텔용 유선전화기","회선장애 감시기기","회전형 전기건조기","휴대용 기포발생기","휴대용 냉동냉장고","IO 인터페이스","IP 연선전화기","LED 경관조명","LED 실내조명","LED 조명장치","LED 투광조명","MP3 플레이어","PLS 조명기구","R형복합식수신기","TV영상프로젝터","VoIP 전화기","가정 및 상업용","가정용 전기기기","거리유도 표시등","경보자동전화장치","고주파 마사지기","고주파 조명기기","공기흡입형감지기","광산용안전등기구","교통카드 충전기","국내 소형선박용","귀 청소 내시경","납땜 제거 인두","네비텍스 수신기","단독경보형감지기","디지털 컨트롤러","무정전 전원장치","미니 서큘레이터","벽걸이용 전화기","복사기(복합기)","상업용 주방후드","상업용가스취반기","상업용식기세척기","상업용전기취반기","서버 (가정용)","서브우퍼 스피커","센터드라이브모터","슬라이드 투영기","실리콘 마사지기","아이스크림프리저","애완동물 목욕기","오디오 컨트롤러","음성점멸 유도등","음향신호전송장치","저주파 마사지기","전기냉장냉동기기","전기작동 도어록","전동형 롤스크린","조작반 전원장치","주방기구 소독기","지문인식 USB","차량 영상 장치","차상정보통신장치","초근거리 레이더","초지향성 스피커","축열식전기난방기","축열조용 디퓨져","충전식 휴대전등","칼/수저 살균기","컴퓨터용 스피커","컴프레서 게이트","통신 인터페이스","플라스틱 용접기","플라스틱 절단기","휴대용 냉온장고","(「전파법」제","AC용 보일러","DC 전기방석","FM신호처리기","GPIB분석기","IP영상전화기","LCD 모니터","LED 가로등","LED 경계등","LED 경관등","LED 등기구","LED 모니터","LED 보안등","LED 스탠드","LED 실내등","LED 컨버터","LED 투광등","LED 평판등","LFD 모니터","PCM단국장치","USB 마이크","USB 충전기","가슴 마사지기","거리유도등기구","거주로조명설비","것 스팀청소기","고주파 온열기","과일껍질 깎이","광센서 중계기","군불침대온풍기","권총형 납땜기","나비 마사지기","다기능 복합기","두피 마사지기","디스크플레이어","디지털 장치류","디지털 카메라","디지털 키보드","디지털 피아노","레이저 수술기","레이저사격기기","레트로아케이드","멀티폰 전화기","면상발열 벤치","모바일 프린터","무인경비시스템","미용 마사지기","바코드 스캐너","번호표 발행기","복합형 감지기","비디오 도어폰","비디오 레코더","비디오 엔코더","비디오게임기구","산소이온발생기","상업용가스국솥","상업용가스밥솥","소용돌이 욕조","소형전기보일러","수도동결방지기","스마트 우편함","스펙트럼분석기","스피커 시스템","아이 마사지기","안면 사우나기","얼굴 마사지기","오디오 레코더","오디오 스위치","온열 마사지기","요쿠르트제조기","욕실용 온풍기","음식물 처리기","이더넷 스위치","입구표시만차등","잉크젯 복합기","전기고기구이기","전기국수제조기","전기라디에이터","전기머리손질기","전기바닥청소기","전기방향확산기","전기사우나기기","전기스팀다리미","전기식기건조기","전기식기세척기","전기주류숙성기","전기핫플레이트","전기훈증살충기","전기휴대용그릴","전동(전기)차","주방용전열기구","중입자 가속기","지중매입등기구","차량번호인식기","체인형조명기구","초음파 가습기","초음파 세척기","통합 광수신기","통화시간기록기","펑션제너레이터","페인트 제거기","포터블 레코더","포터블 스피커","핸디형 다리미","헤드 마사지기","회의용 브릿지","후추 그라인더","휴대용 선풍기","3D 프린터",": 전파통신","AC운전실등","AV 컨버터","DC운전실등","LED 랜턴","LED 램프","LED 모듈","LED유도등","P형 수신기","R형 수신기","R형 중계기","UVB 램프","간이형수신기","감자 탈피기","개인용컴퓨터","게임컨트롤러","경관조명기구","관련 기기,","광대역증폭기","국내 항해용","냉장냉동기기","네트웍분석기","노트북컴퓨터","는 통신설비","동물 부화기","디지털 다트","모터 보호기","미니 가습기","미니 선풍기","바늘형탈모기","바닥 세척기","발 마사지기","발 맛사지기","병맥주거품기","보안 점멸등","보플 제거기","비디오카메라","빔 프로젝터","사우나온열기","사육용 히터","산업용컴퓨터","손톱 정리기","수위 조절기","스마트조리기","식물용 히터","식품 해동기","신호변환장치","안구 온열기","어깨 안마기","에어프라이어","영상컨트롤러","오디오 앰프","오디오분석기","오실로스코프","용설비는 대","원격제어기기","위성셋톱박스","자기식안정기","전관리에 관","전기 소각기","전기 스탠드","전기 용접기","전기 조각기","전기고기갈개","전기그라인더","전기금속가위","전기깡통따개","전기냉난방기","전기냉온수기","전기드라이버","전기마사지기","전기물끓이기","전기보온밥솥","전기빵자르개","전기스팀쿠커","전기에어커튼","전기온수매트","전기온수침대","전기온수펌프","전기온열의자","전기잔디깎이","전기프라이팬","전기헬스기구","전동 예초기","전동오토바이","전원공급장치","전자식안정기","중앙컨트롤러","지문 인식기","직류전원장치","직접 연결되","진동 클렌저","차량 조작반","차상 제어기","쵸코렛용해기","출력 중계기","칫솔 살균기","카본발열조끼","태양광가로등","투광조명기기","티켓 프린터","파라핀용해기","포스 리더기","포토 프린터","피난구유도등","핀셋형탈모기","필름 접착기","필름 투영기","하향광송신기","할로겐등기구","헤드폰 앰프","홈오토메이션","화상회의장비","휴대용 랜턴","힐링 라디오","(전선로에","CID 폰","DC객실등","IP전화기","IP카메라","LAN카드","LCR미터","㎑ 이상의","가스감지기","각도절단기","계란반죽기","공기정화기","공기조화기","공기청정기","공장등기구","공중전화기","광 증폭기","광통신장비","구강세정기","구강세척기","금전등록기","기포발생기","긴급전화기","김치냉장고","냉온정수기","냉온풍매트","네온변압기","농구게임기","누전차단기","달걀조리기","데이터로거","동전계수기","두피모발기","라디오시계","라면조리기","레벨조정기","레인지후드","렌즈 모듈","맥주거품기","머리인두기","모듈레이터","모발가습기","모발건조기","무선마이크","무선청소기","무선호출기","무인발매기","무인정산기","무전극램프","문서세단기","미니게임기","바닥청소기","방폭등기구","백열등기구","버터제조기","번호표시기","보플제거기","보호계전기","불꽃감지기","비디오카드","비상라이트","비상전화기","사우나기기","서버 보드","센서등기구","순번대기기","스마트워치","스팀다리미","식기세척기","식품건조기","신디사이져","신발건조기","신호발생기","신호처리기","실물화상기","어학실습기","오물흡입기","온풍난방기","왁스용해기","우유가열기","의 주파수","의류관리기","자동판매기","전격살충기","전기가열기","전기광택기","전기난방기","전기냉방기","전기냉수기","전기냉장고","전기냉풍기","전기녹즙기","전기레인지","전기면도기","전기보온기","전기보일러","전기분무기","전기분수기","전기세미기","전기세탁기","전기소독기","전기손난로","전기스토브","전기약탕기","전기오븐기","전기온수기","전기온장고","전기온풍기","전기육절기","전기이발기","전기장난감","전기정미기","전기정수기","전기제모기","전기주온기","전기주전자","전기진동기","전기집진기","전기찜질기","전기테이퍼","전기토스터","전기튀김기","전기포충기","전기훈증기","전동 가위","전동거품기","전동분무기","전동스쿠터","전동자전거","전동진료대","전동퀵보드","전동휠체어","전자 드럼","전자레인지","젖병가열기","조명기기류","주서믹서기","착신표시기","출 장치의","치아세정기","카드리더기","커피메이커","커피분쇄기","컴퓨터서버","케이블모뎀","크림거품기","터널등기구","통화감지기","투광등기구","포스시스템","피부관리기","피부진단기","피지제거기","핫플레이트","항제2호에","해충퇴치기","형광등기구","환기청정기","회선어댑터","경보센서","광송신기","광수신기","광증폭기","납땜인두","돔카메라","디밍모듈","마그드릴","마더보드","마사지건","마사지기","머리인두","멀티미터","모발말개","바람방석","발보온기","보온밥솥","사운드바","샴푸기기","서브우퍼","손건조기","스틱PC","안마의자","온열복대","온열시트","와플기기","유체펌프","인형뽑기","전기곤로","전기그릴","전기냄비","전기대패","전기드릴","전기매트","전기못총","전기밥솥","전기방석","전기변좌","전기샌더","전기시계","전기오븐","전기욕조","전기장판","전기침대","전기카펫","전기포트","전기햄머","전기호브","전동드릴","전동보드","전동보트","전동책상","전동침대","전열보드","전원박스","전자보드","전자시계","전자저울","주름펴기","죽조리기","클릭미터","투광조명","파워미터","파워앰프","프리앰프","플랩댐퍼","해안국용","후드믹서","가습기","가열총","객실등","거실등","거품기","계량기","광모뎀","기포기","냉동고","냉수기","냉장고","냉풍기","녹음기","다트판","등기구","리시버","마우스","메가폰","면도기","모니터","믹서기","발욕조","보온기","복사기","복합기","비데기","비상벨","빙삭기","산업용","선풍기","세척기","세탁기","송풍기","스캐너","안마기","압즙기","에어컨","온풍기","완구류","음수기","인터콤","전기요","전기칼","전기톱","전동휠","전화기","제단기","제모기","제빙기","제습기","조광기","찜질기","채굴기","천공기","컴퓨터","코팅기","크래들","키보드","탈수기","토스터","투영기","펀보드","포리셔","프리저","프린터","혼합기","환풍기","훈증기"];
  const cleanName=t=>t.toLowerCase().replace(/[\s·・()（）_\-]/g,'');
  // 과거 품목명 목록은 판정 근거로 사용하지 않습니다.
 
@@ -233,7 +260,7 @@ form.addEventListener('submit',e=>{
  const queryName=normalizeName(product);
  // 더 구체적인 제품명을 우선 검색하여 '무선충전기'가 '충전기'에 가려지지 않도록 합니다.
  const candidates=[...productFamilies,...extendedFamilies,...functionalFamilies,...catalog].flatMap(x=>x.terms.map(t=>({term:normalizeName(t),item:x})))
-   .filter(x=>x.term.length>=2&&queryName.includes(x.term))
+   .filter(x=>x.term.length>=3&&queryName.includes(x.term)&&!['산업용','가정용','시스템','기기류','전자제품'].includes(x.term))
    .sort((a,b)=>b.term.length-a.term.length);
  const matched=candidates.length?candidates[0].item:null;
  const category=matched?matched.category:'기능별 추가 검토';
@@ -268,40 +295,48 @@ form.addEventListener('submit',e=>{
  const systemDevice=/시스템|장비|기기|장치|설비|단말기|컨트롤러|프로세서|서버|워크스테이션|컴퓨터|제어반|운영장치/.test(normalized);
  const activeFunction=/진단|검사|분석|처리|제어|측정|계측|수집|기록|표시|모니터링|통신|연산|판독|판정|자동|전자|디지털|전동|스마트|센서|검출|출력|입력|영상|신호/.test(normalized);
  const explicitPassive=/케이블|전선|단순커넥터|단순젠더|나사|볼트|너트|브래킷|거치대|외함|케이스|단순기구|기계식|수동식/.test(normalized);
- const inferredElectronicSystem=systemDevice&&activeFunction&&!explicitPassive;
- const likelyElectronic=Boolean(electronicCategory||ordinaryElectric||functionalElectric||diagnosticSystem||inferredElectronicSystem||inferred||wireless==='있음');
+ const inferredElectronicSystem=systemDevice&&!explicitPassive&&(activeFunction||((purpose==='산업용 장비'||purpose==='정보통신·사무기기'||purpose==='의료·전문 장비')&&!isPassive));
+ const likelyElectronic=Boolean((electronicCategory||ordinaryElectric||functionalElectric||diagnosticSystem||inferredElectronicSystem||inferred||wireless==='있음')&&!explicitPassive);
  let emcTarget=false;
  if(conflict){
-  addResult(items,'전자파 적합성평가','확인 필요','제품명과 무선 기능 입력이 일치하지 않습니다. 제품 사양을 확인해 주세요.');
- }else if(isPassive&&!inferred&&wireless==='없음'&&!electricConnection&&!passiveAccessory&&!likelyElectronic){
-  addResult(items,'전자파 적합성평가','비대상 가능성 높음','전자회로·능동 기능이 없는 순수 수동 제품이라는 입력을 전제로 합니다.');
+  resultAdd(items,'전자파 적합성평가','확인 필요','제품명과 무선 기능 입력이 일치하지 않습니다. 제품 매뉴얼 및 실제 기능을 확인해 주세요.');
+ }else if(isPassive&&!inferred&&wireless==='없음'&&!electricConnection&&!passiveAccessory){
+  resultAdd(items,'전자파 적합성평가','비대상 가능성 높음','전자회로·능동 기능이 없는 순수 수동 제품이라는 입력을 전제로 합니다.');
  }else if(!isPassive&&!electricConnection&&!passiveAccessory&&likelyElectronic){
   emcTarget=true;
-  addResult(items,'전자파 적합성평가','대상 가능성 높음',(diagnosticSystem||inferredElectronicSystem)?'제품명상 정보 수집·처리, 진단 또는 제어 기능을 수행하는 전자장비로 예상되어 EMC 대상 가능성이 높습니다. 실제 회로·기능 확인이 필요합니다.':'제품명과 사용 목적상 전자회로가 동작하는 제품으로 예상되어 EMC 대상 가능성이 높습니다. 실제 회로·기능 확인이 필요합니다.');
+  resultAdd(items,'전자파 적합성평가','대상 가능성 높음',(diagnosticSystem||inferredElectronicSystem)?'제품명과 용도상 정보처리·감시·제어 등 전자 기능을 갖춘 장비일 가능성이 있어 EMC 대상 가능성이 높습니다. 정확한 판단을 위해 제품 매뉴얼 및 실제 기능 확인이 필요합니다.':'제품명과 사용 목적상 전자회로가 동작하는 제품으로 예상되어 EMC 대상 가능성이 높습니다. 정확한 판단을 위해 제품 매뉴얼 및 실제 기능 확인이 필요합니다.');
  }else{
-  addResult(items,'전자파 적합성평가','확인 필요','입력된 제품명과 전원 정보만으로는 전자회로 및 기능을 충분히 확인하기 어렵습니다. 사용설명서와 회로 구성을 확인해야 합니다.');
+  resultAdd(items,'전자파 적합성평가','확인 필요','입력된 제품명과 전원 정보만으로는 전자회로 및 기능을 충분히 확인하기 어렵습니다. 정확한 판단을 위해 제품 매뉴얼 및 실제 기능 확인이 필요합니다.');
  }
  if(lowVoltageBody){
-  addResult(items,'전기안전','비대상 가능성 높음','일반적인 저전압 본체를 기준으로 합니다. 배터리·충전기·동봉 어댑터는 별도 확인 대상입니다.');
+  resultAdd(items,'전기안전','비대상 가능성 높음','일반적인 저전압 본체를 기준으로 합니다. 배터리·충전기·동봉 어댑터는 별도 확인 대상입니다.');
  }else if(safetyHousehold&&ac){
-  addResult(items,'전기안전','대상 가능성 높음','일반적인 AC 전원 '+category+' 제품을 기준으로 합니다. 정격·용도 및 세부 안전관리 품목을 최종 확인합니다.');
+  resultAdd(items,'전기안전','대상 가능성 높음','일반적인 AC 전원 '+category+' 제품을 기준으로 합니다. 정격·용도 및 세부 안전관리 품목을 최종 확인합니다.');
  }else if(safetySupply&&ac){
-  addResult(items,'전기안전','대상 가능성 높음','AC 전원 관련 제품의 일반적인 안전관리 품목을 기준으로 합니다. 제품별 적용 조건과 예외를 확인합니다.');
+  resultAdd(items,'전기안전','대상 가능성 높음','AC 전원 관련 제품의 일반적인 안전관리 품목을 기준으로 합니다. 제품별 적용 조건과 예외를 확인합니다.');
  }else if(isPassive&&!electricConnection&&!passiveAccessory){
-  addResult(items,'전기안전','비대상 가능성 높음','안전관리 대상 전기부품이 없는 단순 수동 제품이라는 전제입니다.');
+  resultAdd(items,'전기안전','비대상 가능성 높음','안전관리 대상 전기부품이 없는 단순 수동 제품이라는 전제입니다.');
  }else{
-  addResult(items,'전기안전','확인 필요',ac?'AC 전원을 사용하는 제품으로, 제품 종류와 전원 구조를 확인해야 합니다.':'제품 종류와 전원 구성에 따라 전기안전 대상 여부가 달라질 수 있습니다.');
+  resultAdd(items,'전기안전','확인 필요',ac?'AC 전원을 사용하더라도 모든 제품이 전기안전 대상은 아닙니다. 제품 매뉴얼 및 실제 기능 확인이 필요합니다.':'제품 종류와 전원 구성에 따라 전기안전 대상 여부가 달라질 수 있습니다.');
  }
  if(conflict){
-  addResult(items,'무선 인증','확인 필요','제품명과 무선 기능 입력이 서로 다릅니다.');
+  resultAdd(items,'무선 인증','확인 필요','제품명과 무선 기능 입력이 서로 다릅니다.');
  }else if(moduleStatus==='예'&&(wireless==='있음'||inferred)){
-  addResult(items,'무선 인증','확인 필요','기존 KC 인증 무선모듈 사용 시 완제품의 RF 시험·인증 처리 여부는 모듈 인증조건, 안테나, RF부 변경 및 완제품 구성을 확인한 후 판단합니다. 완제품 EMC·REMC는 별도 검토합니다.');
+  resultAdd(items,'무선 인증','확인 필요','기존 KC 인증 무선모듈 사용 시 완제품의 RF 시험·인증 처리 여부는 모듈 인증조건, 안테나, RF부 변경 및 완제품 구성을 확인한 후 판단합니다. 완제품 EMC·REMC는 별도 검토합니다.');
  }else if(wireless==='있음'||inferred){
-  addResult(items,'무선 인증','대상 가능성 높음',(inferred||wirelessType)+' 무선 송신 기능이 있는 제품을 기준으로 합니다. 실제 주파수·출력·구성에 따라 적용 대상과 절차를 최종 확인합니다.');
+  resultAdd(items,'무선 인증','대상 가능성 높음',(inferred||wirelessType)+' 무선 송신 기능이 있는 제품을 기준으로 합니다. 실제 주파수·출력·구성에 따라 적용 대상과 절차를 최종 확인합니다.');
  }else if(wireless==='없음'){
-  addResult(items,'무선 인증','비대상 가능성 높음','입력하신 정보상 무선통신 기능이 없어 무선 인증 대상이 아닐 가능성이 높습니다.');
+  resultAdd(items,'무선 인증','비대상 가능성 높음','입력하신 정보상 무선통신 기능이 없어 무선 인증 대상이 아닐 가능성이 높습니다.');
  }else{
-  addResult(items,'무선 인증','확인 필요','무선 송신 기능 유무를 확인해야 합니다.');
+  resultAdd(items,'무선 인증','확인 필요','무선 송신 기능 유무를 확인해야 합니다.');
+ }
+ // '확인 필요' 항목만 기록합니다. 결과 저장 실패가 고객 진단을 막지 않도록 비동기 처리합니다.
+ if(judgments.some(x=>x.status.includes('확인 필요'))){
+  void saveReviewCase({product_name:product,purpose,power_modes:powers,voltage,
+   wireless,wireless_type:wirelessType,charge_mode:powers.includes('충전식 배터리')?(form.elements.charge.value||'미선택'):'해당 없음',
+   emc_status:judgments.find(x=>x.title==='전자파 적합성평가')?.status||'확인 필요',
+   safety_status:judgments.find(x=>x.title==='전기안전')?.status||'확인 필요',
+   radio_status:judgments.find(x=>x.title==='무선 인증')?.status||'확인 필요'});
  }
  // 상세 준비서류는 고객 화면에 표시하지 않고 상담 시 안내합니다.
  const summary=['[제품인증 자가진단 · 국내 KC 예비 검토]','제품명: '+product,'참고 제품군: '+category,'용도: '+purpose,'전원 방식: '+power,'충전 방식: '+(powers.includes('충전식 배터리')?(form.elements.charge.value||'미선택'):'해당 없음'),'정격전압: '+voltage,'무선 기능: '+wireless,'무선 방식: '+wirelessType,'기존 KC 인증 무선 모듈 사용: '+moduleStatus,'모듈 시험 이력(고객 입력): '+moduleHistory].join('\n');
@@ -309,8 +344,9 @@ form.addEventListener('submit',e=>{
  try{sessionStorage.setItem('con_kc_diagnosis',summary);}catch(_){}
  const link=document.getElementById('consultLink');
  link.href='contact.html?diagnosis='+encodeURIComponent(summary)+'#inquiry-board';
- document.getElementById('results').hidden=false;
- document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+ progress.hidden=false;submitButton.disabled=true;submitButton.textContent='결과 표시 준비 중...';
+ progress.scrollIntoView({behavior:'smooth',block:'start'});
+ pendingReveal=setTimeout(()=>{pendingReveal=null;progress.hidden=true;submitButton.disabled=false;submitButton.textContent='자가진단 결과 확인하기';results.hidden=false;results.scrollIntoView({behavior:'smooth',block:'start'});},2000);
 });
 </script>
 <!-- 제품 인증 참고용 자가진단: 상담 전 예비 분류 -->
