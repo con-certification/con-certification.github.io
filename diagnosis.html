@@ -48,9 +48,9 @@ body{margin:0;background:#f5f8fc;color:#172b45;font-family:Arial,'Malgun Gothic'
  <div class="diag-field"><label for="purpose">제품 용도 *</label><select id="purpose" required><option value="">선택해 주세요</option><option>가정용·생활가전</option><option>정보통신·사무기기</option><option>산업용 장비</option><option>조명·전기용품</option><option>의료·전문 장비</option><option>부품·액세서리</option><option>기타·잘 모르겠음</option></select></div>
  <div class="diag-field"><fieldset><legend>전원 방식 *</legend><div class="diag-options"><label><input type="radio" name="power" value="AC 전원" required>AC 전원</label><label><input type="radio" name="power" value="DC 어댑터">DC 어댑터</label><label><input type="radio" name="power" value="배터리">배터리</label><label><input type="radio" name="power" value="무전원·수동">무전원·수동</label></div></fieldset></div>
  <div class="diag-field"><label for="voltage">정격전압 (선택)</label><input id="voltage" maxlength="50" placeholder="예: AC 220V, DC 5V, 잘 모름"></div>
- <div class="diag-field"><fieldset><legend>무선 기능 *</legend><div class="diag-options"><label><input type="radio" name="wireless" value="있음" required>있음</label><label><input type="radio" name="wireless" value="없음">없음</label><label><input type="radio" name="wireless" value="잘 모름">잘 모름</label></div></fieldset></div>
+ <div class="diag-field" id="wirelessQuestion"><fieldset><legend>무선 기능 *</legend><div class="diag-options"><label><input type="radio" name="wireless" value="있음" required>있음</label><label><input type="radio" name="wireless" value="없음">없음</label><label><input type="radio" name="wireless" value="잘 모름">잘 모름</label></div></fieldset></div>
  <div class="diag-field" id="wirelessTypeWrap" hidden><label for="wirelessType">무선 방식</label><select id="wirelessType"><option>잘 모름</option><option>Bluetooth</option><option>Wi-Fi</option><option>LTE·5G</option><option>RF 리모컨·기타 무선</option><option>복수 무선 방식</option></select></div>
- <div class="diag-field" id="moduleWrap" hidden><fieldset><legend>기존 KC 인증 무선 모듈을 사용하나요?</legend><div class="diag-options"><label><input type="radio" name="certModule" value="예">예</label><label><input type="radio" name="certModule" value="아니요">아니요</label><label><input type="radio" name="certModule" value="잘 모름">잘 모르겠습니다</label></div></fieldset><p class="diag-note">인증번호를 직접 입력할 필요는 없습니다. 인증 모듈을 사용하는 경우 인증 시험 진행 시 필증과 시험성적서가 필요합니다.</p></div>
+ <div class="diag-field" id="moduleWrap" hidden><fieldset><legend>기존 KC 인증 무선 모듈을 사용하나요?</legend><div class="diag-options"><label><input type="radio" name="certModule" value="예">예</label><label><input type="radio" name="certModule" value="아니요">아니요</label><label><input type="radio" name="certModule" value="잘 모름">잘 모르겠습니다</label></div></fieldset><p class="diag-note">인증번호를 직접 입력할 필요는 없습니다. 인증 모듈을 사용하는 경우 인증 시험 진행 시 필증과 시험성적서가 필요합니다.</p><div class="diag-field" id="moduleHistoryWrap" hidden><fieldset><legend>기존 무선 모듈의 시험 이력 (알고 계신 경우)</legend><div class="diag-options"><label><input type="radio" name="moduleHistory" value="RF만">RF만</label><label><input type="radio" name="moduleHistory" value="RF+REMC">RF + REMC</label><label><input type="radio" name="moduleHistory" value="잘 모름" checked>잘 모름</label></div></fieldset><p class="diag-note">정확한 시험 이력은 무선 모듈 인증서(필증)와 시험성적서를 제출받아 확인합니다.</p></div></div>
  <button type="submit" class="diag-primary">자가진단 결과 확인하기</button>
  <p class="diag-note">개인정보 입력 없이 이용할 수 있습니다. 입력 내용은 상담 버튼을 누르기 전까지 서버에 제출되지 않습니다.</p>
 </form>
@@ -67,7 +67,19 @@ body{margin:0;background:#f5f8fc;color:#172b45;font-family:Arial,'Malgun Gothic'
 const form=document.getElementById('diagForm');
 const wrap=document.getElementById('wirelessTypeWrap');
 const moduleWrap=document.getElementById('moduleWrap');
-function syncWirelessFields(){const enabled=form.elements.wireless.value==='있음';wrap.hidden=!enabled;moduleWrap.hidden=!enabled;if(!enabled)form.querySelectorAll('input[name="certModule"]').forEach(x=>x.checked=false);}
+const wirelessQuestion=document.getElementById('wirelessQuestion');
+const moduleHistoryWrap=document.getElementById('moduleHistoryWrap');
+function syncModuleHistory(){
+ moduleHistoryWrap.hidden=moduleWrap.hidden||form.elements.certModule.value!=='예';
+ if(moduleHistoryWrap.hidden)form.querySelector('input[name="moduleHistory"][value="잘 모름"]').checked=true;
+}
+function syncWirelessFields(){
+ const enabled=form.elements.wireless.value==='있음';
+ wrap.hidden=!enabled;moduleWrap.hidden=!enabled;
+ if(!enabled){form.querySelectorAll('input[name="certModule"]').forEach(x=>x.checked=false);}
+ syncModuleHistory();
+}
+form.querySelectorAll('input[name="certModule"]').forEach(x=>x.addEventListener('change',syncModuleHistory));
 form.elements.wireless.forEach(el=>el.addEventListener('change',syncWirelessFields));
 const productInput=document.getElementById('product');
 const inferredNote=document.createElement('p');inferredNote.className='diag-note';inferredNote.id='inferredNote';inferredNote.style.margin='8px 0 0';
@@ -82,15 +94,21 @@ function detectWireless(name){
  return '';
 }
 let lastDetected='';
-productInput.addEventListener('input',()=>{
+function updateProductInference(){
  const detected=detectWireless(productInput.value);
+ wirelessQuestion.hidden=Boolean(detected);
  if(detected){
-  if(!form.elements.wireless.value||lastDetected){inferredRadio('wireless','있음');}
+  inferredRadio('wireless','있음');
   document.getElementById('wirelessType').value=detected;
-  inferredNote.textContent='제품명에서 '+detected+' 무선 기능을 인식했습니다. 다른 사양이라면 아래에서 수정할 수 있습니다.';
- }else{inferredNote.textContent='';if(lastDetected&&form.elements.wireless.value==='있음'){form.querySelectorAll('input[name="wireless"]').forEach(x=>x.checked=false);wrap.hidden=true;}}
+  inferredNote.textContent='제품명에서 '+detected+' 무선 기능을 자동 인식했습니다.';
+ }else{
+  inferredNote.textContent='';
+  if(lastDetected){form.querySelectorAll('input[name="wireless"]').forEach(x=>x.checked=false);syncWirelessFields();}
+ }
  lastDetected=detected;
-});
+}
+productInput.addEventListener('input',updateProductInference);
+updateProductInference();
 function addDocuments(target,title,documents,note=''){
  const box=document.createElement('div');box.className='diag-result';
  const heading=document.createElement('strong');heading.textContent=title;box.append(heading);
@@ -115,6 +133,7 @@ form.addEventListener('submit',e=>{
  const wireless=form.elements.wireless.value;
  const wirelessType=wireless==='있음'?document.getElementById('wirelessType').value:'해당 없음';
  const moduleStatus=wireless==='있음'?(form.elements.certModule.value||'잘 모름'):'해당 없음';
+ const moduleHistory=moduleStatus==='예'?form.elements.moduleHistory.value:'해당 없음';
  const items=document.getElementById('resultItems');items.replaceChildren();
  // 2021년 제품별 전자파적합성 시험방법 V5에 등장하는 제품군 예시 기반의 키워드 분류 (2026-11-06 점검).
  // 이 분류는 현행 법령에 따른 인증 확정 판정이 아닙니다.
@@ -180,6 +199,8 @@ form.addEventListener('submit',e=>{
  }
  if(conflict){
   addResult(items,'무선 인증','입력 정보 재확인 필요','제품명과 선택한 무선 기능이 서로 다릅니다.');
+ }else if(moduleStatus==='예'&&(wireless==='있음'||inferred)){
+  addResult(items,'무선 인증','기존 모듈 인증 활용 및 완제품 시험 범위 확인','기존 KC 인증 무선 모듈 사용으로 입력됐습니다. 인증서(필증)와 시험성적서로 RF·REMC 시험 이력, 안테나 및 완제품 구성을 확인해 필요한 인증 절차와 시험 범위를 판단합니다.');
  }else if(wireless==='있음'||inferred){
   addResult(items,'무선 인증','대상 가능성 높음',(inferred||wirelessType)+' 송신 기능이 있는 제품으로 입력됐습니다. 주파수·출력·모듈 및 완제품 구성에 따라 적용 절차를 확인해야 합니다.');
  }else if(wireless==='없음'){
@@ -197,10 +218,10 @@ form.addEventListener('submit',e=>{
  if(!conflict&&(wireless==='있음'||inferred)){
   addDocuments(items,'무선 인증 기본 준비서류',['안테나 사양서','사용자설명서(무선 기술사양 포함)','부품 배치도','회로도'],'제품과 인증 유형에 따라 추가 자료가 필요할 수 있습니다.');
   if(moduleStatus==='예'){
-   addDocuments(items,'기존 인증 무선 모듈 사용 시 필수 제출자료',['무선 모듈 인증서(필증)','무선 모듈 시험성적서'],'위 자료는 인증 시험 진행 시 필요한 자료입니다. RF 및 무선기기 전자파(REMC) 시험 이력과 인증 조건을 확인하여 완제품에 적용 가능한 범위를 검토합니다. 모듈 인증만으로 완제품 인증이 자동 면제되지는 않습니다.');
+   addDocuments(items,'기존 인증 무선 모듈 사용 시 필수 제출자료',['무선 모듈 인증서(필증)','무선 모듈 시험성적서'],'위 자료는 인증 시험 진행 시 필요한 자료입니다. RF 및 무선기기 전자파(REMC) 시험 이력과 인증 조건을 실제 성적서로 확인합니다. 고객이 선택한 시험 이력만으로 면제 또는 시험 생략을 확정하지 않습니다.');
   }
  }
- const summary=['[제품인증 자가진단 · 국내 KC 예비 검토]','제품명: '+product,'참고 제품군: '+category,'용도: '+purpose,'전원 방식: '+power,'정격전압: '+voltage,'무선 기능: '+wireless,'무선 방식: '+wirelessType,'기존 KC 인증 무선 모듈 사용: '+moduleStatus].join('\n');
+ const summary=['[제품인증 자가진단 · 국내 KC 예비 검토]','제품명: '+product,'참고 제품군: '+category,'용도: '+purpose,'전원 방식: '+power,'정격전압: '+voltage,'무선 기능: '+wireless,'무선 방식: '+wirelessType,'기존 KC 인증 무선 모듈 사용: '+moduleStatus,'모듈 시험 이력(고객 입력): '+moduleHistory].join('\n');
  // 상담 페이지에서 진단 정보를 활용할 수 있도록 동일 출처 세션에 저장합니다.
  try{sessionStorage.setItem('con_kc_diagnosis',summary);}catch(_){}
  const link=document.getElementById('consultLink');
