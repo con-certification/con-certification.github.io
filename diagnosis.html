@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>30초 제품인증 자가진단 | 주식회사 시온</title>
 <meta name="description" content="주식회사 시온 제품인증 자가진단. 현재 국내 KC 분야 예비 검토를 제공합니다. 전자파·전기안전·무선 인증 검토 필요성을 확인하고 상담을 신청하세요.">
-<link rel="stylesheet" href="style.css">
+<!-- 독립형 자가진단 페이지: 공통 스타일의 고정 메뉴 간섭 방지 -->
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f5f8fc;color:#172b45;font-family:Arial,'Malgun Gothic',sans-serif}
-.diag-header{background:#102844;color:#fff;padding:18px max(20px,calc((100vw - 1080px)/2));display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+html{scroll-behavior:smooth}body{margin:0;background:#f5f8fc;color:#172b45;font-family:Arial,'Malgun Gothic',sans-serif}
+.diag-header{position:relative;top:auto;bottom:auto;left:auto;right:auto;z-index:1;width:100%;background:#102844;color:#fff;padding:18px max(20px,calc((100vw - 1080px)/2));display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
 .diag-header a{color:white;text-decoration:none;font-weight:700}
 .diag-wrap{max-width:800px;margin:44px auto 80px;padding:0 18px}
 .diag-kicker{color:#1266ba;font-size:13px;font-weight:800;letter-spacing:1.5px}
@@ -42,7 +42,7 @@ body{margin:0;background:#f5f8fc;color:#172b45;font-family:Arial,'Malgun Gothic'
 <main class="diag-wrap">
 <p class="diag-kicker">PRODUCT CERTIFICATION QUICK CHECK</p>
 <h1>30초 제품인증 자가진단</h1>
-<p class="diag-intro">제품명·용도·전원·무선 기능을 바탕으로 국내 KC 인증 대상 여부를 1차 판단합니다. CE·FCC 등 해외인증 진단은 준비 중이며, 상담으로 문의하실 수 있습니다. </p>
+<p class="diag-intro">제품명·용도·전원·무선 기능을 바탕으로 국내 KC 인증 대상 여부를 간단히 1차 판단합니다. 실제 회로·기능·사용설명서 확인 전의 참고 결과이며, 최종 판단은 상담을 통해 안내합니다. CE·FCC 등 해외인증은 별도 문의해 주세요. </p>
 <form class="diag-card" id="diagForm">
  <div class="diag-field"><label for="product">제품명 또는 제품 종류 *</label><input id="product" name="product" required maxlength="120" placeholder="예: 블루투스 키보드, 신발건조기"></div>
  <div class="diag-field"><label for="purpose">제품 용도 *</label><select id="purpose" required><option value="">선택해 주세요</option><option>가정용·생활가전</option><option>정보통신·사무기기</option><option>산업용 장비</option><option>조명·전기용품</option><option>의료·전문 장비</option><option>부품·액세서리</option><option>기타·잘 모르겠음</option></select></div>
@@ -59,7 +59,7 @@ body{margin:0;background:#f5f8fc;color:#172b45;font-family:Arial,'Malgun Gothic'
 <h2>제품인증 자가진단 결과</h2>
 <p class="diag-note" id="resultProduct"></p>
 <div id="resultItems"></div>
-<p class="diag-warning">본 결과는 참고용 1차 진단입니다. 정확한 인증 대상 여부는 주식회사 시온에 문의하여 확인하시기 바랍니다.</p>
+<p class="diag-warning">본 결과는 입력하신 제품명·용도·전원·무선 기능만으로 판단한 참고용 1차 결과입니다. 실제 회로 구성, 주요 기능 및 사용설명서에 따라 결과가 달라질 수 있습니다. 정확한 인증 대상 여부는 주식회사 시온에 문의해 확인하시기 바랍니다.</p>
 <a id="consultLink" class="diag-primary" style="display:block;text-align:center;text-decoration:none" href="contact.html">최종 인증 대상 여부 문의하기 →</a>
 <a href="#diagForm" class="diag-secondary">입력 내용 수정하기</a>
 </section>
@@ -131,8 +131,8 @@ function addDocuments(target,title,documents,note=''){
 }
 function addResult(target,title,status,description){
  const div=document.createElement('div');div.className='diag-result';
- const strong=document.createElement('strong');strong.textContent=title+' · '+status;
- const span=document.createElement('span');span.textContent='';
+ const strong=document.createElement('strong');strong.textContent=title+' · '+(status.includes('1차 판단')?status:status+' (1차 판단)');
+ const span=document.createElement('span');span.textContent=description||'';
  div.append(strong,span);target.append(div);
 }
 form.addEventListener('submit',e=>{
@@ -212,6 +212,7 @@ form.addEventListener('submit',e=>{
  // 이 자료는 시험방법 참고표이며 현행 인증대상 고시 자체가 아닙니다.
  // 제품명 전체 일치가 아닌 기능/용도 중심의 넓은 분류(개별 키워드 패치 방지).
  const functionalFamilies=[
+  {terms:['자가진단','자동진단','진단시스템','진단장치','진단기','판독시스템','판정시스템','정보처리','정보분석','데이터처리','연산장치','처리시스템','분석시스템','검사시스템','판정장치'],category:'정보기기 · 진단·정보처리'},
   {terms:['데이터수집','데이터로거','데이터기록','데이터저장','데이터분석','자료수집','자료기록','신호수집','신호기록','신호분석','daq','datalogger','dataacquisition','진동분석','상태감시','상태모니터링'],category:'산업용 장비 · 데이터 수집·계측'},
   {terms:['계측','측정','측량','시험장비','시험기','분석기','검사장비','검사기','검출기','모니터링','모니터','센서장치','센서모듈','센서시스템'],category:'산업용 장비 · 계측·검사'},
   {terms:['제어장치','제어기','제어반','컨트롤러','컨트롤박스','자동제어','공정제어','모션제어','구동제어','설비제어','자동화장치','자동화시스템','hmi','plc'],category:'산업용 장비 · 제어·자동화'},
@@ -263,7 +264,12 @@ form.addEventListener('submit',e=>{
  const electronicCategory=Boolean(knownEmc||homeAppliance||powerSupply||/조명·전기용품|산업용 장비|의료·전문 장비|완구·무선기기/.test(category));
  const ordinaryElectric=/건조기|드라이어|드라이기|선풍기|가습기|제습기|공기청정기|청소기|전기밥솥|전기포트|전기주전자|커피머신|믹서기|다리미|전기히터|난방기|에어프라이어|식기세척기|살균기|소독기|전기드릴|전동공구|전광판|디스플레이|모니터|프린터|스캐너|컴퓨터|노트북|태블릿|충전기|어댑터|아답터|아답타|인버터|제어기|컨트롤러|측정기|계측기|플라즈마|로봇/.test(normalized);
  const functionalElectric=/전기|전자|전동|모터|가열|건조|냉각|냉동|조명|레이저|센서|검출|측정|계측|제어|통신|네트워크|영상|음향|오디오|전원|충전|변환|플라즈마|살균|초음파|발광|디지털|자동화|분석|인쇄|출력|스마트|펌프|컴프레서|압축|인버터|로봇|데이터|로거|기록|수집|검사|모니터링|단말|인터페이스|DAQ|logger/.test(normalized);
- const likelyElectronic=Boolean(electronicCategory||ordinaryElectric||functionalElectric||inferred||wireless==='있음');
+ const diagnosticSystem=/자가진단|자동진단|진단|판독|판정|정보처리|정보분석|데이터처리|연산|분석|검사|검증|감시|모니터링|데이터수집|데이터기록|신호처리|영상처리|상태감시/.test(normalized);
+ const systemDevice=/시스템|장비|기기|장치|설비|단말기|컨트롤러|프로세서|서버|워크스테이션|컴퓨터|제어반|운영장치/.test(normalized);
+ const activeFunction=/진단|검사|분석|처리|제어|측정|계측|수집|기록|표시|모니터링|통신|연산|판독|판정|자동|전자|디지털|전동|스마트|센서|검출|출력|입력|영상|신호/.test(normalized);
+ const explicitPassive=/케이블|전선|단순커넥터|단순젠더|나사|볼트|너트|브래킷|거치대|외함|케이스|단순기구|기계식|수동식/.test(normalized);
+ const inferredElectronicSystem=systemDevice&&activeFunction&&!explicitPassive;
+ const likelyElectronic=Boolean(electronicCategory||ordinaryElectric||functionalElectric||diagnosticSystem||inferredElectronicSystem||inferred||wireless==='있음');
  let emcTarget=false;
  if(conflict){
   addResult(items,'전자파 적합성평가','확인 필요','제품명과 무선 기능 입력이 일치하지 않습니다. 제품 사양을 확인해 주세요.');
@@ -271,9 +277,9 @@ form.addEventListener('submit',e=>{
   addResult(items,'전자파 적합성평가','비대상 가능성 높음','전자회로·능동 기능이 없는 순수 수동 제품이라는 입력을 전제로 합니다.');
  }else if(!isPassive&&!electricConnection&&!passiveAccessory&&likelyElectronic){
   emcTarget=true;
-  addResult(items,'전자파 적합성평가','대상 가능성 높음','제품의 기능과 전원을 고려한 EMC 대상 가능성에 대한 1차 판단입니다. 현행 고시의 정확한 대상 품목 및 제외 조건은 별도 확인해야 합니다.');
+  addResult(items,'전자파 적합성평가','대상 가능성 높음',(diagnosticSystem||inferredElectronicSystem)?'제품명상 정보 수집·처리, 진단 또는 제어 기능을 수행하는 전자장비로 예상되어 EMC 대상 가능성이 높습니다. 실제 회로·기능 확인이 필요합니다.':'제품명과 사용 목적상 전자회로가 동작하는 제품으로 예상되어 EMC 대상 가능성이 높습니다. 실제 회로·기능 확인이 필요합니다.');
  }else{
-  addResult(items,'전자파 적합성평가','확인 필요','제품명만으로 능동 전자회로 및 현행 고시상 대상 품목을 확인하기 어렵습니다. 제품의 작동 원리·내부 회로 및 용도 확인이 필요합니다.');
+  addResult(items,'전자파 적합성평가','확인 필요','입력된 제품명과 전원 정보만으로는 전자회로 및 기능을 충분히 확인하기 어렵습니다. 사용설명서와 회로 구성을 확인해야 합니다.');
  }
  if(lowVoltageBody){
   addResult(items,'전기안전','비대상 가능성 높음','일반적인 저전압 본체를 기준으로 합니다. 배터리·충전기·동봉 어댑터는 별도 확인 대상입니다.');
@@ -284,7 +290,7 @@ form.addEventListener('submit',e=>{
  }else if(isPassive&&!electricConnection&&!passiveAccessory){
   addResult(items,'전기안전','비대상 가능성 높음','안전관리 대상 전기부품이 없는 단순 수동 제품이라는 전제입니다.');
  }else{
-  addResult(items,'전기안전','확인 필요','제품군·정격·사용 목적 및 별도 구성품에 따라 전기용품 안전관리 대상 여부가 달라질 수 있습니다.');
+  addResult(items,'전기안전','확인 필요',ac?'AC 전원을 사용하는 제품으로, 제품 종류와 전원 구조를 확인해야 합니다.':'제품 종류와 전원 구성에 따라 전기안전 대상 여부가 달라질 수 있습니다.');
  }
  if(conflict){
   addResult(items,'무선 인증','확인 필요','제품명과 무선 기능 입력이 서로 다릅니다.');
@@ -293,23 +299,11 @@ form.addEventListener('submit',e=>{
  }else if(wireless==='있음'||inferred){
   addResult(items,'무선 인증','대상 가능성 높음',(inferred||wirelessType)+' 무선 송신 기능이 있는 제품을 기준으로 합니다. 실제 주파수·출력·구성에 따라 적용 대상과 절차를 최종 확인합니다.');
  }else if(wireless==='없음'){
-  addResult(items,'무선 인증','비대상 가능성 높음','무선 송신 기능이 없다는 입력을 전제로 합니다.');
+  addResult(items,'무선 인증','비대상 가능성 높음','입력하신 정보상 무선통신 기능이 없어 무선 인증 대상이 아닐 가능성이 높습니다.');
  }else{
   addResult(items,'무선 인증','확인 필요','무선 송신 기능 유무를 확인해야 합니다.');
  }
- // 인증 대상 가능성에 따라 고객에게 준비서류를 간단하게 안내합니다.
- if(emcTarget){
-  addDocuments(items,'전자파(EMC) 기본 준비서류',['사용자설명서(기술사양 포함)']);
- }
- if(!lowVoltageBody && ((safetyHousehold&&ac)||(safetySupply&&ac))){
-  addDocuments(items,'전기안전 준비자료 안내',['제품 사양서','회로도','주요 부품 목록 및 관련 인증자료'],'제품과 인증 유형에 따라 추가 자료가 필요하며 세부 서류는 별도 안내합니다.');
- }
- if(!conflict&&(wireless==='있음'||inferred)){
-  addDocuments(items,'무선 인증 기본 준비서류',['안테나 사양서','사용자설명서(무선 기술사양 포함)','부품 배치도','회로도'],'제품과 인증 유형에 따라 추가 자료가 필요할 수 있습니다.');
-  if(moduleStatus==='예'){
-   addDocuments(items,'기존 인증 무선 모듈 사용 시 필수 제출자료',['무선 모듈 인증서(필증)','무선 모듈 시험성적서'],'위 자료는 인증 시험 진행 시 필요한 자료입니다. RF 및 무선기기 전자파(REMC) 시험 이력과 인증 조건을 실제 성적서로 확인합니다. 고객이 선택한 시험 이력만으로 면제 또는 시험 생략을 확정하지 않습니다.');
-  }
- }
+ // 상세 준비서류는 고객 화면에 표시하지 않고 상담 시 안내합니다.
  const summary=['[제품인증 자가진단 · 국내 KC 예비 검토]','제품명: '+product,'참고 제품군: '+category,'용도: '+purpose,'전원 방식: '+power,'충전 방식: '+(powers.includes('충전식 배터리')?(form.elements.charge.value||'미선택'):'해당 없음'),'정격전압: '+voltage,'무선 기능: '+wireless,'무선 방식: '+wirelessType,'기존 KC 인증 무선 모듈 사용: '+moduleStatus,'모듈 시험 이력(고객 입력): '+moduleHistory].join('\n');
  // 상담 페이지에서 진단 정보를 활용할 수 있도록 동일 출처 세션에 저장합니다.
  try{sessionStorage.setItem('con_kc_diagnosis',summary);}catch(_){}
