@@ -200,7 +200,7 @@ form.addEventListener('submit',e=>{
  if(conflict){
   addResult(items,'무선 인증','입력 정보 재확인 필요','제품명과 선택한 무선 기능이 서로 다릅니다.');
  }else if(moduleStatus==='예'&&(wireless==='있음'||inferred)){
-  addResult(items,'무선 인증','기존 모듈 인증 활용 및 완제품 시험 범위 확인','기존 KC 인증 무선 모듈 사용으로 입력됐습니다. 인증서(필증)와 시험성적서로 RF·REMC 시험 이력, 안테나 및 완제품 구성을 확인해 필요한 인증 절차와 시험 범위를 판단합니다.');
+  addResult(items,'무선 인증','별도 RF 인증 대상 아님(조건부)','기존 KC 인증 무선 모듈을 인증 조건에 맞게 사용하고 무선부에 영향을 주는 변경이 없다면 해당 무선부에 대한 별도 RF 인증을 진행하지 않을 수 있습니다. 실제 인증서(필증) 및 시험성적서 제출 시 RF·REMC 시험 이력과 인증 조건을 확인하여 최종 적용 여부를 판단합니다. 완제품의 EMC·REMC 적용 여부는 별도로 확인합니다.');
  }else if(wireless==='있음'||inferred){
   addResult(items,'무선 인증','대상 가능성 높음',(inferred||wirelessType)+' 송신 기능이 있는 제품으로 입력됐습니다. 주파수·출력·모듈 및 완제품 구성에 따라 적용 절차를 확인해야 합니다.');
  }else if(wireless==='없음'){
