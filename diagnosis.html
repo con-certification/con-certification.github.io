@@ -46,7 +46,8 @@ body{margin:0;background:#f5f8fc;color:#172b45;font-family:Arial,'Malgun Gothic'
 <form class="diag-card" id="diagForm">
  <div class="diag-field"><label for="product">제품명 또는 제품 종류 *</label><input id="product" name="product" required maxlength="120" placeholder="예: 블루투스 키보드, 신발건조기"></div>
  <div class="diag-field"><label for="purpose">제품 용도 *</label><select id="purpose" required><option value="">선택해 주세요</option><option>가정용·생활가전</option><option>정보통신·사무기기</option><option>산업용 장비</option><option>조명·전기용품</option><option>의료·전문 장비</option><option>부품·액세서리</option><option>기타·잘 모르겠음</option></select></div>
- <div class="diag-field"><fieldset><legend>전원 방식 *</legend><div class="diag-options"><label><input type="radio" name="power" value="AC 전원" required>AC 전원</label><label><input type="radio" name="power" value="DC 어댑터">DC 어댑터</label><label><input type="radio" name="power" value="배터리">배터리</label><label><input type="radio" name="power" value="무전원·수동">무전원·수동</label></div></fieldset></div>
+ <div class="diag-field"><fieldset><legend>전원 방식 *</legend><div class="diag-options"><label><input type="radio" name="power" value="AC 전원" required>AC 전원</label><label><input type="radio" name="power" value="DC 어댑터">DC 어댑터</label><label><input type="radio" name="power" value="충전식 배터리">충전식 배터리</label><label><input type="radio" name="power" value="일회용 건전지">일회용 건전지</label><label><input type="radio" name="power" value="무전원·수동">무전원·수동</label></div></fieldset></div>
+ <div class="diag-field" id="chargeWrap" hidden><fieldset><legend>충전 방식</legend><div class="diag-options"><label><input type="radio" name="charge" value="USB 충전">USB 충전(USB-C 등)</label><label><input type="radio" name="charge" value="전용 충전기·어댑터">전용 충전기·어댑터</label><label><input type="radio" name="charge" value="무선 충전">무선 충전</label><label><input type="radio" name="charge" value="배터리 분리 후 외부 충전">배터리 분리 후 외부 충전</label><label><input type="radio" name="charge" value="잘 모름">잘 모름</label></div></fieldset></div>
  <div class="diag-field"><label for="voltage">정격전압 (선택)</label><input id="voltage" maxlength="50" placeholder="예: AC 220V, DC 5V, 잘 모름"></div>
  <div class="diag-field" id="wirelessQuestion"><fieldset><legend>무선 기능 *</legend><div class="diag-options"><label><input type="radio" name="wireless" value="있음" required>있음</label><label><input type="radio" name="wireless" value="없음">없음</label><label><input type="radio" name="wireless" value="잘 모름">잘 모름</label></div></fieldset></div>
  <div class="diag-field" id="wirelessTypeWrap" hidden><label for="wirelessType">무선 방식</label><select id="wirelessType"><option>잘 모름</option><option>Bluetooth</option><option>Wi-Fi</option><option>LTE·5G</option><option>RF 리모컨·기타 무선</option><option>복수 무선 방식</option></select></div>
@@ -69,6 +70,10 @@ const wrap=document.getElementById('wirelessTypeWrap');
 const moduleWrap=document.getElementById('moduleWrap');
 const wirelessQuestion=document.getElementById('wirelessQuestion');
 const moduleHistoryWrap=document.getElementById('moduleHistoryWrap');
+const chargeWrap=document.getElementById('chargeWrap');
+function syncCharge(){chargeWrap.hidden=form.elements.power.value!=='충전식 배터리';}
+form.querySelectorAll('input[name="power"]').forEach(x=>x.addEventListener('change',syncCharge));
+syncCharge();
 function syncModuleHistory(){
  moduleHistoryWrap.hidden=moduleWrap.hidden||form.elements.certModule.value!=='예';
  if(moduleHistoryWrap.hidden)form.querySelector('input[name="moduleHistory"][value="잘 모름"]').checked=true;
@@ -156,6 +161,7 @@ form.addEventListener('submit',e=>{
   {"terms": ["전기다리미", "스팀다리미"], "category": "가정용 전기기기 · 다리미", "emc": "발열 및 전자제어 구성을 확인합니다.", "safety": "다리미 세부 품목과 정격을 확인합니다."},
   {"terms": ["진공청소기", "전기청소기", "청소기"], "category": "가정용 전기기기 · 청소기", "emc": "모터·배터리·충전 방식과 사용 환경을 확인합니다.", "safety": "청소기 품목과 배터리·충전기 구성을 확인합니다."},
   {"terms": ["복합기", "복사기", "프린터", "스캐너"], "category": "정보·사무기기 · 출력·입력기기", "emc": "정보처리 및 유선·무선 연결 기능을 확인합니다.", "safety": "동봉 전원장치와 제품 용도를 확인합니다."},
+  {"terms": ["컴퓨터", "데스크톱", "데스크탑", "PC", "피씨", "일체형PC"], "category": "정보기기 · 컴퓨터", "emc": "일반적인 컴퓨터는 전자파 적합성평가 대상 품목입니다.", "safety": "본체 전원 구성 및 구성품을 확인합니다."},
   {"terms": ["노트북", "랩톱", "태블릿"], "category": "정보기기 · 휴대용 컴퓨터", "emc": "정보처리 기능과 통신 모듈 구성을 확인합니다.", "safety": "본체·배터리·외부 전원장치의 안전관리 적용을 각각 확인합니다."},
   {"terms": ["모니터", "디스플레이"], "category": "영상·정보기기 · 모니터", "emc": "영상 입력·출력 기능과 제품 용도를 확인합니다.", "safety": "내장 전원부 및 외부 어댑터 구성을 확인합니다."},
   {"terms": ["무선라우터", "와이파이 공유기", "공유기", "라우터"], "category": "통신기기 · 라우터", "emc": "유선·무선 통신 인터페이스와 사용 주파수를 확인합니다.", "safety": "외부 전원장치 및 제품 구성 확인이 필요합니다."},
@@ -176,8 +182,11 @@ form.addEventListener('submit',e=>{
  const appliance=matched&&/가정용 전기기기/.test(category);
  const powerSupply=matched&&/전원·충전기기/.test(category);
  const ac=power==='AC 전원';
+ const isComputer=matched&&category==='정보기기 · 컴퓨터';
  if(isPassive&&!inferred&&wireless==='없음'){
   addResult(items,'전자파 적합성평가','대상 아닐 가능성 높음','무전원·수동 제품으로 입력됐습니다. 전자회로 또는 능동 기능이 없는 경우를 전제로 한 예비 판단입니다.');
+ }else if(isComputer){
+  addResult(items,'전자파 적합성평가','대상','일반적인 컴퓨터는 KC 전자파 적합성평가 대상 기자재입니다. 적용 절차 및 법령상 예외는 실제 제품의 구성과 용도에 따라 확인합니다.');
  }else if(matched){
   addResult(items,'전자파 적합성평가','대상 가능성 높음',infoDevice?'정보·통신 기능을 가진 제품군입니다. 제품 구성에 따른 적합성평가 대상 여부를 확인해야 합니다.':appliance?'모터·가열·전자제어 기능이 있는 제품군으로 전자파 적합성평가 대상 가능성이 높습니다.':'전기·전자 기능이 있는 제품군으로 전자파 적합성평가 대상 가능성이 높습니다.');
  }else{
@@ -221,7 +230,7 @@ form.addEventListener('submit',e=>{
    addDocuments(items,'기존 인증 무선 모듈 사용 시 필수 제출자료',['무선 모듈 인증서(필증)','무선 모듈 시험성적서'],'위 자료는 인증 시험 진행 시 필요한 자료입니다. RF 및 무선기기 전자파(REMC) 시험 이력과 인증 조건을 실제 성적서로 확인합니다. 고객이 선택한 시험 이력만으로 면제 또는 시험 생략을 확정하지 않습니다.');
   }
  }
- const summary=['[제품인증 자가진단 · 국내 KC 예비 검토]','제품명: '+product,'참고 제품군: '+category,'용도: '+purpose,'전원 방식: '+power,'정격전압: '+voltage,'무선 기능: '+wireless,'무선 방식: '+wirelessType,'기존 KC 인증 무선 모듈 사용: '+moduleStatus,'모듈 시험 이력(고객 입력): '+moduleHistory].join('\n');
+ const summary=['[제품인증 자가진단 · 국내 KC 예비 검토]','제품명: '+product,'참고 제품군: '+category,'용도: '+purpose,'전원 방식: '+power,'충전 방식: '+(power==='충전식 배터리'?(form.elements.charge.value||'미선택'):'해당 없음'),'정격전압: '+voltage,'무선 기능: '+wireless,'무선 방식: '+wirelessType,'기존 KC 인증 무선 모듈 사용: '+moduleStatus,'모듈 시험 이력(고객 입력): '+moduleHistory].join('\n');
  // 상담 페이지에서 진단 정보를 활용할 수 있도록 동일 출처 세션에 저장합니다.
  try{sessionStorage.setItem('con_kc_diagnosis',summary);}catch(_){}
  const link=document.getElementById('consultLink');
