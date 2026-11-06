@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>30초 KC 인증 자가진단 | 주식회사 시온</title>
+<meta name="description" content="주식회사 시온 KC 인증 자가진단. 전자파·전기안전·무선 인증 검토 필요성을 확인하고 상담을 신청하세요.">
+<link rel="stylesheet" href="style.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f8fc;color:#172b45;font-family:Arial,'Malgun Gothic',sans-serif}
+.diag-header{background:#102844;color:#fff;padding:18px max(20px,calc((100vw - 1080px)/2));display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.diag-header a{color:white;text-decoration:none;font-weight:700}
+.diag-wrap{max-width:800px;margin:44px auto 80px;padding:0 18px}
+.diag-kicker{color:#1266ba;font-size:13px;font-weight:800;letter-spacing:1.5px}
+.diag-wrap h1{font-size:clamp(27px,5vw,38px);margin:12px 0}
+.diag-intro{color:#5c6c80;line-height:1.8;margin-bottom:26px}
+.diag-card{background:white;border:1px solid #dce6f0;border-radius:16px;padding:clamp(20px,4vw,34px);box-shadow:0 9px 30px #1028440b}
+.diag-field{margin-bottom:22px}
+.diag-field label,.diag-field legend{display:block;font-weight:750;margin-bottom:10px;font-size:15px}
+.diag-field input,.diag-field select{display:block;width:100%;padding:13px 14px;border:1px solid #c9d6e5;border-radius:9px;background:#fff;color:#15263c;font:inherit}
+.diag-field fieldset{border:0;padding:0;margin:0}
+.diag-options{display:flex;gap:9px;flex-wrap:wrap}
+.diag-options label{display:flex;align-items:center;gap:7px;border:1px solid #d2deea;border-radius:9px;padding:11px 13px;font-size:14px;font-weight:500;margin:0;cursor:pointer}
+.diag-options input{width:auto;margin:0;accent-color:#0969da}
+.diag-note{font-size:13px;color:#64758b;line-height:1.65}
+.diag-primary{width:100%;padding:15px;border:0;border-radius:9px;background:#0969da;color:white;font-weight:800;font-size:16px;cursor:pointer}
+.diag-primary:hover{background:#0756b6}
+.diag-results{margin-top:24px}
+.diag-results[hidden]{display:none}
+.diag-results h2{margin:0 0 16px;font-size:23px}
+.diag-result{padding:15px 17px;border:1px solid #dce6f0;border-radius:10px;margin-bottom:10px;background:#fbfdff}
+.diag-result strong{display:block;margin-bottom:5px}
+.diag-result span{font-size:14px;color:#52657b;line-height:1.6}
+.diag-warning{padding:14px 16px;border-radius:10px;background:#f5f8fc;font-size:13px;color:#566a82;line-height:1.75;margin:18px 0}
+.diag-secondary{display:inline-block;text-decoration:none;color:#0969da;font-weight:700;margin-top:15px}
+@media(max-width:520px){.diag-wrap{margin-top:28px}.diag-options{display:grid;grid-template-columns:1fr 1fr}.diag-options label{min-width:0}}
+</style>
+</head>
+<body>
+<header class="diag-header"><a href="index.html">C•on &nbsp; 주식회사 시온</a><a href="index.html">← 홈페이지</a></header>
+<main class="diag-wrap">
+<p class="diag-kicker">KC CERTIFICATION QUICK CHECK</p>
+<h1>30초 KC 인증 자가진단</h1>
+<p class="diag-intro">제품의 기본 정보를 입력하면 인증 분야별 검토 필요성을 안내합니다. 시험규격이나 세부 시험항목은 표시하지 않습니다.</p>
+<form class="diag-card" id="diagForm">
+ <div class="diag-field"><label for="product">제품명 또는 제품 종류 *</label><input id="product" name="product" required maxlength="120" placeholder="예: 블루투스 키보드, 신발건조기"></div>
+ <div class="diag-field"><label for="purpose">제품 용도 *</label><select id="purpose" required><option value="">선택해 주세요</option><option>가정용·생활가전</option><option>정보통신·사무기기</option><option>산업용 장비</option><option>조명·전기용품</option><option>의료·전문 장비</option><option>부품·액세서리</option><option>기타·잘 모르겠음</option></select></div>
+ <div class="diag-field"><fieldset><legend>전원 방식 *</legend><div class="diag-options"><label><input type="radio" name="power" value="AC 전원" required>AC 전원</label><label><input type="radio" name="power" value="DC 어댑터">DC 어댑터</label><label><input type="radio" name="power" value="배터리">배터리</label><label><input type="radio" name="power" value="무전원·수동">무전원·수동</label></div></fieldset></div>
+ <div class="diag-field"><label for="voltage">정격전압 (선택)</label><input id="voltage" maxlength="50" placeholder="예: AC 220V, DC 5V, 잘 모름"></div>
+ <div class="diag-field"><fieldset><legend>무선 기능 *</legend><div class="diag-options"><label><input type="radio" name="wireless" value="있음" required>있음</label><label><input type="radio" name="wireless" value="없음">없음</label><label><input type="radio" name="wireless" value="잘 모름">잘 모름</label></div></fieldset></div>
+ <div class="diag-field" id="wirelessTypeWrap" hidden><label for="wirelessType">무선 방식</label><select id="wirelessType"><option>잘 모름</option><option>Bluetooth</option><option>Wi-Fi</option><option>LTE·5G</option><option>RF 리모컨·기타 무선</option><option>복수 무선 방식</option></select></div>
+ <button type="submit" class="diag-primary">자가진단 결과 확인하기</button>
+ <p class="diag-note">개인정보 입력 없이 이용할 수 있습니다. 입력 내용은 상담 버튼을 누르기 전까지 서버에 제출되지 않습니다.</p>
+</form>
+<section id="results" class="diag-card diag-results" hidden aria-live="polite">
+<h2>KC 인증 자가진단 결과</h2>
+<p class="diag-note" id="resultProduct"></p>
+<div id="resultItems"></div>
+<p class="diag-warning">이 결과는 입력된 정보만으로 생성된 사전 검토 안내이며, 법적 인증 대상 여부를 확정하지 않습니다. 제품의 구조·정격·용도·무선 사양과 현행 법령·고시를 확인해야 합니다. '추가 검토 필요'는 인증 대상 제외를 의미하지 않습니다.</p>
+<a id="consultLink" class="diag-primary" style="display:block;text-align:center;text-decoration:none" href="contact.html">진단 내용으로 무료 상담 신청하기 →</a>
+<a href="#diagForm" class="diag-secondary">입력 내용 수정하기</a>
+</section>
+</main>
+<script>
+const form=document.getElementById('diagForm');
+const wrap=document.getElementById('wirelessTypeWrap');
+form.elements.wireless.forEach(el=>el.addEventListener('change',()=>{wrap.hidden=form.elements.wireless.value!=='있음'}));
+function addResult(target,title,status,description){
+ const div=document.createElement('div');div.className='diag-result';
+ const strong=document.createElement('strong');strong.textContent=title+' · '+status;
+ const span=document.createElement('span');span.textContent=description;
+ div.append(strong,span);target.append(div);
+}
+form.addEventListener('submit',e=>{
+ e.preventDefault();
+ if(!form.reportValidity())return;
+ const product=document.getElementById('product').value.trim();
+ const purpose=document.getElementById('purpose').value;
+ const power=form.elements.power.value;
+ const voltage=document.getElementById('voltage').value.trim()||'미입력';
+ const wireless=form.elements.wireless.value;
+ const wirelessType=wireless==='있음'?document.getElementById('wirelessType').value:'해당 없음';
+ const items=document.getElementById('resultItems');items.replaceChildren();
+ document.getElementById('resultProduct').textContent='제품: '+product;
+ if(power==='무전원·수동'){
+  addResult(items,'전자파 적합성평가','추가 검토 필요','능동 전자회로 유무, 연결되는 기기 및 제품 분류를 확인해야 합니다.');
+ }else{
+  addResult(items,'전자파 적합성평가','대상 가능성 있음','전기·전자 기능과 제품 분류에 따라 적용 여부를 확인해야 합니다.');
+ }
+ if(power==='AC 전원'){
+  addResult(items,'전기안전','대상 가능성 있음','AC 전원 사용 제품입니다. 품목 분류, 정격, 용도 및 관련 법령에 따른 확인이 필요합니다.');
+ }else{
+  addResult(items,'전기안전','추가 검토 필요','전원 방식만으로 대상 여부를 판단할 수 없습니다. 제품 종류와 전원 구성 확인이 필요합니다.');
+ }
+ if(wireless==='있음'){
+  addResult(items,'무선 인증','대상 가능성 있음','무선 기능이 있습니다. 주파수, 출력, 모듈 인증 및 완제품 구성 확인이 필요합니다.');
+ }else{
+  addResult(items,'무선 인증','추가 검토 필요',wireless==='없음'?'입력상 무선 기능은 없지만 제품 구성과 통신 기능을 확인해야 합니다.':'무선 기능 여부와 통신 사양을 확인해야 합니다.');
+ }
+ const summary=['[KC 인증 자가진단]','제품명: '+product,'용도: '+purpose,'전원 방식: '+power,'정격전압: '+voltage,'무선 기능: '+wireless,'무선 방식: '+wirelessType].join('\n');
+ // 상담 페이지에서 진단 정보를 활용할 수 있도록 동일 출처 세션에 저장합니다.
+ try{sessionStorage.setItem('con_kc_diagnosis',summary);}catch(_){}
+ const link=document.getElementById('consultLink');
+ link.href='contact.html?diagnosis='+encodeURIComponent(summary)+'#inquiry-board';
+ document.getElementById('results').hidden=false;
+ document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+});
+</script>
+</body></html>
