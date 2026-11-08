@@ -45,23 +45,24 @@
 @media(max-width:850px){.formgrid{grid-template-columns:1fr}.formfield.full{grid-column:auto}.inquiry-head{align-items:flex-start;flex-direction:column}.inquiry-table th:first-child,.inquiry-table td:first-child{display:none}}
 </style>
 <div class="inquiry-head"><div><p class="eyebrow blue">ONLINE INQUIRY</p><h2>온라인 인증 문의</h2><p>홈페이지에서 문의를 남겨주시면 확인 후 연락드리겠습니다.</p></div></div>
-<table class="inquiry-table inquiry-table-header"><colgroup><col style="width:90px"><col><col style="width:130px"><col style="width:130px"></colgroup><thead><tr><th>번호</th><th>제목</th><th>작성자</th><th>등록일</th></tr></thead></table>
+<table class="inquiry-table inquiry-table-header"><colgroup><col style="width:90px"><col><col style="width:130px"><col style="width:130px"></colgroup><thead><tr><th>번호</th><th>문의 목적</th><th>작성자</th><th>등록일</th></tr></thead></table>
 <div class="inquiry-viewport" id="inquiryViewport"><table class="inquiry-table inquiry-table-body"><colgroup><col style="width:90px"><col><col style="width:130px"><col style="width:130px"></colgroup><tbody id="inquiryList"><tr><td colspan="4" class="private-row">문의 목록을 불러오는 중입니다.</td></tr></tbody></table></div>
 <nav id="inquiryPagination" class="inquiry-pagination" aria-label="상담문의 페이지"></nav>
-<p class="formnote">※ 목록에는 제목, 마스킹된 작성자, 등록일만 표시되며 연락처·이메일·회사명·제품명·문의내용은 공개되지 않습니다.</p>
+<p class="formnote">※ 목록에는 문의 목적, 마스킹된 작성자, 등록일만 표시되며 연락처·이메일·회사명·제품명·문의내용은 공개되지 않습니다.</p>
 <div class="board-actions"><button type="button" class="board-btn" id="writeOpen">글쓰기</button></div>
 <div class="inquiry-formbox" id="inquiryFormBox">
 <h3>인증 문의 작성</h3>
 <form id="inquiryForm">
 <div class="formgrid">
-<div class="formfield full"><label>제목 <span>*</span></label><input name="title" maxlength="100" required placeholder="예: 무선제품 KC 인증 견적 문의"></div>
-<div class="formfield"><label>담당자명 <span>*</span></label><input name="writer" maxlength="50" required></div>
+<div class="formfield full"><label>문의 목적</label><input name="title" maxlength="100" placeholder="예: 신규 인증 진행, 인증 비용 문의, 시험 상담, 인증 변경"></div>
+<div class="formfield"><label>담당자명</label><input name="writer" maxlength="50"></div>
 <div class="formfield"><label>회사명</label><input name="company" maxlength="100"></div>
-<div class="formfield"><label>연락처 <span>*</span></label><input name="contact" maxlength="50" required placeholder="010-0000-0000"></div>
+<div class="formfield"><label>연락처</label><input name="contact" maxlength="50" placeholder="010-0000-0000"></div>
 <div class="formfield"><label>이메일</label><input name="email" type="email" maxlength="120"></div>
-<div class="formfield"><label>제품명 <span>*</span></label><input name="product" maxlength="120" required></div>
+<div class="formfield full"><p class="formnote" style="margin:0">문의에 대한 답변을 받으시려면 연락처 또는 이메일 중 하나를 남겨주세요.</p></div>
+<div class="formfield"><label>제품명</label><input name="product" maxlength="120"></div>
 <div class="formfield"><label>희망 인증</label><select name="certification"><option value="">선택해 주세요</option><option>KC 인증</option><option>CE 인증</option><option>FCC 인증</option><option>EMC / RF</option><option>전기안전 / 신뢰성</option><option>기타 해외인증</option><option>잘 모르겠음</option></select></div>
-<div class="formfield full"><label>문의 내용 <span>*</span></label><textarea name="content" required placeholder="제품의 전원, 무선기능, 사용 용도 등 알고 계신 내용을 적어주세요."></textarea></div>
+<div class="formfield full"><label>문의 내용</label><textarea name="content" placeholder="제품의 전원, 무선기능, 사용 용도 등 알고 계신 내용을 적어주세요."></textarea><p class="formnote" style="margin-top:8px">제품 정보와 문의 내용을 자세히 작성해 주실수록 더욱 정확한 답변을 드릴 수 있습니다.</p></div>
 </div>
 <p class="formnote">입력하신 정보는 인증 상담 및 회신을 위해 사용됩니다. 민감한 개인정보나 비밀번호는 입력하지 마세요.</p>
 <div id="formMsg" class="formmsg"></div>
@@ -170,6 +171,13 @@ e.preventDefault();
 const btn=document.getElementById("submitInquiry"),msg=document.getElementById("formMsg");
 btn.disabled=true;btn.textContent="등록 중...";msg.className="formmsg";msg.textContent="";
 const data=Object.fromEntries(new FormData(this).entries());
+const hasInput=Object.values(data).some(value=>String(value??"").trim().length>0);
+if(!hasInput){msg.className="formmsg err";msg.textContent="문의하실 내용을 한 가지 이상 입력해 주세요.";btn.disabled=false;btn.textContent="문의 등록";return;}
+// 기존 Supabase RLS 정책(제목·작성자·내용 비어 있지 않음)을 유지하기 위한 기본값.
+// 화면에서는 모든 입력란을 선택 사항으로 제공합니다.
+if(!data.title.trim())data.title="인증 상담 문의";
+if(!data.writer.trim())data.writer="익명";
+if(!data.content.trim())data.content="상세 문의 내용 미기재";
 try{
 const res=await fetch(SUPABASE_URL+"/rest/v1/inquiries",{method:"POST",headers:{"apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify(data)});
 if(!res.ok)throw new Error(await res.text());
