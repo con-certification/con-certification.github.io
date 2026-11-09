@@ -689,7 +689,22 @@ main>.sion-v2-cert,main>.sion-v2-testing,main>.sion-v2-process{width:100%!import
 .sion-footer-icon-v28 svg{display:block;width:100%;height:100%}
 .sion-footer-v26 .sion-footer-guidance b{flex:0 0 120px!important}
 @media(max-width:580px){.sion-footer-v26 .sion-footer-guidance>div{display:grid!important;grid-template-columns:26px 1fr!important;align-items:start!important;gap:4px 10px!important}.sion-footer-v26 .sion-footer-guidance span:not(.sion-footer-icon-v28){grid-column:2!important}}
-</style></head>
+</style><style id="sion-mobile-inquiry-fix">
+/* Mobile: keep the inquiry title readable instead of compressing four columns. */
+@media (max-width: 600px) {
+  .inquiry-home .home-inquiry-header colgroup,
+  .inquiry-home .home-inquiry-body colgroup { display: none !important; }
+  .inquiry-home .home-inquiry-header th:not(:nth-child(2)),
+  .inquiry-home .home-inquiry-body td:not(:nth-child(2)):not(.home-inquiry-empty) { display: none !important; }
+  .inquiry-home .home-inquiry-header,
+  .inquiry-home .home-inquiry-body { width: 100% !important; table-layout: fixed !important; }
+  .inquiry-home .home-inquiry-header th:nth-child(2),
+  .inquiry-home .home-inquiry-body td:nth-child(2) { display: table-cell !important; width: 100% !important; box-sizing: border-box; text-align: left !important; padding: 12px 14px !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; word-break: keep-all !important; }
+  .inquiry-home .home-inquiry-body td:nth-child(2) a { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .inquiry-home .home-inquiry-empty { display: table-cell !important; }
+}
+</style>
+</head>
 <body>
 <header class="sion-header"><div class="sion-navwrap">
 <a aria-label="주식회사 시온 홈" class="sion-brand" href="index.html"><img alt="C·ON Certification ON 주식회사 시온" src="sion-logo-transparent.png"/></a>
