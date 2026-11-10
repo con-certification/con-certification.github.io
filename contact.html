@@ -54,6 +54,74 @@ body{background:#fff;color:var(--sion-ink)}
 @media(max-width:760px){.sion-navwrap{padding:10px 16px}.sion-brand img{width:124px}.sion-menu-button{display:block}.sion-navigation{display:none;position:absolute;top:100%;left:0;right:0;background:white;box-shadow:0 12px 18px rgba(0,0,0,.1);padding:16px;flex-direction:column;align-items:stretch;gap:0}.sion-navigation.is-open{display:flex}.sion-navigation a{font-size:14px;padding:13px;border-bottom:1px solid #e5edf6}.sion-navigation .sion-contact-link{text-align:center;margin-top:10px}.contact-page-hero{min-height:0}.contact-hero-inner{grid-template-columns:1fr;gap:22px;padding:34px 0}.contact-hero-points{gap:9px}.contact-hero-points span{font-size:13px}.contact-layout{padding:35px 16px 25px}.contact-feature-grid{grid-template-columns:1fr}.contact-selfcheck{min-height:0;padding:28px 25px}.contact-channel-stack{gap:12px}.contact-email{padding:23px}.contact-services{grid-template-columns:repeat(2,1fr);padding:15px}.contact-services strong{grid-column:1/-1}.contact-services span{border-left:0;border-top:1px solid #cfdeef}.contact-prep{padding:35px 16px 25px}.contact-prep .detailgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.contact-blog{padding:0 16px 35px}.contact-blog .blogbox{flex-direction:column;align-items:flex-start;padding:25px}.sion-footer-inner{grid-template-columns:1fr}.sion-footer-guidance{border-left:0;border-top:1px solid #36506d;padding:20px 0 0}.sion-footer-guidance>div{grid-template-columns:24px 1fr}.sion-footer-guidance>div span:last-child{grid-column:2}.sion-footer-inner small{grid-column:auto}}
 @media(max-width:420px){.contact-phone{align-items:flex-start;flex-direction:column}.contact-services{grid-template-columns:1fr 1fr}.contact-prep .detailgrid{grid-template-columns:1fr}.contact-email .main-email{font-size:14px}}
 </style>
+<style id="contact-reference-final">
+/* 2026-11-10: visual update; all inquiry form DOM and JS retained */
+.sion-header{position:relative;z-index:50}
+.sion-navwrap{max-width:1120px;padding:8px 22px;gap:28px;min-height:70px}
+.sion-brand img{width:116px}
+.sion-navigation{gap:25px}
+.sion-navigation a:not(.sion-contact-link){border-bottom:2px solid #c5d9ea;padding:10px 0 7px;transition:color .2s,border-color .2s}
+.sion-navigation a:not(.sion-contact-link):hover,.sion-navigation a:not(.sion-contact-link):focus-visible{border-bottom-color:#006ed1;color:#006ed1}
+.sion-navigation .sion-contact-link{padding:11px 20px;background:#086fd0}
+.contact-page-hero{min-height:235px;background:linear-gradient(90deg,#05234c 0%,#063d82 43%,rgba(2,39,84,.84) 65%,rgba(4,45,87,.14) 100%),url('contact-headset.jpg') right center/auto 100% no-repeat,#06316c}
+.contact-page-hero:after{background:linear-gradient(145deg,transparent 30%,rgba(0,113,231,.22) 52%,transparent 67%)}
+.contact-hero-inner{width:min(1080px,calc(100% - 44px));grid-template-columns:.95fr 1.05fr;gap:26px;padding:32px 0}
+.contact-page-hero h1{border-left:5px solid #0a8cff;padding-left:18px;font-size:43px}
+.contact-hero-points{padding-left:25px;max-width:420px}
+.contact-hero-points span{font-size:15px;text-shadow:0 1px 5px #00214a}
+.contact-layout{max-width:1120px;padding-top:30px;padding-bottom:16px}
+.contact-layout:before{content:'✉';position:absolute;right:max(5%,calc((100% - 1100px)/2));top:315px;font-size:130px;color:#c5dfff;opacity:.32;transform:rotate(-20deg);pointer-events:none}
+.contact-layout h2{font-size:36px;margin:5px 0 8px}
+.contact-layout .contact-lead{max-width:800px;margin-bottom:24px}
+.contact-feature-grid{grid-template-columns:1.13fr 1fr;gap:15px}
+.contact-selfcheck{min-height:290px;padding:32px 26px 28px 190px;border-radius:24px;background:linear-gradient(120deg,#0479cc 0%,#035ab2 46%,#063c83 100%);box-shadow:0 10px 25px rgba(0,82,173,.15)}
+.contact-selfcheck:before{content:''}
+.contact-selfcheck .check-illustration{position:absolute;width:190px;height:210px;left:4px;bottom:28px;filter:drop-shadow(0 9px 8px rgba(0,29,78,.3))}
+.contact-selfcheck .feature-tag{font-size:11px;padding:7px 11px;white-space:nowrap}
+.contact-selfcheck h3{font-size:30px;white-space:nowrap;margin:15px 0 10px;letter-spacing:-.06em}
+.contact-selfcheck h3 mark,.contact-final-cta h2 mark{background:none;color:#ffe300}
+.contact-selfcheck p{font-size:13px;line-height:1.7;margin-bottom:18px}
+.contact-selfcheck .start-check{font-size:15px;padding:12px 21px}
+.contact-email{padding:19px 23px;border-radius:22px;background:linear-gradient(110deg,#f7fbff,#e3f0ff);position:relative;overflow:hidden}
+.contact-email:after{content:'✉';position:absolute;right:20px;top:10px;font-size:95px;color:#9ac8ff;opacity:.45;transform:rotate(-16deg);pointer-events:none}
+.contact-email>*{position:relative;z-index:1}
+.contact-channel-title{font-size:23px}.contact-email p{margin:7px 0 10px}
+.contact-email .main-email{display:flex;width:max-content;margin:auto;font-size:18px;padding:10px 23px;background:linear-gradient(90deg,#006ed7,#072d74);box-shadow:0 4px 12px #aac6ed}
+.contact-email .secondary-email{text-align:center;font-size:12px;margin-top:10px}
+.contact-phone{padding:16px 20px;border-radius:18px}
+.contact-services{margin-top:18px;border-radius:21px;padding:13px 12px;background:linear-gradient(120deg,#f8fbff,#e6f1ff)}
+.contact-services strong{font-size:18px}.contact-services span{font-size:12px}.contact-services em{font-size:25px;margin-bottom:5px}
+#inquiry-board{padding-top:20px;padding-bottom:18px;background:#fff}
+#inquiry-board>.inquiry-head,#inquiry-board>.inquiry-table,#inquiry-board>.inquiry-viewport,#inquiry-board>.inquiry-pagination,#inquiry-board>.formnote,#inquiry-board>.board-actions,#inquiry-board>.inquiry-formbox{max-width:1070px}
+#inquiry-board .inquiry-head{padding:0 0 6px}
+#inquiry-board .inquiry-head h2{margin:4px 0 5px}
+#inquiry-board .inquiry-table-header{border:1px solid #dbe8f9;border-bottom:0;border-radius:15px 15px 0 0}
+#inquiry-board .inquiry-viewport{border:1px solid #dbe8f9;border-top:0;border-bottom:0}
+#inquiry-board .inquiry-table th,#inquiry-board .inquiry-table td{padding:9px 12px}
+#inquiry-board .inquiry-viewport{height:220px}
+#inquiry-board .inquiry-table-body tr{height:44px}
+#inquiry-board .inquiry-pagination{margin-top:9px}
+#inquiry-board .formnote{background:transparent;padding:8px 0;font-size:11px}
+#inquiry-board .board-actions{margin-top:-35px;position:relative;z-index:2;padding-right:12px;margin-bottom:15px}
+#inquiry-board .board-btn{background:#0756bd}
+.contact-prep{padding-top:24px;padding-bottom:15px}
+.contact-prep h2{font-size:23px;margin-bottom:16px}
+.contact-prep .detailgrid{gap:12px}
+.contact-prep .detailgrid article{padding:17px 19px;border-radius:17px}
+.contact-prep .prep-symbol{font-size:26px;margin-bottom:5px}
+.contact-prep .detailgrid h3{margin-bottom:5px}
+.contact-blog{padding-bottom:20px}
+.contact-blog .blogbox{background:linear-gradient(90deg,#eff6ff 0%,#eff6ff 55%,rgba(239,246,255,.7) 100%);padding:21px 30px}
+.contact-blog .blogbtn{background:linear-gradient(90deg,#22bc3f,#56ce16)}
+.contact-final-cta{background:linear-gradient(95deg,rgba(3,28,68,.75),rgba(4,53,120,.38)),url('sion-contact-clean-wave-v28.jpg') center/cover;padding:23px 22px}
+.contact-final-cta h2{margin:6px 0 8px}
+.contact-final-links{gap:24px;margin-top:17px}
+.contact-final-links a{padding:10px 19px}
+.sion-footer-v26{padding:29px 22px}
+@media(max-width:1100px){.sion-navigation{gap:16px}.sion-navigation a{font-size:12px}.contact-selfcheck{padding-left:165px}.contact-selfcheck .check-illustration{width:160px}.contact-selfcheck h3{font-size:27px}}
+@media(max-width:760px){.sion-navwrap{min-height:60px}.sion-brand img{width:124px}.sion-navigation{gap:0}.sion-navigation a:not(.sion-contact-link){border-bottom:1px solid #d9e6f3;padding:13px}.contact-page-hero{background:linear-gradient(90deg,rgba(3,32,71,.95),rgba(3,44,92,.76)),url('contact-headset.jpg') right center/auto 100% no-repeat,#07356e}.contact-hero-inner{grid-template-columns:1fr;gap:16px}.contact-hero-points{padding-left:0}.contact-layout:before{display:none}.contact-selfcheck{padding:25px 24px 25px 135px;min-height:265px}.contact-selfcheck .check-illustration{width:132px;left:0}.contact-selfcheck h3{font-size:25px;white-space:normal}.contact-services{grid-template-columns:repeat(2,1fr)}#inquiry-board{padding-left:16px;padding-right:16px}#inquiry-board .board-actions{margin-top:10px}.contact-prep .detailgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.contact-selfcheck{padding:23px 19px}.contact-selfcheck .check-illustration{position:relative;left:auto;bottom:auto;width:110px;height:105px;align-self:center}.contact-selfcheck h3{font-size:26px}.contact-email .main-email{font-size:14px}.contact-prep .detailgrid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <header class="sion-header"><div class="sion-navwrap">
@@ -65,7 +133,7 @@ body{background:#fff;color:var(--sion-ink)}
 <main>
 <section class="contact-page-hero"><div class="contact-hero-inner"><div><div class="contact-hero-kicker">CONTACT</div><h1>상담문의</h1><p>제품 인증, 시험, 비용, 기간 등<br>궁금하신 내용을 언제든지 문의하세요.</p></div><div class="contact-hero-points"><span>인증 대상 및 적용 규격 안내</span><span>시험 항목 및 비용·기간 상담</span><span>신청 절차 및 필요 서류 안내</span></div></div></section>
 
-<section class="contact-layout" aria-labelledby="contact-heading"><p class="contact-kicker">CERTIFICATION INQUIRY</p><h2 id="contact-heading">제품 인증 상담 및 문의</h2><p class="contact-lead">KC · CE · FCC 등 국내·해외 인증에 대한 상담부터 시험, 비용, 기간, 신청 절차까지 제품 특성과 사용 조건에 맞춰 안내해 드립니다.</p><div class="contact-feature-grid"><article class="contact-selfcheck"><span class="feature-tag">제품인증 1차 확인</span><h3>30초 제품인증<br>자가진단</h3><p>제품 정보를 입력하고 필요한 인증과 시험 항목을 빠르게 1차 진단해 보세요. 실제 적용 여부는 추가 확인이 필요합니다.</p><a class="start-check" href="diagnosis.html" target="_blank" rel="noopener noreferrer">30초 자가진단 시작 →</a></article><div class="contact-channel-stack"><article class="contact-email"><div class="contact-channel-title"><span class="contact-channel-icon" aria-hidden="true">✉</span> 이메일 상담</div><p>제품 사양서, 사진, 인증 관련 자료를 보내주시면 확인 후 상담해 드립니다.</p><a class="main-email" href="mailto:certi@coon.co.kr?subject=제품인증%20상담%20문의">✉ certi@coon.co.kr</a><div class="secondary-email">대표메일 · 인증 상담 및 문의<br>담당자 메일: <a href="mailto:jhkim@coon.co.kr?subject=제품인증%20상담%20문의">jhkim@coon.co.kr</a></div></article><article class="contact-phone"><div><div class="phone-label">☎ 전화 상담</div><div class="phone-caption">간단한 문의는 전화로도 상담 가능합니다.</div></div><a href="tel:01028042207">010-2804-2207</a></article></div></div><div class="contact-services"><strong>어떤 내용으로<br>문의할 수 있나요?</strong><span><em>☑</em>인증 대상 및<br>적용 규격 확인</span><span><em>▤</em>시험 항목 및<br>비용 검토</span><span><em>▦</em>시험 및 인증<br>소요 기간 안내</span><span><em>▣</em>신청 절차 및<br>제출 서류</span><span><em>♧</em>기타 기술 문의 및<br>진행 상담</span></div></section>
+<section class="contact-layout" aria-labelledby="contact-heading"><p class="contact-kicker">CERTIFICATION INQUIRY</p><h2 id="contact-heading">제품 인증 상담 및 문의</h2><p class="contact-lead">KC · CE · FCC 등 국내·해외 인증에 대한 상담부터 시험, 비용, 기간, 신청 절차까지 제품 특성과 사용 조건에 맞춰 안내해 드립니다.</p><div class="contact-feature-grid"><article class="contact-selfcheck"><svg class="check-illustration" viewBox="0 0 210 230" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8fdff"/><stop offset="1" stop-color="#cbe9ff"/></linearGradient></defs><g transform="rotate(-12 90 115)"><rect x="29" y="34" width="133" height="172" rx="18" fill="#79baff" stroke="#c8e9ff" stroke-width="5"/><rect x="43" y="49" width="104" height="141" rx="10" fill="url(#paper)"/><rect x="73" y="22" width="50" height="28" rx="12" fill="#2e8ce5" stroke="#c8e9ff" stroke-width="4"/><circle cx="98" cy="30" r="5" fill="#c8e9ff"/><g stroke="#24ad80" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m57 86 9 9 15-18"/><path d="m57 123 9 9 15-18"/><path d="m57 159 9 9 15-18"/></g><g stroke="#a7cce8" stroke-width="6" stroke-linecap="round"><path d="M94 86h36M94 123h36M94 160h28"/></g></g><circle cx="151" cy="158" r="39" fill="#eaf7ff" stroke="#075dc3" stroke-width="9"/><path d="m177 188 24 28" stroke="#073e89" stroke-width="15" stroke-linecap="round"/><circle cx="151" cy="158" r="25" fill="#b5e1ff" fill-opacity=".5"/></svg><span class="feature-tag">가장 많이 이용하는 서비스</span><h3><mark>30초</mark> 제품인증 자가진단</h3><p>제품 정보를 입력하고 필요한 인증과 시험 항목을 빠르게 1차 진단해 보세요. 실제 적용 여부는 추가 확인이 필요합니다.</p><a class="start-check" href="diagnosis.html" target="_blank" rel="noopener noreferrer">30초 자가진단 시작 →</a></article><div class="contact-channel-stack"><article class="contact-email"><div class="contact-channel-title"><span class="contact-channel-icon" aria-hidden="true">✉</span> 이메일 상담</div><p>제품 사양서, 사진, 인증 관련 자료를 보내주시면 확인 후 상담해 드립니다.</p><a class="main-email" href="mailto:certi@coon.co.kr?subject=제품인증%20상담%20문의">✉ certi@coon.co.kr</a><div class="secondary-email">대표메일 · 인증 상담 및 문의<br>담당자 메일: <a href="mailto:jhkim@coon.co.kr?subject=제품인증%20상담%20문의">jhkim@coon.co.kr</a></div></article><article class="contact-phone"><div><div class="phone-label">☎ 전화 상담</div><div class="phone-caption">간단한 문의는 전화로도 상담 가능합니다.</div></div><a href="tel:01028042207">010-2804-2207</a></article></div></div><div class="contact-services"><strong>어떤 내용으로<br>문의할 수 있나요?</strong><span><em>☑</em>인증 대상 및<br>적용 규격 확인</span><span><em>▤</em>시험 항목 및<br>비용 검토</span><span><em>▦</em>시험 및 인증<br>소요 기간 안내</span><span><em>▣</em>신청 절차 및<br>제출 서류</span><span><em>♧</em>기타 기술 문의 및<br>진행 상담</span></div></section>
 
 <section class="section alt" id="inquiry-board">
 <style>
@@ -116,11 +184,11 @@ body{background:#fff;color:var(--sion-ink)}
 </div>
 </section>
 
-<section class="contact-prep"><h2>상담 전 준비하시면 더 정확한 안내가 가능합니다.</h2><div class="detailgrid"><article><span class="prep-symbol" aria-hidden="true">⬡</span><h3>제품 기본정보</h3><p>제품명, 모델명, 사용 용도와 주요 기능</p></article><article><span class="prep-symbol" aria-hidden="true">♧</span><h3>전원 정보</h3><p>AC/DC 입력, 어댑터, 배터리 사용 여부</p></article><article><span class="prep-symbol" aria-hidden="true">◉</span><h3>무선 기능</h3><p>Wi-Fi, Bluetooth, LTE, NFC 등 사용 여부와 주파수</p></article><article><span class="prep-symbol" aria-hidden="true">▤</span><h3>보유 자료</h3><p>제품 사진, 사양서, 사용자설명서, 회로 관련 자료 등</p></article></div></section>
+<section class="contact-prep"><h2>상담 전 준비하시면 더 정확한 안내가 가능합니다.</h2><div class="detailgrid"><article><span class="prep-symbol" aria-hidden="true">⬡</span><h3>제품 기본정보</h3><p>제품명, 모델명, 사용 용도와 주요 기능</p></article><article><span class="prep-symbol" aria-hidden="true">♧</span><h3>전원 정보</h3><p>AC/DC 입력, 어댑터, 배터리 사용 여부</p></article><article><span class="prep-symbol" aria-hidden="true">◉</span><h3>무선 기능</h3><p>Wi-Fi, Bluetooth, LTE, NFC 등 사용 여부와 주파수</p></article><article><span class="prep-symbol" aria-hidden="true">▤</span><h3>참고 자료(선택)</h3><p>제품 사진, 사양서, 사용자설명서, 회로 관련 자료 등</p></article></div></section>
 
 <section class="contact-blog"><div class="blogbox"><div><p class="eyebrow blue">NAVER BLOG</p><h2>인증 관련 자료와 실무정보</h2><p>주식회사 시온 네이버 블로그에서 제품인증 관련 정보를 확인할 수 있습니다.</p></div><a class="blogbtn" href="https://blog.naver.com/con_certification" target="_blank" rel="noopener">네이버 블로그 바로가기 →</a></div></section>
 </main>
-<section class="contact-final-cta"><p class="contact-kicker">CONTACT</p><h2>인증 상담 · 시험 · 비용 · 기간을 문의하세요!</h2><p>제품명 또는 사용 사양을 보내주시면 확인 후 안내해 드립니다.</p><div class="contact-final-links"><a href="mailto:certi@coon.co.kr?subject=제품인증%20상담%20문의">✉ certi@coon.co.kr (대표메일)</a><a href="mailto:jhkim@coon.co.kr?subject=제품인증%20상담%20문의">♙ jhkim@coon.co.kr (담당자)</a><a href="tel:01028042207">☎ 010-2804-2207</a></div></section>
+<section class="contact-final-cta"><p class="contact-kicker">CONTACT</p><h2>인증 상담 · 시험 · 비용 · 기간을 <mark>지금 문의하세요!</mark></h2><p>제품명 또는 사용 사양을 보내주시면 확인 후 안내해 드립니다.</p><div class="contact-final-links"><a href="mailto:certi@coon.co.kr?subject=제품인증%20상담%20문의">✉ certi@coon.co.kr (대표메일)</a><a href="mailto:jhkim@coon.co.kr?subject=제품인증%20상담%20문의">♙ jhkim@coon.co.kr (담당자)</a><a href="tel:01028042207">☎ 010-2804-2207</a></div></section>
 <footer class="sion-footer-v26"><div class="sion-footer-inner">
 <div class="sion-footer-company"><strong>주식회사 시온 | C·ON</strong><p>국내외 인증대행 · EMC·RF · 전기안전 · 신뢰성·환경시험</p></div>
 <div class="sion-footer-guidance">
