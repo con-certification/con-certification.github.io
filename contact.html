@@ -151,7 +151,23 @@ body{font-family:Pretendard,'Noto Sans KR','Malgun Gothic',Arial,sans-serif;lett
 .contact-blog .blogbox:before,.contact-blog .blogbox:after{display:none!important}
 @media(max-width:760px){.sion-header{top:0!important}.sion-navigation{z-index:1001!important}}
 </style>
-</head>
+<style id="contact-header-and-icon-alignment-fix">
+/* Header layout restored to original contact.html proportions; sticky behavior retained. */
+.sion-header{position:sticky!important;top:0!important;z-index:1000!important}
+.sion-navwrap{max-width:1280px!important;width:100%!important;box-sizing:border-box!important;min-height:0!important;margin:0 auto!important;padding:11px 24px!important;gap:24px!important}
+.sion-brand img{width:150px!important;height:auto!important}
+.sion-navigation{gap:23px!important}
+.sion-navigation a{font-size:14px!important}
+/* Prevent object images from appearing cropped, while keeping existing text and links. */
+.contact-selfcheck .premium-art{object-fit:contain!important;object-position:center!important;max-width:100%!important}
+.contact-channel-icon,.contact-phone .phone-label,.contact-services em,.contact-prep .prep-symbol{overflow:visible!important}
+.contact-email,.contact-phone,.contact-services,.contact-prep .detailgrid article{overflow:visible!important}
+.contact-channel-icon img,.contact-phone .phone-label img,.contact-services em img,.contact-prep .prep-symbol img{object-fit:contain!important;object-position:center!important;max-width:100%!important;max-height:100%!important;transform:none!important;clip-path:none!important;filter:drop-shadow(0 3px 5px rgba(15,55,112,.13))!important}
+.contact-services em img{width:54px!important;height:54px!important}
+.contact-prep .prep-symbol img{width:64px!important;height:62px!important}
+@media(max-width:1050px){.sion-navigation{gap:12px!important}.sion-navigation a{font-size:12px!important}}
+@media(max-width:760px){.sion-navwrap{padding:10px 16px!important}.sion-brand img{width:124px!important}.sion-navigation{gap:0!important}.sion-navigation a{font-size:14px!important}}
+</style></head>
 <body>
 <header class="sion-header"><div class="sion-navwrap">
 <a aria-label="주식회사 시온 홈" class="sion-brand" href="index.html"><img alt="C·ON Certification ON 주식회사 시온" src="sion-logo-transparent.png"/></a>
