@@ -241,13 +241,35 @@ body{background:#fff;color:#092652;font-family:'Noto Sans KR','Malgun Gothic',Ar
 .contact-services,.detailgrid article{background:linear-gradient(155deg,#fff 0%,#f1f8ff 55%,#e0efff 100%)}
 .contact-selfcheck{background:radial-gradient(circle at 8% 14%,#12aaf6 0%,transparent 42%),linear-gradient(128deg,#0786db 0%,#0652b3 58%,#052c75 100%)}
 @media(max-width:700px){.sion-navwrap{min-height:64px}.sion-brand img{width:110px}.contact-selfcheck .sion-decor img{transform:none}}
+</style><style id="contact-header-footer-final">
+/* Contact-only shared header/footer finishing layer — 2026-11-12 */
+@media (min-width: 951px) {
+  .sion-header .sion-navwrap{width:min(1190px,96%)!important;max-width:1190px!important;min-height:76px!important;padding:0 12px!important;gap:20px!important;justify-content:space-between!important}
+  .sion-header .sion-brand{flex:0 0 auto!important}
+  .sion-header .sion-brand img{width:132px!important;max-height:68px!important;object-fit:contain!important}
+  .sion-header .sion-navigation{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:3px!important;flex-wrap:nowrap!important}
+  .sion-header .sion-navigation>a:not(.sion-contact-link){font-size:14px!important;letter-spacing:-.55px!important;padding:12px 9px 15px!important;color:#09254c!important;font-weight:800!important;white-space:nowrap!important;border-radius:5px 5px 0 0!important}
+  .sion-header .sion-navigation>a:not(.sion-contact-link)::after{left:9px!important;right:9px!important;bottom:5px!important;height:2px!important;background:#c7dfea!important}
+  .sion-header .sion-navigation>a:not(.sion-contact-link):hover,.sion-header .sion-navigation>a:not(.sion-contact-link):focus-visible{color:#0753a9!important;background:#edf7ff!important}
+  .sion-header .sion-navigation .sion-contact-link{margin-left:9px!important;padding:11px 19px!important;background:#1268dc!important;color:white!important;border-radius:999px!important;font-weight:850!important;white-space:nowrap!important}
+  .sion-header .sion-navigation .sion-contact-link:hover,.sion-header .sion-navigation .sion-contact-link:focus-visible{background:#084aab!important;color:white!important}
+}
+/* Shared wave banner and navy footer; isolated from inquiry and form controls */
+.contact-final-cta{position:relative!important;isolation:isolate;overflow:hidden!important;background:radial-gradient(ellipse at 75% 15%,rgba(18,131,238,.6),transparent 55%),linear-gradient(110deg,#042858 0%,#075ab6 60%,#063b83 100%)!important;color:white!important;text-align:center!important}
+.contact-final-cta::before,.contact-final-cta::after{pointer-events:none!important;z-index:-1!important}
+.contact-final-cta .cta-content{position:relative;z-index:1}
+.contact-final-cta .cta-links a{background:#fff!important;color:#0b356d!important;border:1px solid rgba(255,255,255,.75)!important;transition:transform .2s,background .2s!important}
+.contact-final-cta .cta-links a:hover{background:#eaf4ff!important;color:#073b83!important;transform:translateY(-2px)}
+.sion-footer-v26{background:#041d38!important;color:#eaf3ff!important}
+.sion-footer-v26 .sion-footer-inner{max-width:1160px!important;margin:0 auto!important}
+@media(max-width:950px){.sion-header .sion-navigation .sion-contact-link:hover{color:#fff!important}}
 </style></head>
 <body>
 <header class="sion-header"><div class="sion-navwrap">
 <a aria-label="주식회사 시온 홈" class="sion-brand" href="index.html"><img alt="C·ON Certification ON 주식회사 시온" src="sion-logo-transparent.png"/></a>
 <button aria-controls="sion-navigation" aria-expanded="false" aria-label="전체 메뉴 열기" class="sion-menu-button" type="button">☰ <span>메뉴</span></button>
 <nav aria-label="주요 메뉴" class="sion-navigation" id="sion-navigation">
-<a href="about.html">회사소개</a><a href="kc.html">KC 인증</a><a href="ce.html">CE 인증</a><a href="fcc.html">FCC 인증</a><a href="emc.html">시험서비스</a><a href="https://blog.naver.com/PostList.naver?blogId=con_certification&amp;categoryNo=11" rel="noopener noreferrer" target="_blank">인증 사례</a><a href="https://blog.naver.com/con_certification" rel="noopener noreferrer" target="_blank">인증정보</a><a class="sion-contact-link" href="contact.html">상담문의 <span aria-hidden="true">↗</span></a>
+<a href="about.html">회사소개</a><a href="kc.html">KC 인증</a><a href="ce.html">CE 인증</a><a href="fcc.html">FCC 인증</a><a href="emc.html">시험서비스</a><a href="https://blog.naver.com/PostList.naver?blogId=con_certification&amp;categoryNo=11" rel="noopener noreferrer" target="_blank">인증 사례</a><a href="https://blog.naver.com/con_certification" rel="noopener noreferrer" target="_blank">인증정보</a><a aria-current="page" class="sion-contact-link" href="contact.html">상담문의 <span aria-hidden="true">↗</span></a>
 </nav></div></header>
 <main>
 <section class="contact-page-hero"><div class="contact-hero-inner"><div><div class="contact-hero-kicker">CONTACT</div><h1>상담문의</h1><p>제품 인증, 시험, 비용, 기간 등<br/>궁금하신 내용을 언제든지 문의하세요.</p></div><div class="contact-hero-points"><span>인증 대상 및 적용 규격 안내</span><span>시험 항목 및 비용·기간 상담</span><span>신청 절차 및 필요 서류 안내</span></div></div><img alt="" aria-hidden="true" class="hero-art" src="data:image/svg+xml;base64,PHN2ZyBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTY1IDE3MCI+PGRlZnM+PGZpbHRlciBpZD0ic2lvbkRlcHRoIiB4PSItNDAlIiB5PSItNDAlIiB3aWR0aD0iMTgwJSIgaGVpZ2h0PSIxOTAlIj48ZmVEcm9wU2hhZG93IGR4PSI0IiBkeT0iOCIgc3RkRGV2aWF0aW9uPSI1IiBmbG9vZC1jb2xvcj0iIzA5MmY2NSIgZmxvb2Qtb3BhY2l0eT0iLjI2Ii8+PC9maWx0ZXI+PGxpbmVhckdyYWRpZW50IGlkPSJzaW9uR2xvc3MiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9Ii41OCIvPjxzdG9wIG9mZnNldD0iLjQ4IiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9Ii4wNiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzAwM2U4OCIgc3RvcC1vcGFjaXR5PSIuMTMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48ZyBmaWx0ZXI9InVybCgjc2lvbkRlcHRoKSI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2Y5ZmNmZiIvPjxzdG9wIG9mZnNldD0iLjQ4IiBzdG9wLWNvbG9yPSIjYjRkNmY1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNDE3YmFkIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHBhdGggZD0iTTMyIDg4VjYzQzMyIDE4IDEyOCAxOCAxMjggNjN2MjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzIzMmQzYiIgc3Ryb2tlLXdpZHRoPSIxNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTI5IDgxcS0xOS0yLTE5IDE3djIycTAgMTcgMjEgMTdoMTVWODF6TTEzMSA4MXExOS0yIDE5IDE3djIycTAgMTctMjEgMTdoLTE1VjgxeiIgZmlsbD0idXJsKCNnKSIgc3Ryb2tlPSIjMTQyNjNkIiBzdHJva2Utd2lkdGg9IjQiLz48cGF0aCBkPSJNMTI5IDEzNnEtOCAxNi0zNSAxNiIgc3Ryb2tlPSIjMjIyIiBzdHJva2Utd2lkdGg9IjYiIGZpbGw9Im5vbmUiLz48cmVjdCB4PSI3OCIgeT0iMTQ2IiB3aWR0aD0iMjMiIGhlaWdodD0iOSIgcng9IjUiIGZpbGw9IiMxNzFmMmEiLz48L2c+PC9zdmc+"/></section>
