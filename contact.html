@@ -410,6 +410,18 @@ body{background:#fff;color:#092652;font-family:'Noto Sans KR','Malgun Gothic',Ar
   .sion-header .sion-navigation{gap:clamp(18px,1.9vw,30px)!important;justify-content:flex-end!important;}
 }
 </style>
+<style id="approved-header-spacing">
+/* Approved header reference: desktop spacing only. All page functionality retained. */
+@media (min-width:1001px){
+ .sion-header{height:119px!important;min-height:119px!important}
+ .sion-header .sion-navwrap{width:calc(100% - 128px)!important;max-width:1240px!important;height:119px!important;min-height:119px!important;padding:0!important;gap:28px!important;justify-content:space-between!important}
+ .sion-header .sion-brand{width:158px!important;height:auto!important;flex:0 0 158px!important}
+ .sion-header .sion-brand img{width:158px!important;max-width:158px!important;height:auto!important;max-height:104px!important}
+ .sion-header .sion-navigation{flex:1 1 auto!important;justify-content:space-between!important;gap:clamp(10px,1.1vw,18px)!important;margin-left:0!important}
+ .sion-header .sion-navigation>a:not(.sion-contact-link){font-size:15px!important;padding:12px 0!important;white-space:nowrap!important}
+ .sion-header .sion-navigation .sion-contact-link{font-size:15px!important;padding:15px 22px!important;margin-left:0!important;white-space:nowrap!important}
+}
+</style>
 </head>
 <body>
 <header class="sion-header"><div class="sion-navwrap">
