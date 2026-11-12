@@ -590,7 +590,6 @@ html body section.sion-contact-v26 .sion-desc-break{display:block!important}
  .contact-page-hero::before{background:radial-gradient(ellipse at 95% 15%,rgba(36,164,255,.3),transparent 60%)!important}
 }
 </style><style id="contact-fixed-header-restoration">
-
 </style><style id="sion-contact-content-proportions">
 /* Approved contact header geometry — copied from final natural header. */
 
@@ -644,7 +643,46 @@ html body section.sion-contact-v26 .sion-desc-break{display:block!important}
 }
 @media(max-width:767px){html body .contact-layout,html body #inquiry-board,html body .contact-prep,html body .contact-blog{width:calc(100% - 28px)!important;margin-left:auto!important;margin-right:auto!important}}
 </style>
-</head>
+<style id="contact-body-redesign-v2">
+/* CONTACT BODY V2 — redesign only below approved hero and above approved footer */
+@media (min-width: 901px) {
+ body main > .contact-layout,body main > #inquiry-board,body main > .contact-prep,body main > .contact-blog{width:min(1180px,calc(100% - 72px))!important;max-width:1180px!important;margin-left:auto!important;margin-right:auto!important;box-sizing:border-box!important}
+ body main > .contact-layout{padding:34px 0 0!important}
+ body .contact-layout .contact-kicker{font-size:12px!important;letter-spacing:1.8px!important;margin:0 0 7px!important}
+ body .contact-layout h2{font-size:32px!important;letter-spacing:-1.3px!important;line-height:1.18!important;margin:0 0 10px!important}
+ body .contact-layout .contact-lead{font-size:15px!important;line-height:1.65!important;margin:0 0 22px!important;max-width:none!important}
+ body .contact-feature-grid{display:grid!important;grid-template-columns:1.08fr .92fr!important;gap:18px!important;align-items:stretch!important}
+ body .contact-selfcheck{min-height:300px!important;border-radius:18px!important;padding:38px 24px 34px 43%!important;box-shadow:0 10px 24px rgba(0,75,160,.16)!important}
+ body .contact-selfcheck .sion-decor{width:40%!important;left:0!important;top:7%!important;height:85%!important}
+ body .contact-selfcheck h3{font-size:29px!important;line-height:1.2!important;margin-bottom:12px!important}
+ body .contact-selfcheck p{font-size:15px!important;line-height:1.6!important}
+ body .contact-selfcheck a{min-height:46px!important;padding:11px 21px!important;font-size:15px!important}
+ body .contact-channel-stack{display:grid!important;grid-template-rows:1.25fr .75fr!important;gap:14px!important;min-height:300px!important}
+ body .contact-channel-stack > *{border-radius:17px!important;padding:18px 24px!important;min-height:0!important;box-shadow:0 5px 16px rgba(29,102,173,.09)!important}
+ body .contact-channel-stack h3{font-size:22px!important}
+ body .contact-channel-stack p{font-size:14px!important;line-height:1.5!important}
+ body .contact-layout .contact-topics{margin-top:16px!important;border-radius:17px!important;min-height:122px!important;box-shadow:0 6px 18px rgba(28,99,171,.09)!important}
+ body .contact-layout .contact-topics > *{padding-top:15px!important;padding-bottom:15px!important}
+ body #inquiry-board{margin-top:35px!important;margin-bottom:24px!important;padding:0!important}
+ body #inquiry-board .inquiry-head h2{font-size:30px!important;line-height:1.2!important}
+ body #inquiry-board .inquiry-head{margin-bottom:15px!important}
+ body #inquiry-board .inquiry-table th{font-size:14px!important}
+ body #inquiry-board .inquiry-table td{font-size:14px!important}
+ body #inquiry-board .inquiry-viewport{max-height:275px!important}
+ body #inquiry-board .board-actions{padding-top:14px!important;padding-bottom:14px!important}
+ body .contact-prep{margin-top:26px!important}
+ body .contact-prep > h2{font-size:24px!important;margin-bottom:16px!important}
+ body .contact-prep .detailgrid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important}
+ body .contact-prep .detailgrid article{min-height:168px!important;padding:20px 15px!important;border-radius:17px!important;box-shadow:0 5px 15px rgba(29,102,173,.08)!important}
+ body .contact-prep .detailgrid h3{font-size:17px!important}
+ body .contact-prep .detailgrid p{font-size:13px!important;line-height:1.5!important}
+ body .contact-blog{margin-top:16px!important;margin-bottom:34px!important}
+ body .contact-blog .blogbox{min-height:116px!important;padding:18px 28px!important;border-radius:17px!important;box-shadow:0 5px 16px rgba(29,102,173,.09)!important}
+ body .contact-blog h2{font-size:23px!important}
+}
+@media (min-width: 901px) and (max-width: 1100px){body main > .contact-layout,body main > #inquiry-board,body main > .contact-prep,body main > .contact-blog{width:calc(100% - 44px)!important}body .contact-selfcheck{padding-left:39%!important}body .contact-selfcheck h3{font-size:24px!important}}
+@media (max-width:900px){body main > .contact-layout,body main > #inquiry-board,body main > .contact-prep,body main > .contact-blog{max-width:100%!important;box-sizing:border-box!important}}
+</style></head>
 <body>
 <header class="sion-header"><div class="sion-navwrap">
 <a aria-label="주식회사 시온 홈" class="sion-brand" href="index.html"><img alt="C·ON Certification ON 주식회사 시온" src="sion-logo-transparent.png"/></a>
