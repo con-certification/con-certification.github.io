@@ -420,6 +420,48 @@ body{background:#fff;color:#092652;font-family:'Noto Sans KR','Malgun Gothic',Ar
 .sion-contact-v26 h2 .sion-cta-accent{color:#8edbff!important;text-shadow:0 2px 16px rgba(68,195,255,.18)}
 .sion-contact-v26 .sion-cta-desc-accent{color:#b9ebff!important;font-weight:850!important}
 </style>
+<style>
+/* Final approved desktop navigation proportions — isolated to the header */
+@media (min-width:1001px){
+ .sion-header{height:119px!important;min-height:119px!important}
+ .sion-header .sion-navwrap{width:calc(100% - 128px)!important;max-width:1240px!important;height:119px!important;min-height:119px!important;padding:0!important;gap:30px!important;justify-content:space-between!important}
+ .sion-header .sion-brand{width:158px!important;flex:0 0 158px!important}
+ .sion-header .sion-brand img{width:158px!important;max-width:158px!important;max-height:104px!important;height:auto!important}
+ .sion-header .sion-navigation{flex:1 1 auto!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:clamp(10px,1.25vw,20px)!important;margin-left:0!important}
+ .sion-header .sion-navigation>a:not(.sion-contact-link){font-size:15px!important;font-weight:800!important;letter-spacing:-.4px!important;padding:12px 0!important;white-space:nowrap!important}
+ .sion-header .sion-navigation .sion-contact-link{font-size:15px!important;padding:15px 22px!important;margin-left:0!important;white-space:nowrap!important}
+}
+/* Footer: distinct warm emphasis, labeled email routes and a visible action button */
+.sion-contact-v26 h2 .sion-cta-accent{color:#ffe09b!important;text-shadow:0 2px 16px rgba(255,196,86,.16)!important}
+.sion-contact-v26 .sion-cta-desc-accent{color:#ffe09b!important;font-weight:850!important}
+.sion-contact-v26>a.cta.light{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:13px!important;background:#fff!important;color:#06447f!important;border:2px solid #fff!important;border-radius:999px!important;padding:13px 25px!important;font-size:16px!important;font-weight:900!important;box-shadow:0 9px 22px rgba(0,17,54,.28)!important;transition:transform .2s,box-shadow .2s,background .2s!important}
+.sion-contact-v26>a.cta.light:hover,.sion-contact-v26>a.cta.light:focus-visible{background:#fff0c8!important;color:#073b75!important;transform:translateY(-3px)!important;box-shadow:0 14px 26px rgba(0,17,54,.34)!important}
+.sion-contact-v26 .sion-cta-arrow{font-size:19px!important;line-height:1!important;font-weight:900!important}
+.sion-contact-v26 .sion-contact-emails{display:flex!important;align-items:center!important;justify-content:center!important;gap:14px!important;flex-wrap:wrap!important;margin-top:17px!important}
+.sion-contact-v26 .sion-labeled-email{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:2px!important;text-align:left!important;min-width:205px!important;padding:10px 16px!important;background:rgba(0,24,65,.23)!important;border:1px solid rgba(255,255,255,.27)!important;border-radius:11px!important;color:white!important;text-decoration:none!important;transition:background .2s,border-color .2s!important}
+.sion-contact-v26 .sion-labeled-email:hover{background:rgba(255,255,255,.14)!important;border-color:#ffe09b!important;color:white!important}
+.sion-contact-v26 .sion-email-label{font-size:12px!important;color:#ffe09b!important;font-weight:800!important;letter-spacing:.02em!important}
+.sion-contact-v26 .sion-labeled-email strong{font-size:15px!important;font-weight:750!important;color:#fff!important;letter-spacing:0!important}
+@media(max-width:700px){.sion-contact-v26>a.cta.light{font-size:14px!important;padding:12px 22px!important}.sion-contact-v26 .sion-contact-emails{gap:8px!important}.sion-contact-v26 .sion-labeled-email{min-width:0!important;width:min(100%,290px)!important}.sion-contact-v26 .sion-labeled-email strong{font-size:14px!important}}
+</style>
+<style id="sion-footer-emphasis-refinement">
+/* Emphasis through typographic hierarchy only: no underline or gold. */
+.sion-contact-v26 h2 .sion-cta-accent{color:#eaf8ff!important;font-weight:950!important;text-shadow:0 3px 20px rgba(0,15,45,.32)!important;background:none!important;text-decoration:none!important;padding:0!important}
+.sion-contact-v26 .sion-cta-desc-accent{color:#fff!important;font-weight:850!important;text-shadow:0 1px 12px rgba(0,15,45,.24)!important;text-decoration:none!important;background:none!important}
+</style>
+<style id="sion-contact-cta-polish-20261112">
+/* Contact CTA only. Keep all other page sections and scripts intact. */
+.sion-contact-v26 h2 .sion-cta-accent{color:#a6f4db!important;font-weight:900!important;text-shadow:none!important;background:none!important;text-decoration:none!important;border:0!important}
+.sion-contact-v26 .sion-cta-desc-accent{color:#c5f9e9!important;font-weight:800!important;text-shadow:none!important;background:none!important;text-decoration:none!important;border:0!important}
+.sion-contact-v26>a.cta.light{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:16px!important;min-height:62px!important;padding:15px 20px 15px 28px!important;background:#fff!important;color:#073c74!important;border:2px solid #fff!important;border-radius:14px!important;font-size:18px!important;font-weight:900!important;letter-spacing:-.03em!important;box-shadow:0 8px 0 rgba(0,29,75,.36),0 17px 34px rgba(0,22,65,.36)!important;text-decoration:none!important;cursor:pointer!important;transform:none!important;transition:background .2s,transform .2s,box-shadow .2s!important}
+.sion-contact-v26>a.cta.light .sion-cta-arrow{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:33px!important;height:33px!important;border-radius:9px!important;background:#086bcb!important;color:#fff!important;font-size:21px!important;line-height:1!important}
+.sion-contact-v26>a.cta.light:hover{background:#eaf8ff!important;transform:translateY(-2px)!important;box-shadow:0 10px 0 rgba(0,29,75,.36),0 20px 36px rgba(0,22,65,.4)!important}
+.sion-contact-v26>a.cta.light:active{transform:translateY(4px)!important;box-shadow:0 3px 0 rgba(0,29,75,.36),0 8px 18px rgba(0,22,65,.28)!important}
+.sion-contact-v26>a.cta.light:focus-visible{outline:3px solid #a6f4db!important;outline-offset:5px!important}
+.sion-contact-v26 .sion-email-label{color:#b5f5e2!important}
+.sion-contact-v26 .sion-labeled-email:hover{border-color:#b5f5e2!important}
+@media(max-width:700px){.sion-contact-v26>a.cta.light{min-height:55px!important;font-size:16px!important;padding:12px 15px 12px 21px!important}}
+</style>
 </head>
 <body>
 <header class="sion-header"><div class="sion-navwrap">
@@ -465,8 +507,8 @@ body{background:#fff;color:#092652;font-family:'Noto Sans KR','Malgun Gothic',Ar
 <p class="eyebrow">CONTACT</p>
 <h2>인증대행 상담이 <span class="sion-cta-accent">필요하신가요?</span></h2>
 <p class="sion-contact-description">제품명과 주요 사양을 알려주시면 <strong class="sion-cta-desc-accent">예상 인증 항목과 시험 범위, 비용 및 절차</strong>를 안내해 드립니다.</p>
-<a class="cta light" href="contact.html">인증 상담하기</a>
-<div class="sion-contact-emails"><a href="mailto:certi@coon.co.kr">✉  certi@coon.co.kr</a><a href="mailto:jhkim@coon.co.kr">✉  jhkim@coon.co.kr</a></div>
+<a class="cta light" href="contact.html"><span>인증 상담하기</span><span aria-hidden="true" class="sion-cta-arrow">↗</span></a>
+<div class="sion-contact-emails"><a class="sion-labeled-email" href="mailto:certi@coon.co.kr"><span class="sion-email-label">대표 이메일</span><strong>certi@coon.co.kr</strong></a><a class="sion-labeled-email" href="mailto:jhkim@coon.co.kr"><span class="sion-email-label">담당자 이메일</span><strong>jhkim@coon.co.kr</strong></a></div>
 </section><footer class="sion-footer-v26"><div class="sion-footer-inner">
 <div class="sion-footer-company"><strong>주식회사 시온 | C·ON</strong><p>국내외 인증대행 · EMC·RF · 전기안전 · 신뢰성·환경시험</p></div>
 <div class="sion-footer-guidance">
