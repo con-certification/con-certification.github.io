@@ -516,7 +516,21 @@ body section.sion-contact-v26 .sion-labeled-email{background:rgba(4,33,75,.55)!i
 body section.sion-contact-v26 .sion-email-label{color:#b6dfff!important;font-size:13px!important}
 body section.sion-contact-v26 .sion-labeled-email strong{color:#fff!important;font-size:17px!important}
 @media(max-width:800px){body section.sion-contact-v26{padding:65px 6%!important;text-align:center!important}body section.sion-contact-v26 .sion-contact-description{font-size:16px!important;line-height:1.75!important}body section.sion-contact-v26 .sion-contact-emails{gap:10px!important}}
-</style></head>
+</style>
+<style id="approved-header-scale-fix">
+/* Match approved header at both 1060px and high-resolution desktop screenshots. */
+@media(min-width:901px){
+ body header.sion-header{height:clamp(119px,11.22vw,220px)!important;min-height:clamp(119px,11.22vw,220px)!important}
+ body header.sion-header .sion-navwrap{width:88%!important;max-width:none!important;min-height:100%!important;height:100%!important;gap:clamp(26px,2.5vw,52px)!important}
+ body header.sion-header .sion-brand{flex:0 0 clamp(160px,15vw,310px)!important;width:clamp(160px,15vw,310px)!important;min-width:clamp(160px,15vw,310px)!important;max-width:clamp(160px,15vw,310px)!important}
+ body header.sion-header .sion-brand img{width:100%!important;max-height:none!important;height:auto!important}
+ body header.sion-header .sion-navigation{flex:1!important;justify-content:space-between!important;gap:clamp(12px,1.3vw,27px)!important}
+ body header.sion-header .sion-navigation>a:not(.sion-contact-link){font-size:clamp(15px,1.5vw,30px)!important;padding:clamp(11px,1vw,20px) clamp(2px,.25vw,6px)!important;letter-spacing:-.035em!important}
+ body header.sion-header .sion-navigation>a:not(.sion-contact-link)::after{left:2px!important;right:2px!important;bottom:3px!important}
+ body header.sion-header .sion-navigation>a.sion-contact-link{font-size:clamp(15px,1.5vw,30px)!important;min-height:clamp(52px,5vw,102px)!important;padding:clamp(13px,1.3vw,27px) clamp(19px,1.9vw,40px)!important}
+}
+</style>
+</head>
 <body>
 <header class="sion-header"><div class="sion-navwrap">
 <a aria-label="주식회사 시온 홈" class="sion-brand" href="index.html"><img alt="C·ON Certification ON 주식회사 시온" src="sion-logo-transparent.png"/></a>
