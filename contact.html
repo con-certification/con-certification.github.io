@@ -576,7 +576,24 @@ html body section.sion-contact-v26 .sion-desc-break{display:block!important}
  html body header.sion-header .sion-navigation>a:not(.sion-contact-link){font-size:13px!important}
  html body header.sion-header .sion-navigation>a.sion-contact-link{font-size:13px!important;padding:12px 17px!important}
 }
-</style></head>
+</style><style>
+/* Center the approved logo + navigation as one unit; no other page changes. */
+@media (min-width:901px){
+ html body header.sion-header .sion-navwrap{
+   width:max-content!important;max-width:calc(100% - 40px)!important;
+   margin-left:auto!important;margin-right:auto!important;
+   padding:0!important;display:flex!important;justify-content:center!important;
+   align-items:center!important;gap:clamp(22px,2.6vw,34px)!important;
+ }
+ html body header.sion-header .sion-brand{flex:0 0 auto!important;}
+ html body header.sion-header .sion-navigation{
+   width:max-content!important;flex:0 0 auto!important;
+   justify-content:flex-start!important;margin:0!important;
+   gap:clamp(14px,1.65vw,25px)!important;
+ }
+}
+</style>
+</head>
 <body>
 <header class="sion-header"><div class="sion-navwrap">
 <a aria-label="주식회사 시온 홈" class="sion-brand" href="index.html"><img alt="C·ON Certification ON 주식회사 시온" src="sion-logo-transparent.png"/></a>
