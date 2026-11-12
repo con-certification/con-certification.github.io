@@ -516,18 +516,47 @@ body section.sion-contact-v26 .sion-labeled-email{background:rgba(4,33,75,.55)!i
 body section.sion-contact-v26 .sion-email-label{color:#b6dfff!important;font-size:13px!important}
 body section.sion-contact-v26 .sion-labeled-email strong{color:#fff!important;font-size:17px!important}
 @media(max-width:800px){body section.sion-contact-v26{padding:65px 6%!important;text-align:center!important}body section.sion-contact-v26 .sion-contact-description{font-size:16px!important;line-height:1.75!important}body section.sion-contact-v26 .sion-contact-emails{gap:10px!important}}
-</style>
-<style id="approved-header-scale-fix">
-/* Match approved header at both 1060px and high-resolution desktop screenshots. */
+</style><style>
+/* FINAL: approved header reference — proportional placement only. */
+@media (min-width: 901px) {
+ html body header.sion-header {height:119px!important;min-height:119px!important;max-height:119px!important}
+ html body header.sion-header .sion-navwrap {width:87.8%!important;max-width:none!important;min-width:0!important;height:119px!important;margin:0 auto!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:clamp(24px,2.8vw,39px)!important}
+ html body header.sion-header .sion-brand {flex:0 0 clamp(158px,14.9vw,205px)!important;width:clamp(158px,14.9vw,205px)!important;min-width:0!important;max-width:none!important;margin:0!important;padding:0!important}
+ html body header.sion-header .sion-brand img {width:100%!important;max-width:none!important;max-height:104px!important;height:auto!important;object-fit:contain!important}
+ html body header.sion-header .sion-navigation {flex:1 1 auto!important;width:auto!important;min-width:0!important;max-width:none!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:clamp(12px,1.5vw,21px)!important;margin:0!important;padding:0!important}
+ html body header.sion-header .sion-navigation>a:not(.sion-contact-link) {font-size:clamp(14px,1.42vw,17px)!important;font-weight:750!important;white-space:nowrap!important;padding:12px 0!important;flex:0 0 auto!important}
+ html body header.sion-header .sion-navigation>a.sion-contact-link {flex:0 0 auto!important;font-size:clamp(14px,1.42vw,17px)!important;padding:13px clamp(17px,2vw,23px)!important;border-radius:999px!important;white-space:nowrap!important}
+}
+</style><style id="approved-header-footer-readability">
+/* Approved screenshot header: match proportions, not magnification. */
 @media(min-width:901px){
- body header.sion-header{height:clamp(119px,11.22vw,220px)!important;min-height:clamp(119px,11.22vw,220px)!important}
- body header.sion-header .sion-navwrap{width:88%!important;max-width:none!important;min-height:100%!important;height:100%!important;gap:clamp(26px,2.5vw,52px)!important}
- body header.sion-header .sion-brand{flex:0 0 clamp(160px,15vw,310px)!important;width:clamp(160px,15vw,310px)!important;min-width:clamp(160px,15vw,310px)!important;max-width:clamp(160px,15vw,310px)!important}
- body header.sion-header .sion-brand img{width:100%!important;max-height:none!important;height:auto!important}
- body header.sion-header .sion-navigation{flex:1!important;justify-content:space-between!important;gap:clamp(12px,1.3vw,27px)!important}
- body header.sion-header .sion-navigation>a:not(.sion-contact-link){font-size:clamp(15px,1.5vw,30px)!important;padding:clamp(11px,1vw,20px) clamp(2px,.25vw,6px)!important;letter-spacing:-.035em!important}
- body header.sion-header .sion-navigation>a:not(.sion-contact-link)::after{left:2px!important;right:2px!important;bottom:3px!important}
- body header.sion-header .sion-navigation>a.sion-contact-link{font-size:clamp(15px,1.5vw,30px)!important;min-height:clamp(52px,5vw,102px)!important;padding:clamp(13px,1.3vw,27px) clamp(19px,1.9vw,40px)!important}
+ html body header.sion-header{height:119px!important;min-height:119px!important;max-height:119px!important}
+ html body header.sion-header .sion-navwrap{width:87.8%!important;max-width:1320px!important;height:119px!important;gap:32px!important;margin:0 auto!important;padding:0!important;justify-content:space-between!important}
+ html body header.sion-header .sion-brand{flex:0 0 155px!important;width:155px!important;max-width:155px!important}
+ html body header.sion-header .sion-brand img{width:155px!important;max-width:155px!important;height:auto!important;max-height:96px!important}
+ html body header.sion-header .sion-navigation{flex:1 1 auto!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;margin:0!important;padding:0!important}
+ html body header.sion-header .sion-navigation>a:not(.sion-contact-link){font-size:15px!important;font-weight:750!important;letter-spacing:-.035em!important;white-space:nowrap!important;padding:10px 0!important}
+ html body header.sion-header .sion-navigation>a.sion-contact-link{font-size:15px!important;padding:13px 20px!important;white-space:nowrap!important}
+}
+@media(min-width:901px) and (max-width:1050px){
+ html body header.sion-header .sion-navwrap{gap:26px!important}
+ html body header.sion-header .sion-navigation>a:not(.sion-contact-link){font-size:14px!important}
+ html body header.sion-header .sion-navigation>a.sion-contact-link{font-size:14px!important;padding:12px 17px!important}
+}
+/* Footer: readable hierarchy; preserve existing left/right layout and wave. */
+html body section.sion-contact-v26 .sion-contact-description{
+ color:#e2edf9!important;font-size:17px!important;font-weight:400!important;
+ line-height:1.85!important;letter-spacing:-.025em!important;max-width:590px!important;
+ text-shadow:0 1px 5px rgba(0,15,40,.15)!important;
+}
+html body section.sion-contact-v26 .sion-cta-desc-accent{
+ color:#ffffff!important;font-size:inherit!important;font-weight:650!important;
+ letter-spacing:inherit!important;text-decoration:none!important;
+ background:none!important;text-shadow:none!important;
+}
+html body section.sion-contact-v26 .sion-desc-break{display:block!important}
+@media(max-width:800px){
+ html body section.sion-contact-v26 .sion-contact-description{font-size:15px!important;line-height:1.8!important;max-width:100%!important}
 }
 </style>
 </head>
@@ -574,7 +603,7 @@ body section.sion-contact-v26 .sion-labeled-email strong{color:#fff!important;fo
 <section class="contactstrip sion-final-contact sion-contact-v26">
 <p class="eyebrow">CONTACT</p>
 <h2>인증대행 상담이 <span class="sion-cta-accent">필요하신가요?</span></h2>
-<p class="sion-contact-description">제품명과 주요 사양을 알려주시면 <strong class="sion-cta-desc-accent">예상 인증 항목과 시험 범위, 비용 및 절차</strong>를 안내해 드립니다.</p>
+<p class="sion-contact-description">제품명과 주요 사양을 알려주시면<br class="sion-desc-break"/><strong class="sion-cta-desc-accent">예상 인증 항목 · 시험 범위 · 비용 · 절차</strong>를 안내해 드립니다.</p>
 <a class="cta light" href="contact.html"><span>인증 상담하기</span><span aria-hidden="true" class="sion-cta-arrow">↗</span></a>
 <div class="sion-contact-emails"><a class="sion-labeled-email" href="mailto:certi@coon.co.kr"><span class="sion-email-label">대표 이메일</span><strong>certi@coon.co.kr</strong></a><a class="sion-labeled-email" href="mailto:jhkim@coon.co.kr"><span class="sion-email-label">담당자 이메일</span><strong>jhkim@coon.co.kr</strong></a></div>
 </section><footer class="sion-footer-v26"><div class="sion-footer-inner">
