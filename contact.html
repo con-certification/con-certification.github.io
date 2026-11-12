@@ -593,6 +593,40 @@ html body section.sion-contact-v26 .sion-desc-break{display:block!important}
  }
 }
 </style>
+<style id="approved-header-natural-spacing">
+/* Final desktop header spacing: balanced, centered navigation group.
+   No changes to the hero, contact content, footer, or scripts. */
+@media (min-width:1101px) {
+  html body header.sion-header .sion-navwrap {
+    width:max-content!important;
+    max-width:calc(100% - 64px)!important;
+    margin-inline:auto!important;
+    justify-content:center!important;
+    gap:clamp(38px,3.6vw,56px)!important;
+  }
+  html body header.sion-header .sion-navigation {
+    width:max-content!important;
+    flex:0 0 auto!important;
+    justify-content:flex-start!important;
+    gap:clamp(24px,2.05vw,34px)!important;
+  }
+}
+@media (min-width:901px) and (max-width:1100px) {
+  html body header.sion-header .sion-navwrap {
+    width:calc(100% - 48px)!important;
+    max-width:100%!important;
+    margin-inline:auto!important;
+    justify-content:center!important;
+    gap:clamp(18px,2vw,26px)!important;
+  }
+  html body header.sion-header .sion-navigation {
+    width:auto!important;
+    flex:0 1 auto!important;
+    justify-content:space-between!important;
+    gap:clamp(9px,1.15vw,14px)!important;
+  }
+}
+</style>
 </head>
 <body>
 <header class="sion-header"><div class="sion-navwrap">
