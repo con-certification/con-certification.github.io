@@ -765,7 +765,37 @@ html body section.sion-contact-v26 .sion-desc-break{display:block!important}
 #certification-consultation .approved-hotspot.staff{left:70%;top:36.5%;width:25%;height:5.8%}
 #certification-consultation .approved-hotspot.phone{left:69%;top:54.8%;width:26%;height:6.5%}
 @media(max-width:650px){#certification-consultation.approved-consultation-visual{padding:8px 0 14px}#certification-consultation .approved-visual-wrap{min-width:0}#certification-consultation .approved-hotspot{border-radius:3px}}
-</style></head>
+</style><style id="inquiry-board-layout-only">
+/* 2026-11-16: online inquiry layout only; do not change board behavior */
+@media (min-width: 768px) {
+  html body #certification-consultation.approved-consultation-visual {
+    padding-bottom: 0 !important;
+  }
+  html body #inquiry-board.section.alt {
+    width: calc(100% - 64px) !important;
+    max-width: 1480px !important;
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+    padding-top: 0 !important;
+    box-sizing: border-box !important;
+  }
+  html body #inquiry-board .inquiry-viewport {
+    height: 270px !important;
+  }
+  html body #inquiry-board .inquiry-head {margin-bottom: 14px !important;}
+}
+@media (max-width: 767px) {
+  html body #certification-consultation.approved-consultation-visual {padding-bottom: 4px !important;}
+  html body #inquiry-board.section.alt {
+    width: calc(100% - 28px) !important;
+    max-width: none !important;
+    margin-top: 8px !important;
+    box-sizing: border-box !important;
+  }
+  html body #inquiry-board .inquiry-viewport {height: 240px !important;}
+}
+</style>
+</head>
 <body>
 <header class="sion-header"><div class="sion-navwrap">
 <a aria-label="주식회사 시온 홈" class="sion-brand" href="index.html"><img alt="C·ON Certification ON 주식회사 시온" src="sion-logo-transparent.png"/></a>
