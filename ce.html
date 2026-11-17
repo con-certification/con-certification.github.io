@@ -100,7 +100,23 @@
 .sion-footer-icon-v28{width:25px;min-width:25px;height:25px;color:#65d9ff;display:inline-flex;align-items:center;justify-content:center;filter:drop-shadow(0 0 5px #18aaff55)}
 .sion-footer-icon-v28 svg{display:block;width:100%;height:100%}
 .sion-footer-v26 .sion-footer-guidance b{flex:0 0 120px!important}
-@media (max-width:580px){.sion-footer-v26 .sion-footer-guidance>div{display:grid!important;grid-template-columns:26px 1fr!important;align-items:start!important;gap:4px 10px!important}.sion-footer-v26 .sion-footer-guidance span:not(.sion-footer-icon-v28){grid-column:2!important}}</style></head><body><header class="sion-header"><div class="sion-navwrap">
+@media (max-width:580px){.sion-footer-v26 .sion-footer-guidance>div{display:grid!important;grid-template-columns:26px 1fr!important;align-items:start!important;gap:4px 10px!important}.sion-footer-v26 .sion-footer-guidance span:not(.sion-footer-icon-v28){grid-column:2!important}}
+/* Approved homepage header alignment and hover only */
+/* Contact page final approved navigation geometry; home body unaffected */
+@media(min-width:1001px){
+html body header.sion-header{height:clamp(100px,11.24vw,119px)!important;min-height:clamp(100px,11.24vw,119px)!important;max-height:119px!important;position:relative!important;background:#fff!important}
+html body header.sion-header .sion-navwrap{width:83vw!important;max-width:1100px!important;height:100%!important;min-height:0!important;margin:0 auto 0 6.1vw!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:2.7vw!important}
+html body header.sion-header .sion-brand{width:15vw!important;min-width:0!important;max-width:160px!important;flex:0 0 min(15vw,160px)!important}
+html body header.sion-header .sion-brand img{display:block!important;width:100%!important;max-width:none!important;max-height:100px!important;height:auto!important;object-fit:contain!important}
+html body header.sion-header .sion-navigation{display:flex!important;flex:1 1 auto!important;min-width:0!important;align-items:center!important;justify-content:space-between!important;gap:clamp(12px,1.8vw,22px)!important;margin:0!important;padding:0!important}
+html body header.sion-header .sion-navigation>a:not(.sion-contact-link){font-size:clamp(13px,1.5vw,16px)!important;font-weight:750!important;letter-spacing:-.035em!important;padding:10px 0!important;white-space:nowrap!important;color:#09284d!important}
+html body header.sion-header .sion-navigation>a.sion-contact-link{font-size:clamp(14px,1.42vw,17px)!important;padding:13px clamp(17px,2vw,23px)!important;white-space:nowrap!important;border-radius:999px!important;color:#fff!important;background:#0874d7!important}
+}
+@media(min-width:1001px) and (max-width:1200px){html body header.sion-header .sion-navwrap{width:88vw!important;margin-left:6vw!important;gap:2.1vw!important}html body header.sion-header .sion-navigation{gap:10px!important}html body header.sion-header .sion-navigation>a:not(.sion-contact-link){font-size:13px!important}html body header.sion-header .sion-navigation>a.sion-contact-link{font-size:13px!important;padding:12px 17px!important}}
+html body header.sion-header .sion-navigation>a:not(.sion-contact-link):hover,html body header.sion-header .sion-navigation>a:not(.sion-contact-link):focus-visible{color:#0b72d3!important;background:#edf7ff!important}
+html body header.sion-header .sion-navigation>a.sion-contact-link:hover,html body header.sion-header .sion-navigation>a.sion-contact-link:focus-visible{background:#0059b1!important;color:#fff!important;opacity:1!important;visibility:visible!important}
+@media(max-width:700px){html body header.sion-header .sion-navigation:not(.is-open){display:none!important}html body header.sion-header .sion-navigation.is-open{display:flex!important}}
+</style></head><body><header class="sion-header"><div class="sion-navwrap">
 <a aria-label="주식회사 시온 홈" class="sion-brand" href="index.html"><img alt="C·ON Certification ON 주식회사 시온" src="sion-logo-transparent.png"/></a>
 <button aria-controls="sion-navigation" aria-expanded="false" aria-label="전체 메뉴 열기" class="sion-menu-button" type="button">☰ <span>메뉴</span></button>
 <nav aria-label="주요 메뉴" class="sion-navigation" id="sion-navigation">
