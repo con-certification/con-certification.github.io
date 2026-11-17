@@ -123,6 +123,16 @@ body{font-family:'Noto Sans KR','Malgun Gothic',sans-serif;color:#0a2455;backgro
 .sion-footer-inner{width:min(1080px,calc(100% - 36px))}
 @media(max-width:950px) and (min-width:701px){.sion-navwrap{gap:8px}.sion-brand img{width:98px}.sion-navigation{gap:0}.sion-navigation>a:not(.sion-contact-link){font-size:12px;padding:10px 6px 14px}.sion-navigation>a:not(.sion-contact-link)::after{left:6px;right:6px}.contact-selfcheck h3{font-size:22px}}
 @media(max-width:700px){.sion-navwrap{min-height:64px;padding:0 14px}.sion-brand img{width:110px}.sion-navigation{top:64px}.contact-page-hero{height:215px}.contact-hero-inner{display:block;padding:17px 15px}.contact-hero-inner h1{font-size:31px;margin:5px 0 7px}.contact-hero-inner p{font-size:11px}.contact-hero-points{font-size:10px;gap:6px;margin:12px 0 0}.hero-art{width:115px;height:125px;right:-6px;bottom:0;opacity:.8}.contact-layout,#inquiry-board,.contact-prep,.contact-blog{width:calc(100% - 24px)}.contact-layout h2,#inquiry-board h2{font-size:24px}.contact-feature-grid{grid-template-columns:1fr}.contact-selfcheck{min-height:228px;padding:18px 12px 18px 42%}.contact-selfcheck .sion-decor{width:40%}.contact-selfcheck h3{font-size:20px}.contact-selfcheck p{font-size:10px}.contact-selfcheck .start-check{font-size:11px;padding:9px 11px}.contact-channel-stack{grid-template-rows:1fr 83px}.contact-email{min-height:155px;padding:13px 12px 12px 33%}.contact-channel-title{font-size:21px}.contact-phone{padding:10px 12px 10px 27%}.contact-phone a{font-size:14px}.contact-services{grid-template-columns:repeat(5,minmax(0,1fr));padding:8px 3px}.contact-services>strong{font-size:17px;grid-column:1/-1}.contact-services>span{font-size:9px}.contact-services>span img{height:37px;width:40px}.inquiry-viewport{height:220px}.inquiry-table-body tr{height:54px}.inquiry-table{font-size:10px}.inquiry-table-body td{padding:7px 3px}.detailgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.detailgrid article{min-height:122px}.contact-prep h2{font-size:17px}.blogbox{min-height:156px}.blogbox h2{font-size:19px}.blog-art{left:43%;height:92px}.blogbtn{font-size:10px;padding:9px 12px}.contact-final-cta h2{font-size:20px}.cta-links a{font-size:9px;padding:7px 10px}}
+
+/* Inquiry form footer: emphasized notices at left, actions aligned at right. */
+#inquiryForm .inquiry-form-bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:12px;padding:16px 18px;background:#edf6ff;border:1px solid #c8e2ff;border-radius:12px}
+#inquiryForm .inquiry-form-notices{display:flex;flex-direction:column;gap:9px;min-width:0;flex:1}
+#inquiryForm .inquiry-form-notice{margin:0!important;padding:0!important;border:0!important;background:transparent!important;color:#123e72!important;font-size:13px!important;font-weight:700!important;line-height:1.65!important;display:flex;align-items:flex-start;gap:8px}
+#inquiryForm .inquiry-notice-icon{color:#0877dd;flex:none;font-size:16px;font-weight:900;line-height:1.35}
+#inquiryForm .inquiry-form-bottom .formbuttons{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex:none;margin:0;padding:0}
+#inquiryForm .inquiry-form-bottom .board-btn{white-space:nowrap;min-height:42px}
+@media(max-width:850px){#inquiryForm .inquiry-form-bottom{flex-direction:column;align-items:stretch;gap:14px}#inquiryForm .inquiry-form-bottom .formbuttons{justify-content:flex-end}}
+@media(max-width:480px){#inquiryForm .inquiry-form-bottom{padding:12px}#inquiryForm .inquiry-form-notice{font-size:12px!important}}
 </style><style>
 /* 2026-11-12 approved-inspired visual refresh; functional scripts untouched */
 :root{--navy:#071d50;--blue:#006ce3;--line:#b9d9ff;--shadow:0 7px 24px rgba(4,53,123,.08)}
@@ -1068,11 +1078,16 @@ html body section.sion-contact-v26 .sion-desc-break{display:block!important}
 <div class="formfield full"><p class="formnote" style="margin:0">문의에 대한 답변을 받으시려면 연락처 또는 이메일 중 하나를 남겨주세요.</p></div>
 <div class="formfield"><label>제품명</label><input maxlength="120" name="product"/></div>
 <div class="formfield"><label>희망 인증</label><select name="certification"><option value="">선택해 주세요</option><option>KC 인증</option><option>CE 인증</option><option>FCC 인증</option><option>EMC / RF</option><option>전기안전 / 신뢰성</option><option>기타 해외인증</option><option>잘 모르겠음</option></select></div>
-<div class="formfield full"><label>문의 내용</label><textarea name="content" placeholder="제품의 전원, 무선기능, 사용 용도 등 알고 계신 내용을 적어주세요."></textarea><p class="formnote" style="margin-top:8px">제품 정보와 문의 내용을 자세히 작성해 주실수록 더욱 정확한 답변을 드릴 수 있습니다.</p></div>
+<div class="formfield full"><label>문의 내용</label><textarea name="content" placeholder="제품의 전원, 무선기능, 사용 용도 등 알고 계신 내용을 적어주세요."></textarea></div>
 </div>
-<p class="formnote">입력하신 정보는 인증 상담 및 회신을 위해 사용됩니다. 민감한 개인정보나 비밀번호는 입력하지 마세요.</p>
 <div class="formmsg" id="formMsg"></div>
-<div class="formbuttons"><button class="board-btn cancelbtn" id="writeCancel" type="button">취소</button><button class="board-btn" id="submitInquiry" type="submit">문의 등록</button></div>
+<div class="inquiry-form-bottom">
+  <div class="inquiry-form-notices">
+    <p class="inquiry-form-notice"><span class="inquiry-notice-icon" aria-hidden="true">ⓘ</span>제품 정보와 문의 내용을 자세히 작성해 주실수록 더욱 정확한 답변을 드릴 수 있습니다.</p>
+    <p class="inquiry-form-notice"><span class="inquiry-notice-icon" aria-hidden="true">✓</span>입력하신 정보는 인증 상담 및 회신을 위해 사용됩니다. 민감한 개인정보나 비밀번호는 입력하지 마세요.</p>
+  </div>
+  <div class="formbuttons"><button class="board-btn cancelbtn" id="writeCancel" type="button">취소</button><button class="board-btn" id="submitInquiry" type="submit">문의 등록</button></div>
+</div>
 </form>
 </div>
 </section>
