@@ -955,54 +955,41 @@ html body section.sion-contact-v26 .sion-desc-break{display:block!important}
   }
 }
 </style>
-<style id="sion-final-width-and-diagnosis-button-20261117">
-/* Keep the inquiry board unchanged; align the two lower sections to its width. */
-@media (min-width: 768px) {
-  html body section.contact-prep, html body section.contact-blog {
-    width: min(1240px, calc(100% - 96px)) !important;
+
+<style id="sion-prep-alignment-and-single-button-fix">
+/* Width only: remove the narrower sizing of the two sections below the inquiry board. */
+@media (min-width: 1101px) {
+  html body main section.contact-prep,
+  html body main section.contact-blog {
+    width: calc(100% - 96px) !important;
     max-width: 1240px !important;
-    margin-inline: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
-@media (min-width:768px) and (max-width:1100px) {
-  html body section.contact-prep, html body section.contact-blog {
+@media (min-width: 768px) and (max-width: 1100px) {
+  html body main section.contact-prep,
+  html body main section.contact-blog {
     width: calc(100% - 56px) !important;
     max-width: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
-/* Visual button overlay only: preserve existing diagnosis.html link and new-tab behavior. */
+@media (max-width: 767px) {
+  html body main section.contact-prep,
+  html body main section.contact-blog { width: calc(100% - 28px) !important; max-width: none !important; }
+}
+/* The approved picture already contains a white button. The link stays clickable,
+   but no second button is drawn on top of the image. */
 #certification-consultation .approved-hotspot.self {
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  box-sizing:border-box !important;
-  border:2px solid rgba(255,255,255,.95) !important;
-  border-radius:999px !important;
-  background:linear-gradient(135deg,#147cff 0%,#0053c9 55%,#003b9d 100%) !important;
-  color:#fff !important;
-  box-shadow:0 5px 15px rgba(0,17,80,.36),inset 0 1px 0 rgba(255,255,255,.28) !important;
-  text-decoration:none !important;
-  transition:filter .18s ease,transform .18s ease,box-shadow .18s ease;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: transparent !important;
 }
-#certification-consultation .approved-hotspot.self::after {
-  content:"자가진단 시작  ➜";
-  color:#fff;
-  font-size:clamp(10px,1.1vw,16px);
-  line-height:1;
-  font-weight:900;
-  white-space:nowrap;
-  text-shadow:0 1px 2px rgba(0,0,0,.18);
-}
-#certification-consultation .approved-hotspot.self:hover {
-  filter:brightness(1.14);
-  transform:translateY(-2px);
-  box-shadow:0 9px 20px rgba(0,30,100,.45) !important;
-}
-#certification-consultation .approved-hotspot.self:focus-visible {outline:3px solid #ffdb58;outline-offset:3px}
-@media(max-width:650px){
-  #certification-consultation .approved-hotspot.self{border-width:1px!important}
-  #certification-consultation .approved-hotspot.self::after{font-size:clamp(7px,2vw,11px)}
-}
+#certification-consultation .approved-hotspot.self::after { content: none !important; }
+#certification-consultation .approved-hotspot.self:hover { background: rgba(255,255,255,.10) !important; }
 </style>
 </head>
 <body>
