@@ -116,6 +116,67 @@ html body header.sion-header .sion-navigation>a.sion-contact-link{font-size:clam
 html body header.sion-header .sion-navigation>a:not(.sion-contact-link):hover,html body header.sion-header .sion-navigation>a:not(.sion-contact-link):focus-visible{color:#0b72d3!important;background:#edf7ff!important}
 html body header.sion-header .sion-navigation>a.sion-contact-link:hover,html body header.sion-header .sion-navigation>a.sion-contact-link:focus-visible{background:#0059b1!important;color:#fff!important;opacity:1!important;visibility:visible!important}
 @media(max-width:700px){html body header.sion-header .sion-navigation:not(.is-open){display:none!important}html body header.sion-header .sion-navigation.is-open{display:flex!important}}
+
+/* FINAL homepage header geometry - same as index.html, header only */
+
+/* Home-only: match the approved contact-page header without changing any links or scripts. */
+
+/* Approved header screenshot: 1059px image, content x=65..943, logo x=65..224, first menu x=253. */
+@media (min-width: 901px) {
+ html body header.sion-header {height:clamp(100px,11.24vw,119px)!important;min-height:clamp(100px,11.24vw,119px)!important;max-height:119px!important;}
+ html body header.sion-header .sion-navwrap {width:83vw!important;max-width:1100px!important;height:100%!important;margin:0 auto 0 6.1vw!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:2.7vw!important;}
+ html body header.sion-header .sion-brand {width:15.0vw!important;min-width:0!important;max-width:160px!important;flex:0 0 min(15vw,160px)!important;}
+ html body header.sion-header .sion-brand img {display:block!important;width:100%!important;height:auto!important;max-width:none!important;max-height:100px!important;object-fit:contain!important;}
+ html body header.sion-header .sion-navigation {display:flex!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;max-width:none!important;justify-content:space-between!important;align-items:center!important;gap:clamp(12px,1.8vw,22px)!important;margin:0!important;padding:0!important;}
+ html body header.sion-header .sion-navigation>a:not(.sion-contact-link) {font-size:clamp(13px,1.5vw,16px)!important;font-weight:750!important;letter-spacing:-.035em!important;padding:10px 0!important;white-space:nowrap!important;}
+ html body header.sion-header .sion-navigation>a.sion-contact-link {font-size:clamp(13px,1.5vw,16px)!important;font-weight:800!important;padding:13px 21px!important;border-radius:999px!important;white-space:nowrap!important;}
+}
+@media (min-width:901px) and (max-width:1050px){
+ html body header.sion-header .sion-navwrap{width:88vw!important;margin-left:6vw!important;gap:2.1vw!important}
+ html body header.sion-header .sion-navigation{gap:10px!important}
+ html body header.sion-header .sion-navigation>a:not(.sion-contact-link){font-size:13px!important}
+ html body header.sion-header .sion-navigation>a.sion-contact-link{font-size:13px!important;padding:12px 17px!important}
+}
+
+
+/* Approved contact header geometry — copied from final natural header. */
+
+/* Final desktop header spacing: balanced, centered navigation group.
+   No changes to the hero, contact content, footer, or scripts. */
+@media (min-width:1101px) {
+  html body header.sion-header .sion-navwrap {
+    width:max-content!important;
+    max-width:calc(100% - 64px)!important;
+    margin-inline:auto!important;
+    justify-content:center!important;
+    gap:clamp(38px,3.6vw,56px)!important;
+  }
+  html body header.sion-header .sion-navigation {
+    width:max-content!important;
+    flex:0 0 auto!important;
+    justify-content:flex-start!important;
+    gap:clamp(24px,2.05vw,34px)!important;
+  }
+}
+@media (min-width:901px) and (max-width:1100px) {
+  html body header.sion-header .sion-navwrap {
+    width:calc(100% - 48px)!important;
+    max-width:100%!important;
+    margin-inline:auto!important;
+    justify-content:center!important;
+    gap:clamp(18px,2vw,26px)!important;
+  }
+  html body header.sion-header .sion-navigation {
+    width:auto!important;
+    flex:0 1 auto!important;
+    justify-content:space-between!important;
+    gap:clamp(9px,1.15vw,14px)!important;
+  }
+}
+
+
+@media(min-width:901px){html body header.sion-header{position:relative!important}}
+
 </style></head><body><header class="sion-header"><div class="sion-navwrap">
 <a aria-label="주식회사 시온 홈" class="sion-brand" href="index.html"><img alt="C·ON Certification ON 주식회사 시온" src="sion-logo-transparent.png"/></a>
 <button aria-controls="sion-navigation" aria-expanded="false" aria-label="전체 메뉴 열기" class="sion-menu-button" type="button">☰ <span>메뉴</span></button>
