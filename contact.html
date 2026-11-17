@@ -933,6 +933,28 @@ html body section.sion-contact-v26 .sion-desc-break{display:block!important}
   .contact-prep { margin-top: 30px !important; }
 }
 </style>
+
+<style id="prep-blog-width-only-20261117">
+/* Match only the preparation cards and Naver blog banner to the inquiry board width. */
+@media (min-width:1101px) {
+  html body .contact-prep, html body .contact-blog {
+    width:calc(100% - 96px)!important; max-width:1240px!important;
+    margin-left:auto!important; margin-right:auto!important; box-sizing:border-box!important;
+  }
+}
+@media (min-width:768px) and (max-width:1100px) {
+  html body .contact-prep, html body .contact-blog {
+    width:calc(100% - 56px)!important; max-width:100%!important;
+    margin-left:auto!important; margin-right:auto!important; box-sizing:border-box!important;
+  }
+}
+@media (max-width:767px) {
+  html body .contact-prep, html body .contact-blog {
+    width:calc(100% - 28px)!important; max-width:100%!important;
+    margin-left:auto!important; margin-right:auto!important; box-sizing:border-box!important;
+  }
+}
+</style>
 </head>
 <body>
 <header class="sion-header"><div class="sion-navwrap">
