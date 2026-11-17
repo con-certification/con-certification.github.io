@@ -41,10 +41,141 @@ html{scroll-behavior:smooth}body{margin:0;background:#f5f8fc;color:#172b45;font-
 .diag-warning{padding:14px 16px;border-radius:10px;background:#f5f8fc;font-size:13px;color:#566a82;line-height:1.75;margin:18px 0}
 .diag-secondary{display:inline-block;text-decoration:none;color:#0969da;font-weight:700;margin-top:15px}
 @media(max-width:520px){.diag-wrap{margin-top:28px}.diag-options{display:grid;grid-template-columns:1fr 1fr}.diag-options label{min-width:0}}
+
+/* Exact final homepage header rules, in original cascade order */
+
+/* C·ON homepage-only redesign; original style.css stays untouched */
+:root{--ink:#122b43;--blue:#126dd2;--muted:#5c7185}
+body{font-family:"Pretendard","Noto Sans KR","Malgun Gothic",sans-serif}
+.sion-header{position:sticky;top:0;z-index:150;background:rgba(255,255,255,.97);border-bottom:1px solid #dfeaf3;box-shadow:0 3px 18px rgba(12,48,81,.05);min-height:86px}
+.sion-navwrap{width:min(1320px,94%);min-height:86px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.sion-brand{display:flex;align-items:center;width:205px;height:82px;flex:none}
+.sion-brand img{display:block;width:198px;height:78px;object-fit:contain}
+.sion-navigation{display:flex;align-items:center;gap:5px}
+.sion-navigation>a{position:relative;display:flex;align-items:center;justify-content:center;padding:13px 13px 16px;color:#1d3a50;font-size:15px;font-weight:780;white-space:nowrap;transition:color .2s,background .2s;border-radius:8px}
+.sion-navigation>a:not(.sion-contact-link):after{content:"";position:absolute;bottom:7px;left:14px;right:14px;height:2px;background:#b6cfdf;transition:height .2s,background .2s}
+.sion-navigation>a:not(.sion-contact-link):hover,.sion-navigation>a:not(.sion-contact-link):focus-visible{background:#eaf5fc;color:#0a79bc}
+.sion-navigation>a:not(.sion-contact-link):hover:after{height:3px;background:#1199dc}
+.sion-navigation>a.sion-contact-link{background:#1379d5;color:#fff;border-radius:999px;padding:14px 21px;margin-left:8px;box-shadow:0 8px 19px #146fb526}
+.sion-navigation>a.sion-contact-link:hover{background:#07589f}
+.sion-menu-button{display:none}
+
+
+html{scroll-padding-top:90px}
+.sion-header{position:sticky!important;top:0!important;z-index:9999!important;background:#fff!important;box-shadow:0 4px 22px rgba(5,38,72,.12)!important}
+.sion-navwrap{max-width:1440px!important}
+
+
+/* Contact page final approved navigation geometry; home body unaffected */
+@media(min-width:1001px){
+html body header.sion-header{height:clamp(100px,11.24vw,119px)!important;min-height:clamp(100px,11.24vw,119px)!important;max-height:119px!important;position:relative!important;background:#fff!important}
+html body header.sion-header .sion-navwrap{width:83vw!important;max-width:1100px!important;height:100%!important;min-height:0!important;margin:0 auto 0 6.1vw!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:2.7vw!important}
+html body header.sion-header .sion-brand{width:15vw!important;min-width:0!important;max-width:160px!important;flex:0 0 min(15vw,160px)!important}
+html body header.sion-header .sion-brand img{display:block!important;width:100%!important;max-width:none!important;max-height:100px!important;height:auto!important;object-fit:contain!important}
+html body header.sion-header .sion-navigation{display:flex!important;flex:1 1 auto!important;min-width:0!important;align-items:center!important;justify-content:space-between!important;gap:clamp(12px,1.8vw,22px)!important;margin:0!important;padding:0!important}
+html body header.sion-header .sion-navigation>a:not(.sion-contact-link){font-size:clamp(13px,1.5vw,16px)!important;font-weight:750!important;letter-spacing:-.035em!important;padding:10px 0!important;white-space:nowrap!important;color:#09284d!important}
+html body header.sion-header .sion-navigation>a.sion-contact-link{font-size:clamp(14px,1.42vw,17px)!important;padding:13px clamp(17px,2vw,23px)!important;white-space:nowrap!important;border-radius:999px!important;color:#fff!important;background:#0874d7!important}
+}
+@media(min-width:1001px) and (max-width:1200px){html body header.sion-header .sion-navwrap{width:88vw!important;margin-left:6vw!important;gap:2.1vw!important}html body header.sion-header .sion-navigation{gap:10px!important}html body header.sion-header .sion-navigation>a:not(.sion-contact-link){font-size:13px!important}html body header.sion-header .sion-navigation>a.sion-contact-link{font-size:13px!important;padding:12px 17px!important}}
+html body header.sion-header .sion-navigation>a:not(.sion-contact-link):hover,html body header.sion-header .sion-navigation>a:not(.sion-contact-link):focus-visible{color:#0b72d3!important;background:#edf7ff!important}
+html body header.sion-header .sion-navigation>a.sion-contact-link:hover,html body header.sion-header .sion-navigation>a.sion-contact-link:focus-visible{background:#0059b1!important;color:#fff!important;opacity:1!important;visibility:visible!important}
+@media(max-width:700px){html body header.sion-header .sion-navigation:not(.is-open){display:none!important}html body header.sion-header .sion-navigation.is-open{display:flex!important}}
+
+
+/* Home-only: match the approved contact-page header without changing any links or scripts. */
+
+/* Approved header screenshot: 1059px image, content x=65..943, logo x=65..224, first menu x=253. */
+@media (min-width: 901px) {
+ html body header.sion-header {height:clamp(100px,11.24vw,119px)!important;min-height:clamp(100px,11.24vw,119px)!important;max-height:119px!important;}
+ html body header.sion-header .sion-navwrap {width:83vw!important;max-width:1100px!important;height:100%!important;margin:0 auto 0 6.1vw!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:2.7vw!important;}
+ html body header.sion-header .sion-brand {width:15.0vw!important;min-width:0!important;max-width:160px!important;flex:0 0 min(15vw,160px)!important;}
+ html body header.sion-header .sion-brand img {display:block!important;width:100%!important;height:auto!important;max-width:none!important;max-height:100px!important;object-fit:contain!important;}
+ html body header.sion-header .sion-navigation {display:flex!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;max-width:none!important;justify-content:space-between!important;align-items:center!important;gap:clamp(12px,1.8vw,22px)!important;margin:0!important;padding:0!important;}
+ html body header.sion-header .sion-navigation>a:not(.sion-contact-link) {font-size:clamp(13px,1.5vw,16px)!important;font-weight:750!important;letter-spacing:-.035em!important;padding:10px 0!important;white-space:nowrap!important;}
+ html body header.sion-header .sion-navigation>a.sion-contact-link {font-size:clamp(13px,1.5vw,16px)!important;font-weight:800!important;padding:13px 21px!important;border-radius:999px!important;white-space:nowrap!important;}
+}
+@media (min-width:901px) and (max-width:1050px){
+ html body header.sion-header .sion-navwrap{width:88vw!important;margin-left:6vw!important;gap:2.1vw!important}
+ html body header.sion-header .sion-navigation{gap:10px!important}
+ html body header.sion-header .sion-navigation>a:not(.sion-contact-link){font-size:13px!important}
+ html body header.sion-header .sion-navigation>a.sion-contact-link{font-size:13px!important;padding:12px 17px!important}
+}
+
+
+/* Approved contact header geometry — copied from final natural header. */
+
+/* Final desktop header spacing: balanced, centered navigation group.
+   No changes to the hero, contact content, footer, or scripts. */
+@media (min-width:1101px) {
+  html body header.sion-header .sion-navwrap {
+    width:max-content!important;
+    max-width:calc(100% - 64px)!important;
+    margin-inline:auto!important;
+    justify-content:center!important;
+    gap:clamp(38px,3.6vw,56px)!important;
+  }
+  html body header.sion-header .sion-navigation {
+    width:max-content!important;
+    flex:0 0 auto!important;
+    justify-content:flex-start!important;
+    gap:clamp(24px,2.05vw,34px)!important;
+  }
+}
+@media (min-width:901px) and (max-width:1100px) {
+  html body header.sion-header .sion-navwrap {
+    width:calc(100% - 48px)!important;
+    max-width:100%!important;
+    margin-inline:auto!important;
+    justify-content:center!important;
+    gap:clamp(18px,2vw,26px)!important;
+  }
+  html body header.sion-header .sion-navigation {
+    width:auto!important;
+    flex:0 1 auto!important;
+    justify-content:space-between!important;
+    gap:clamp(9px,1.15vw,14px)!important;
+  }
+}
+
+
+@media(min-width:901px){html body header.sion-header{position:relative!important}}
+
+@media(max-width:900px){.sion-navwrap{width:min(100% - 36px,760px);min-height:76px;flex-wrap:wrap;gap:8px}.sion-brand{width:150px;height:72px}.sion-brand img{width:150px;height:68px}.sion-menu-button{display:block;margin-left:auto;border:1px solid #d7e5f2;background:#fff;color:#09284d;border-radius:10px;padding:10px 13px;font-weight:800;cursor:pointer}.sion-navigation{display:none;flex-basis:100%;flex-direction:column;align-items:stretch;gap:3px;padding:0 0 16px}.sion-navigation.is-open{display:flex}.sion-navigation>a{justify-content:flex-start;padding:12px 15px}.sion-navigation>a.sion-contact-link{margin:6px 0 0;justify-content:center}.sion-navigation>a:not(.sion-contact-link):after{display:none}}
+/* Self-check page only: visual presentation, not diagnostic logic */
+body{background:linear-gradient(180deg,#eef5fd 0%,#f8fbff 45%,#f0f5fb 100%);color:#142e4b}
+.diag-wrap{max-width:900px;margin:0 auto 100px;padding:48px 22px 0}
+.diag-kicker{display:inline-block;margin:0 0 10px;color:#0877d8;font-size:12px;font-weight:850;letter-spacing:2px}
+.diag-wrap h1{font-size:clamp(30px,4.4vw,44px);letter-spacing:-.045em;line-height:1.25;margin:8px 0 16px}
+.diag-intro{max-width:800px;color:#526c86;font-size:15px;line-height:1.95;margin-bottom:30px;word-break:keep-all}
+.diag-card{border:1px solid #e1ebf5;border-radius:22px;padding:clamp(22px,4.6vw,44px);box-shadow:0 16px 46px rgba(19,64,110,.09);background:#fff}
+.diag-field{margin-bottom:28px}
+.diag-field label,.diag-field legend{color:#173858;font-size:15px;font-weight:800;margin-bottom:11px}
+.diag-field input:not([type=checkbox]):not([type=radio]),.diag-field select{min-height:50px;border:1px solid #d2dfec;border-radius:11px;background:#fbfdff;transition:border-color .18s,box-shadow .18s}
+.diag-field input:focus,.diag-field select:focus{outline:none;border-color:#1783df;box-shadow:0 0 0 4px rgba(18,125,218,.11)}
+.diag-options{gap:10px}
+.diag-options label{background:#f9fcff;border:1px solid #dce7f1;border-radius:11px;padding:12px 15px;transition:background .2s,border-color .2s,box-shadow .2s}
+.diag-options label:hover{background:#f0f7ff;border-color:#8cbdeb}
+.diag-options label:has(input:checked){background:#e9f4ff;border-color:#2588de;box-shadow:inset 0 0 0 1px rgba(37,136,222,.18);color:#07569d}
+.diag-primary{min-height:54px;border-radius:11px;background:linear-gradient(100deg,#0870d5,#0b90e4);box-shadow:0 9px 18px rgba(10,112,208,.2);transition:transform .2s,filter .2s}
+.diag-primary:hover{background:linear-gradient(100deg,#075fbc,#087ad1);transform:translateY(-2px);filter:brightness(1.04)}
+.diag-note{color:#72859a}
+.diag-results{margin-top:26px}
+.diag-result{background:#f8fbff;border-radius:13px;border-color:#dce9f5;padding:19px 21px}
+.diag-warning{background:#eef6ff;border:1px solid #d9eafb}
+.diag-secondary{color:#096bd1}
+@media(max-width:520px){.diag-wrap{padding:30px 15px 0;margin-bottom:60px}.diag-card{padding:21px 16px;border-radius:16px}.diag-options{grid-template-columns:1fr 1fr}.diag-options label{padding:11px 9px;font-size:12px}}
+
+
+/* Independent diagnosis page: logo and home-return link only. */
+html body header.diag-simple-header .sion-navwrap{display:flex!important;align-items:center!important;justify-content:space-between!important;max-width:1100px!important;margin-left:auto!important;margin-right:auto!important;width:min(88%,1100px)!important;gap:20px!important}
+html body header.diag-simple-header .diag-home-link{display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:none!important;white-space:nowrap!important;background:#0874d7!important;color:white!important;text-decoration:none!important;font-size:clamp(13px,1.2vw,16px)!important;font-weight:800!important;padding:13px 21px!important;border-radius:999px!important;box-shadow:0 6px 16px rgba(8,116,215,.2)!important;transition:background .18s,transform .18s!important}
+html body header.diag-simple-header .diag-home-link:hover{background:#075ba9!important;transform:translateY(-2px)!important}
+html body header.diag-simple-header .diag-home-link:focus-visible{outline:3px solid #0a78d8;outline-offset:3px}
+@media(max-width:900px){html body header.diag-simple-header .sion-navwrap{width:calc(100% - 36px)!important;min-height:76px!important;flex-wrap:nowrap!important}html body header.diag-simple-header .sion-brand{width:130px!important;flex:0 0 130px!important}html body header.diag-simple-header .sion-brand img{width:130px!important;height:auto!important}html body header.diag-simple-header .diag-home-link{font-size:12px!important;padding:11px 13px!important}}
 </style>
 </head>
 <body>
-<header class="diag-header"><a href="index.html">C•on &nbsp; 주식회사 시온</a><a href="index.html">← 홈페이지</a></header>
+<header class="sion-header diag-simple-header"><div class="sion-navwrap"><a class="sion-brand" href="index.html" aria-label="주식회사 시온 홈페이지"><img src="sion-logo-transparent.png" alt="C·ON Certification ON 주식회사 시온"></a><a class="diag-home-link" href="index.html">← 홈페이지로 돌아가기</a></div></header>
 <main class="diag-wrap">
 <p class="diag-kicker">PRODUCT CERTIFICATION QUICK CHECK</p>
 <h1>30초 제품인증 자가진단</h1>
@@ -350,4 +481,5 @@ form.addEventListener('submit',e=>{
 });
 </script>
 <!-- 제품 인증 참고용 자가진단: 상담 전 예비 분류 -->
+<script>(function(){const b=document.querySelector('.sion-menu-button'),n=document.querySelector('.sion-navigation');if(!b||!n)return;b.addEventListener('click',()=>{let o=n.classList.toggle('is-open');b.setAttribute('aria-expanded',String(o));});})();</script>
 </body></html>
