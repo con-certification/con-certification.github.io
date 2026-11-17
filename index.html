@@ -781,12 +781,15 @@ html body header.sion-header .sion-navigation>a.sion-contact-link:hover,html bod
 
 
 @media(min-width:901px){html body header.sion-header{position:relative!important}}
-/* Home-only: exact user-approved self-check artwork, with a real clickable link over its CTA. */
+/* Home-only: user-approved self-check artwork with a visible, interactive HTML CTA. */
 #kc-self-check .sion-image-selfcheck{position:relative!important;display:block!important;width:100%!important;max-width:none!important;padding:0!important;min-height:0!important;overflow:hidden!important;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:clamp(12px,2vw,30px)!important}
 #kc-self-check .sion-image-selfcheck>img{display:block!important;width:100%!important;height:auto!important;object-fit:contain!important;border-radius:inherit!important}
-#kc-self-check .sion-image-selfcheck-action{position:absolute!important;left:5.4%!important;top:70.5%!important;width:17.5%!important;height:18%!important;display:block!important;z-index:2!important;border-radius:999px!important;cursor:pointer!important;background:transparent!important}
+#kc-self-check .sion-image-selfcheck-action{position:absolute!important;left:5.25%!important;top:70.1%!important;width:17.8%!important;height:18.2%!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:.35em!important;z-index:2!important;box-sizing:border-box!important;border:1px solid rgba(155,225,255,.85)!important;border-radius:999px!important;cursor:pointer!important;background:linear-gradient(180deg,#149bff 0%,#0069e9 100%)!important;color:#fff!important;font-size:clamp(8px,1.45vw,23px)!important;font-weight:800!important;line-height:1!important;text-decoration:none!important;white-space:nowrap!important;box-shadow:0 5px 14px rgba(0,24,85,.48),inset 0 1px 1px rgba(255,255,255,.45)!important;transition:transform .18s ease,filter .18s ease,box-shadow .18s ease!important;transform-origin:center!important}
+#kc-self-check .sion-image-selfcheck-action:hover{filter:brightness(1.17)!important;transform:translateY(-3px) scale(1.025)!important;box-shadow:0 10px 24px rgba(0,23,85,.55),inset 0 1px 1px rgba(255,255,255,.5)!important}
+#kc-self-check .sion-image-selfcheck-action:active{transform:translateY(0) scale(.985)!important;filter:brightness(.96)!important}
+#kc-self-check .sion-image-selfcheck-action .action-arrow{font-size:1.15em!important}
 #kc-self-check .sion-image-selfcheck-action:focus-visible{outline:3px solid #fff!important;outline-offset:2px!important;box-shadow:0 0 0 5px #0878ee!important}
-@media(max-width:600px){#kc-self-check .sion-image-selfcheck{border-radius:12px!important}#kc-self-check .sion-image-selfcheck-action{left:5%!important;width:19%!important}}
+@media(max-width:600px){#kc-self-check .sion-image-selfcheck{border-radius:12px!important}#kc-self-check .sion-image-selfcheck-action{font-size:clamp(6px,1.55vw,9px)!important}}
 </style>
 </head>
 <body>
@@ -809,7 +812,7 @@ html body header.sion-header .sion-navigation>a.sion-contact-link:hover,html bod
 <section class="section" id="kc-self-check">
 <div class="diagnosis-panel sion-image-selfcheck">
 <img src="sion-selfcheck-banner.png" alt="30초 제품인증 자가진단. 제품 기본정보를 입력하면 전자파(EMC), 무선(RF), 전기안전(Safety) 관련 인증 대상 여부를 1차 확인할 수 있습니다." loading="lazy"/>
-<a class="sion-image-selfcheck-action" href="diagnosis.html" rel="noopener noreferrer" target="_blank" aria-label="자가진단 시작 (새 창)"></a>
+<a class="sion-image-selfcheck-action" href="diagnosis.html" rel="noopener noreferrer" target="_blank" aria-label="자가진단 시작 (새 창)">자가진단 시작 <span class="action-arrow" aria-hidden="true">↗</span></a>
 </div>
 </section>
 <section class="section inquiry-home">
