@@ -208,12 +208,28 @@ body{background:radial-gradient(ellipse 65% 420px at 78% 180px,rgba(105,190,255,
 @media(max-width:700px){.diag-wrap{padding:22px 14px 0}.diag-hero-shell{padding:26px 22px 24px;border-radius:18px}.diag-hero-tag{margin-left:0}.diag-focus-items{gap:7px}.diag-focus-items>span{min-width:0;flex:1 1 30%;padding:9px;gap:5px}.diag-focus-items strong{font-size:12px}.diag-focus-items small{font-size:10px}.diag-form-heading{align-items:flex-start}.diag-form-step{font-size:10px;padding:7px 9px}}
 @media(max-width:420px){.diag-focus-items>span{flex:1 1 100%}.diag-hero-top{font-size:9px}.diag-form-heading h2{font-size:19px}.diag-form-step{display:none}}
 
+
+/* Final diagnosis-only refinement: compact independent header + 3D hero artwork */
+html body header.sion-header.diag-simple-header{height:68px!important;min-height:68px!important;max-height:68px!important;padding:0!important;position:relative!important}
+html body header.sion-header.diag-simple-header .sion-navwrap{height:68px!important;min-height:68px!important;max-height:68px!important;width:min(88%,1100px)!important;max-width:1100px!important;margin:0 auto!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:space-between!important}
+html body header.sion-header.diag-simple-header .sion-brand{height:64px!important;max-height:64px!important;width:126px!important;max-width:126px!important;min-width:0!important;flex:0 0 126px!important;display:flex!important;align-items:center!important}
+html body header.sion-header.diag-simple-header .sion-brand img{height:62px!important;max-height:62px!important;width:126px!important;max-width:126px!important;object-fit:contain!important}
+html body header.sion-header.diag-simple-header .diag-home-link{font-size:13px!important;padding:10px 17px!important;min-height:36px!important}
+.diag-hero-shell{min-height:260px;padding:38px 40px 34px;background:linear-gradient(110deg,#092747 0%,#0b355d 52%,#0d70b8 100%)}
+.diag-hero-shell:after{display:none}
+.diag-hero-shell .diag-hero-top,.diag-hero-shell h1,.diag-hero-shell .diag-intro,.diag-hero-shell .diag-focus-items{z-index:2;max-width:59%}
+.diag-hero-shell .diag-intro{font-size:13px;line-height:1.8}
+.diag-hero-shell h1{font-size:clamp(27px,3.6vw,40px)}
+.diag-hero-shell .diag-hero-tag{display:none}
+.diag-hero-art{position:absolute;z-index:1;right:-4%;top:50%;transform:translateY(-49%);width:54%;height:auto;max-height:110%;object-fit:contain;pointer-events:none;filter:drop-shadow(0 12px 24px rgba(0,14,40,.25))}
+@media(max-width:700px){html body header.sion-header.diag-simple-header,html body header.sion-header.diag-simple-header .sion-navwrap{height:64px!important;min-height:64px!important;max-height:64px!important}html body header.sion-header.diag-simple-header .sion-brand{height:60px!important;max-height:60px!important;width:112px!important;max-width:112px!important;flex:0 0 112px!important}html body header.sion-header.diag-simple-header .sion-brand img{width:112px!important;height:57px!important;max-height:57px!important}html body header.sion-header.diag-simple-header .diag-home-link{font-size:11px!important;padding:9px 11px!important}.diag-hero-shell{padding:26px 22px 25px;min-height:0}.diag-hero-shell .diag-hero-top,.diag-hero-shell h1,.diag-hero-shell .diag-intro,.diag-hero-shell .diag-focus-items{max-width:100%}.diag-hero-art{opacity:.15;width:75%;right:-25%;top:42%}.diag-hero-shell .diag-intro{font-size:12px}.diag-hero-shell h1{font-size:30px}}
+
 </style>
 </head>
 <body>
 <header class="sion-header diag-simple-header"><div class="sion-navwrap"><a class="sion-brand" href="index.html" aria-label="주식회사 시온 홈페이지"><img src="sion-logo-transparent.png" alt="C·ON Certification ON 주식회사 시온"></a><a class="diag-home-link" href="index.html">← 홈페이지로 돌아가기</a></div></header>
 <main class="diag-wrap">
-<div class="diag-hero-shell"><div class="diag-hero-top"><span class="diag-hero-dot" aria-hidden="true"></span><span>PRODUCT CERTIFICATION QUICK CHECK</span><span class="diag-hero-tag">KC 인증 사전 검토</span></div><h1>30초 제품인증 <em>자가진단</em></h1><p class="diag-intro">제품명·용도·전원·무선 기능을 바탕으로 국내 KC 인증 대상 여부를 간단히 1차 판단합니다. 제품 매뉴얼 및 실제 기능 확인 전의 참고 결과이며, 최종 판단은 상담을 통해 안내합니다. CE·FCC 등 해외인증은 별도 문의해 주세요.</p><div class="diag-focus-items" aria-label="검토 분야"><span><i class="diag-focus-mark">01</i><strong>전자파</strong><small>EMC</small></span><span><i class="diag-focus-mark">02</i><strong>무선</strong><small>RF</small></span><span><i class="diag-focus-mark">03</i><strong>전기안전</strong><small>Safety</small></span></div></div>
+<div class="diag-hero-shell"><img class="diag-hero-art" src="diagnosis-3d-laptop.png" alt="" aria-hidden="true" loading="eager"><div class="diag-hero-top"><span class="diag-hero-dot" aria-hidden="true"></span><span>PRODUCT CERTIFICATION QUICK CHECK</span><span class="diag-hero-tag">KC 인증 사전 검토</span></div><h1>30초 제품인증 <em>자가진단</em></h1><p class="diag-intro">제품명·용도·전원·무선 기능을 바탕으로 국내 KC 인증 대상 여부를 간단히 1차 판단합니다. 제품 매뉴얼 및 실제 기능 확인 전의 참고 결과이며, 최종 판단은 상담을 통해 안내합니다. CE·FCC 등 해외인증은 별도 문의해 주세요.</p><div class="diag-focus-items" aria-label="검토 분야"><span><i class="diag-focus-mark">01</i><strong>전자파</strong><small>EMC</small></span><span><i class="diag-focus-mark">02</i><strong>무선</strong><small>RF</small></span><span><i class="diag-focus-mark">03</i><strong>전기안전</strong><small>Safety</small></span></div></div>
 <form class="diag-card" id="diagForm">
 <div class="diag-form-heading"><div><span class="diag-form-eyebrow">PRODUCT INFORMATION</span><h2>제품 기본정보 입력</h2><p>제품 정보를 선택하면 인증 분야별 1차 검토 결과를 안내합니다.</p></div><span class="diag-form-step">STEP 01 / 01</span></div>
  <div class="diag-field"><label for="product">제품명 또는 제품 종류 *</label><input id="product" name="product" required maxlength="120" placeholder="예: 블루투스 키보드, 신발건조기"></div>
