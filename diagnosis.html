@@ -172,15 +172,50 @@ html body header.diag-simple-header .diag-home-link{display:inline-flex!importan
 html body header.diag-simple-header .diag-home-link:hover{background:#075ba9!important;transform:translateY(-2px)!important}
 html body header.diag-simple-header .diag-home-link:focus-visible{outline:3px solid #0a78d8;outline-offset:3px}
 @media(max-width:900px){html body header.diag-simple-header .sion-navwrap{width:calc(100% - 36px)!important;min-height:76px!important;flex-wrap:nowrap!important}html body header.diag-simple-header .sion-brand{width:130px!important;flex:0 0 130px!important}html body header.diag-simple-header .sion-brand img{width:130px!important;height:auto!important}html body header.diag-simple-header .diag-home-link{font-size:12px!important;padding:11px 13px!important}}
+
+/* Visual refinement: only presentation. Existing form fields, result engine and DB logic remain intact. */
+body{background:radial-gradient(ellipse 65% 420px at 78% 180px,rgba(105,190,255,.15),transparent 70%),linear-gradient(180deg,#f2f8ff 0%,#f9fbff 52%,#f0f5fb 100%)}
+.diag-wrap{max-width:940px;padding:38px 24px 0}
+.diag-hero-shell{position:relative;overflow:hidden;padding:34px 42px 32px;margin-bottom:24px;border-radius:24px;background:linear-gradient(112deg,#092747 0%,#0b3a69 55%,#0c6bb3 100%);box-shadow:0 18px 42px rgba(8,48,94,.16);color:#fff}
+.diag-hero-shell:before{content:"";position:absolute;right:-100px;top:-175px;width:450px;height:450px;border:1px solid rgba(130,205,255,.25);border-radius:50%;box-shadow:0 0 0 55px rgba(130,205,255,.035),0 0 0 110px rgba(130,205,255,.035);pointer-events:none}
+.diag-hero-shell:after{content:"";position:absolute;right:24px;bottom:0;width:38%;height:2px;background:linear-gradient(90deg,transparent,#60d4ff);pointer-events:none}
+.diag-hero-top{position:relative;display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:11px;font-weight:850;letter-spacing:1.6px;color:#9cdbff}
+.diag-hero-dot{width:7px;height:7px;background:#48d7ff;border-radius:50%;box-shadow:0 0 0 4px rgba(72,215,255,.12)}
+.diag-hero-tag{margin-left:auto;letter-spacing:0;color:#e5f7ff;border:1px solid rgba(190,225,255,.3);padding:6px 12px;border-radius:30px;background:rgba(255,255,255,.07)}
+.diag-hero-shell h1{position:relative;margin:17px 0 13px;font-size:clamp(30px,4.4vw,44px);line-height:1.23;color:#fff;letter-spacing:-.05em}
+.diag-hero-shell h1 em{font-style:normal;color:#67d9ff}
+.diag-hero-shell .diag-intro{position:relative;max-width:735px;margin:0;color:#d0e5f6;font-size:14px;line-height:1.9;word-break:keep-all}
+.diag-focus-items{position:relative;display:flex;gap:10px;margin-top:25px;flex-wrap:wrap}
+.diag-focus-items>span{display:flex;align-items:center;gap:9px;border:1px solid rgba(173,217,250,.22);border-radius:12px;background:rgba(255,255,255,.085);padding:10px 15px;min-width:150px}
+.diag-focus-mark{font-style:normal;font-size:10px;font-weight:850;color:#6cddff}
+.diag-focus-items strong{font-size:13px;font-weight:800;color:white}
+.diag-focus-items small{margin-left:auto;font-size:11px;color:#aedbf8}
+.diag-card{border-radius:22px;padding:clamp(24px,4vw,42px);box-shadow:0 14px 42px rgba(22,64,111,.075)}
+.diag-form-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:30px;padding-bottom:23px;border-bottom:1px solid #e5edf5}
+.diag-form-eyebrow{font-size:10px;font-weight:850;letter-spacing:1.6px;color:#087bd5}
+.diag-form-heading h2{margin:7px 0 6px;font-size:22px;letter-spacing:-.045em;color:#153450}
+.diag-form-heading p{margin:0;font-size:13px;line-height:1.6;color:#637d94}
+.diag-form-step{align-self:flex-start;white-space:nowrap;border-radius:30px;padding:8px 12px;background:#edf6ff;color:#0a75cb;font-size:11px;font-weight:800}
+.diag-field label,.diag-field legend{font-weight:800;color:#163650}
+.diag-options label{box-shadow:0 2px 6px rgba(19,64,110,.025)}
+.diag-options label:has(input:checked){background:#e6f4ff;border-color:#2185db;box-shadow:0 0 0 1px rgba(33,133,219,.2)}
+.diag-note{font-size:13px;color:#596f86;line-height:1.75}
+.diag-card#diagForm>.diag-note{padding:11px 14px;border-left:3px solid #a4d3f7;background:#f6faff;border-radius:0 8px 8px 0;margin-top:14px}
+.diag-primary{letter-spacing:-.01em;font-size:16px;box-shadow:0 8px 20px rgba(6,116,211,.19)}
+.diag-primary:focus-visible{outline:3px solid #7cc6ff;outline-offset:3px}
+.diag-results{border-top:4px solid #0b8ddf}
+.diag-result{border-left:3px solid #1d8dde}
+@media(max-width:700px){.diag-wrap{padding:22px 14px 0}.diag-hero-shell{padding:26px 22px 24px;border-radius:18px}.diag-hero-tag{margin-left:0}.diag-focus-items{gap:7px}.diag-focus-items>span{min-width:0;flex:1 1 30%;padding:9px;gap:5px}.diag-focus-items strong{font-size:12px}.diag-focus-items small{font-size:10px}.diag-form-heading{align-items:flex-start}.diag-form-step{font-size:10px;padding:7px 9px}}
+@media(max-width:420px){.diag-focus-items>span{flex:1 1 100%}.diag-hero-top{font-size:9px}.diag-form-heading h2{font-size:19px}.diag-form-step{display:none}}
+
 </style>
 </head>
 <body>
 <header class="sion-header diag-simple-header"><div class="sion-navwrap"><a class="sion-brand" href="index.html" aria-label="주식회사 시온 홈페이지"><img src="sion-logo-transparent.png" alt="C·ON Certification ON 주식회사 시온"></a><a class="diag-home-link" href="index.html">← 홈페이지로 돌아가기</a></div></header>
 <main class="diag-wrap">
-<p class="diag-kicker">PRODUCT CERTIFICATION QUICK CHECK</p>
-<h1>30초 제품인증 자가진단</h1>
-<p class="diag-intro">제품명·용도·전원·무선 기능을 바탕으로 국내 KC 인증 대상 여부를 간단히 1차 판단합니다. 제품 매뉴얼 및 실제 기능 확인 전의 참고 결과이며, 최종 판단은 상담을 통해 안내합니다. CE·FCC 등 해외인증은 별도 문의해 주세요. </p>
+<div class="diag-hero-shell"><div class="diag-hero-top"><span class="diag-hero-dot" aria-hidden="true"></span><span>PRODUCT CERTIFICATION QUICK CHECK</span><span class="diag-hero-tag">KC 인증 사전 검토</span></div><h1>30초 제품인증 <em>자가진단</em></h1><p class="diag-intro">제품명·용도·전원·무선 기능을 바탕으로 국내 KC 인증 대상 여부를 간단히 1차 판단합니다. 제품 매뉴얼 및 실제 기능 확인 전의 참고 결과이며, 최종 판단은 상담을 통해 안내합니다. CE·FCC 등 해외인증은 별도 문의해 주세요.</p><div class="diag-focus-items" aria-label="검토 분야"><span><i class="diag-focus-mark">01</i><strong>전자파</strong><small>EMC</small></span><span><i class="diag-focus-mark">02</i><strong>무선</strong><small>RF</small></span><span><i class="diag-focus-mark">03</i><strong>전기안전</strong><small>Safety</small></span></div></div>
 <form class="diag-card" id="diagForm">
+<div class="diag-form-heading"><div><span class="diag-form-eyebrow">PRODUCT INFORMATION</span><h2>제품 기본정보 입력</h2><p>제품 정보를 선택하면 인증 분야별 1차 검토 결과를 안내합니다.</p></div><span class="diag-form-step">STEP 01 / 01</span></div>
  <div class="diag-field"><label for="product">제품명 또는 제품 종류 *</label><input id="product" name="product" required maxlength="120" placeholder="예: 블루투스 키보드, 신발건조기"></div>
  <div class="diag-field"><label for="purpose">제품 용도 *</label><select id="purpose" required><option value="">선택해 주세요</option><option>가정용·생활가전</option><option>정보통신·사무기기</option><option>산업용 장비</option><option>조명·전기용품</option><option>의료·전문 장비</option><option>부품·액세서리</option><option>기타·잘 모르겠음</option></select></div>
  <div class="diag-field"><fieldset><legend>전원 방식 * (중복 선택 가능)</legend><p class="diag-note">제품에서 지원하는 전원을 모두 선택해 주세요.</p><div class="diag-options"><label><input type="checkbox" name="power" value="AC 전원">AC 직접 입력</label><label><input type="checkbox" name="power" value="DC 어댑터">외장 AC/DC 어댑터 사용</label><label><input type="checkbox" name="power" value="USB 전원">USB 전원</label><label><input type="checkbox" name="power" value="외부 DC 전원">외부 DC 전원 (DC 24 V 등)</label><label><input type="checkbox" name="power" value="충전식 배터리">충전식 배터리</label><label><input type="checkbox" name="power" value="일회용 건전지">일회용 건전지</label><label><input type="checkbox" name="power" value="무전원·수동">무전원·수동</label></div></fieldset></div>
