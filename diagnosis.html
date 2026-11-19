@@ -224,10 +224,51 @@ html body header.sion-header.diag-simple-header .diag-home-link{font-size:13px!i
 .diag-hero-art{position:absolute;z-index:1;right:-4%;top:50%;transform:translateY(-49%);width:54%;height:auto;max-height:110%;object-fit:contain;pointer-events:none;filter:drop-shadow(0 12px 24px rgba(0,14,40,.25))}
 @media(max-width:700px){html body header.sion-header.diag-simple-header,html body header.sion-header.diag-simple-header .sion-navwrap{height:64px!important;min-height:64px!important;max-height:64px!important}html body header.sion-header.diag-simple-header .sion-brand{height:60px!important;max-height:60px!important;width:112px!important;max-width:112px!important;flex:0 0 112px!important}html body header.sion-header.diag-simple-header .sion-brand img{width:112px!important;height:57px!important;max-height:57px!important}html body header.sion-header.diag-simple-header .diag-home-link{font-size:11px!important;padding:9px 11px!important}.diag-hero-shell{padding:26px 22px 25px;min-height:0}.diag-hero-shell .diag-hero-top,.diag-hero-shell h1,.diag-hero-shell .diag-intro,.diag-hero-shell .diag-focus-items{max-width:100%}.diag-hero-art{opacity:.15;width:75%;right:-25%;top:42%}.diag-hero-shell .diag-intro{font-size:12px}.diag-hero-shell h1{font-size:30px}}
 
+
+/* 2026-11-19: layout and depth refinement; no form or script changes */
+html body{background:
+ radial-gradient(ellipse 62% 36% at -9% 46%,rgba(57,157,236,.23),transparent 80%),
+ radial-gradient(ellipse 58% 40% at 110% 55%,rgba(54,158,242,.21),transparent 80%),
+ radial-gradient(ellipse 80% 24% at 52% 104%,rgba(24,111,207,.12),transparent 75%),
+ linear-gradient(145deg,#edf6ff 0%,#f8fbff 47%,#eaf4ff 100%)!important;
+ background-attachment:fixed!important}
+html body::before{content:"";position:fixed;z-index:-1;inset:0;pointer-events:none;background:
+ radial-gradient(ellipse 70% 65% at -25% 68%,transparent 68%,rgba(255,255,255,.72) 68.15%,transparent 68.6%),
+ radial-gradient(ellipse 70% 65% at 125% 50%,transparent 68%,rgba(255,255,255,.8) 68.15%,transparent 68.6%),
+ repeating-linear-gradient(160deg,transparent 0 44px,rgba(70,152,228,.018) 45px 46px,transparent 47px 90px)}
+html body .diag-wrap{width:min(100% - 48px,1050px)!important;max-width:1050px!important;padding:30px 0 0!important;margin:0 auto 90px!important}
+html body .diag-hero-shell{margin-bottom:22px!important}
+html body .diag-card#diagForm{padding:clamp(28px,4.3vw,48px)!important}
+html body header.sion-header.diag-simple-header .sion-navwrap{width:min(100% - 48px,1050px)!important;max-width:1050px!important;margin:0 auto!important;justify-content:space-between!important}
+html body header.sion-header.diag-simple-header .sion-brand{width:143px!important;max-width:143px!important;flex:0 0 143px!important}
+html body header.sion-header.diag-simple-header .sion-brand img{width:143px!important;max-width:143px!important}
+html body header.sion-header.diag-simple-header .diag-home-link{min-height:38px!important;padding:10px 17px!important}
+.diag-data-notice{display:flex;align-items:flex-start;gap:13px;margin-top:20px;padding:18px 20px;border-radius:13px;background:#f1f7fe;border:1px solid #dbeafa;border-left:4px solid #1688df;color:#3c5873}
+.diag-data-notice .diag-data-icon{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#dceeff;color:#0872c9;font-size:19px;font-weight:800}
+.diag-data-notice strong{display:block;font-size:14px;color:#153f64;margin:1px 0 5px}
+.diag-data-notice p{font-size:13px;line-height:1.8;margin:0;word-break:keep-all}
+@media(max-width:700px){html body .diag-wrap{width:calc(100% - 28px)!important;padding-top:22px!important}html body header.sion-header.diag-simple-header .sion-navwrap{width:calc(100% - 28px)!important}html body header.sion-header.diag-simple-header .sion-brand,html body header.sion-header.diag-simple-header .sion-brand img{width:120px!important;max-width:120px!important}html body header.sion-header.diag-simple-header .sion-brand{flex-basis:120px!important}.diag-data-notice{padding:15px 13px;gap:9px}}
+
+
+/* Final visual-only treatment: 3D blue background and balanced standalone header */
+html body{background:#eaf5ff url("diagnosis-blue-background.png") center top / cover fixed no-repeat!important}
+html body::before{display:none!important}
+html body header.sion-header.diag-simple-header{background:rgba(255,255,255,.97)!important;border-bottom:1px solid #e2eefa!important;box-shadow:0 3px 15px rgba(22,70,112,.09)!important}
+html body header.sion-header.diag-simple-header .sion-navwrap{display:grid!important;grid-template-columns:1fr auto 1fr!important;align-items:center!important;gap:20px!important}
+html body header.sion-header.diag-simple-header .sion-brand{justify-self:start!important}
+html body header.sion-header.diag-simple-header .diag-home-link{justify-self:end!important}
+.diag-header-center{display:flex;align-items:center;justify-content:center;gap:11px;white-space:nowrap;line-height:1.25}
+.diag-header-symbol{display:grid;place-items:center;width:34px;height:34px;border:1px solid #c6e3f9;border-radius:11px;background:linear-gradient(140deg,#e9f7ff,#d9ecff);color:#0879d1;font-size:21px;font-weight:800;box-shadow:0 3px 8px rgba(19,110,188,.09)}
+.diag-header-title{display:flex;flex-direction:column;gap:4px;font-size:14px;letter-spacing:-.035em;font-weight:850;color:#133b60}
+.diag-header-title small{font-size:10px;font-weight:750;letter-spacing:.08em;color:#3c91ca}
+html body .diag-card{box-shadow:0 20px 50px rgba(27,91,151,.15)!important}
+@media(max-width:700px){html body{background-attachment:scroll!important;background-size:auto 100%!important}html body header.sion-header.diag-simple-header .sion-navwrap{grid-template-columns:auto 1fr auto!important;gap:8px!important}.diag-header-center{gap:5px}.diag-header-symbol{display:none}.diag-header-title{font-size:11px}.diag-header-title small{font-size:8px;letter-spacing:0}html body header.sion-header.diag-simple-header .diag-home-link{font-size:10px!important;padding:8px 9px!important}html body header.sion-header.diag-simple-header .sion-brand,html body header.sion-header.diag-simple-header .sion-brand img{width:90px!important;max-width:90px!important}html body header.sion-header.diag-simple-header .sion-brand{flex-basis:90px!important}}
+@media(max-width:380px){.diag-header-title{font-size:10px}.diag-header-title small{font-size:7px}html body header.sion-header.diag-simple-header .diag-home-link{font-size:9px!important;padding:7px!important}}
+
 </style>
 </head>
 <body>
-<header class="sion-header diag-simple-header"><div class="sion-navwrap"><a class="sion-brand" href="index.html" aria-label="주식회사 시온 홈페이지"><img src="sion-logo-transparent.png" alt="C·ON Certification ON 주식회사 시온"></a><a class="diag-home-link" href="index.html">← 홈페이지로 돌아가기</a></div></header>
+<header class="sion-header diag-simple-header"><div class="sion-navwrap"><a class="sion-brand" href="index.html" aria-label="주식회사 시온 홈페이지"><img src="sion-logo-transparent.png" alt="C·ON Certification ON 주식회사 시온"></a><div class="diag-header-center" aria-label="제품인증 자가진단"><span class="diag-header-symbol" aria-hidden="true">✓</span><span class="diag-header-title">제품인증 자가진단<small>EMC · RF · Safety</small></span></div><a class="diag-home-link" href="index.html">← 홈페이지로 돌아가기</a></div></header>
 <main class="diag-wrap">
 <div class="diag-hero-shell"><img class="diag-hero-art" src="diagnosis-3d-laptop.png" alt="" aria-hidden="true" loading="eager"><div class="diag-hero-top"><span class="diag-hero-dot" aria-hidden="true"></span><span>PRODUCT CERTIFICATION QUICK CHECK</span><span class="diag-hero-tag">KC 인증 사전 검토</span></div><h1>30초 제품인증 <em>자가진단</em></h1><p class="diag-intro">제품명·용도·전원·무선 기능을 바탕으로 국내 KC 인증 대상 여부를 간단히 1차 판단합니다. 제품 매뉴얼 및 실제 기능 확인 전의 참고 결과이며, 최종 판단은 상담을 통해 안내합니다. CE·FCC 등 해외인증은 별도 문의해 주세요.</p><div class="diag-focus-items" aria-label="검토 분야"><span><i class="diag-focus-mark">01</i><strong>전자파</strong><small>EMC</small></span><span><i class="diag-focus-mark">02</i><strong>무선</strong><small>RF</small></span><span><i class="diag-focus-mark">03</i><strong>전기안전</strong><small>Safety</small></span></div></div>
 <form class="diag-card" id="diagForm">
@@ -241,8 +282,7 @@ html body header.sion-header.diag-simple-header .diag-home-link{font-size:13px!i
  <div class="diag-field" id="wirelessTypeWrap" hidden><label for="wirelessType">무선 방식</label><select id="wirelessType"><option>잘 모름</option><option>Bluetooth</option><option>Wi-Fi</option><option>LTE·5G</option><option>RF 리모컨·기타 무선</option><option>복수 무선 방식</option></select></div>
  <div class="diag-field" id="moduleWrap" hidden><fieldset><legend>기존 KC 인증 무선 모듈을 사용하나요?</legend><div class="diag-options"><label><input type="radio" name="certModule" value="예">예</label><label><input type="radio" name="certModule" value="아니요">아니요</label><label><input type="radio" name="certModule" value="잘 모름">잘 모르겠습니다</label></div></fieldset><p class="diag-note">인증번호를 직접 입력할 필요는 없습니다. 인증 모듈의 적용 조건은 상담 시 확인합니다.</p><div class="diag-field" id="moduleHistoryWrap" hidden><fieldset><legend>기존 무선 모듈의 시험 이력 (알고 계신 경우)</legend><div class="diag-options"><label><input type="radio" name="moduleHistory" value="RF만">RF만</label><label><input type="radio" name="moduleHistory" value="RF+REMC">RF + REMC</label><label><input type="radio" name="moduleHistory" value="잘 모름" checked>잘 모름</label></div></fieldset><p class="diag-note">시험 이력은 상담 시 확인합니다.</p></div></div>
  <button type="submit" class="diag-primary">자가진단 결과 확인하기</button>
- <p class="diag-note">이름·연락처는 수집하지 않습니다. 인증 결과에 ‘확인 필요’가 포함되면 입력하신 제품 정보와 진단 결과가 서비스 개선을 위해 저장됩니다. 자세한 내용은 하단 안내를 확인해 주세요.</p>
-<p class="diag-note" style="margin:16px 0 0">진단 결과 중 ‘확인 필요’ 항목이 있으면 제품명·용도·전원·무선 기능·인증별 결과·진단 시각을 기록합니다. 고객의 이름·연락처는 수집하지 않으며, 기록은 관리자만 조회할 수 있습니다. 입력란에 개인정보나 영업비밀을 적지 마세요.</p>
+ <div class="diag-data-notice" role="note"><span class="diag-data-icon" aria-hidden="true">ⓘ</span><div><strong>자가진단 정보 안내</strong><p>이름·연락처는 수집하지 않습니다. 진단 결과에 ‘확인 필요’ 항목이 있으면 제품명·용도·전원·무선 기능·인증별 결과·진단 시각이 서비스 개선을 위해 저장되며, 관리자만 조회할 수 있습니다. 입력란에 개인정보나 영업비밀을 기재하지 마세요.</p></div></div>
 </form>
 <section id="progress" class="diag-card diag-progress" role="status" aria-live="polite" hidden><div class="diag-spinner" aria-hidden="true"></div><strong>자가진단 결과를 정리하고 있습니다...</strong><p class="diag-note">입력 정보를 바탕으로 1차 결과를 표시합니다.</p></section>
 <section id="results" class="diag-card diag-results" hidden aria-live="polite">
