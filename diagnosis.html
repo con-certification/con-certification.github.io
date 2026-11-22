@@ -321,6 +321,11 @@ html body .diag-hero-shell .diag-hero-top,html body .diag-hero-shell h1,html bod
 /* Actual rendered 3D hero background asset, rather than subtle CSS rings */
 html body .diag-hero-shell{background-image:linear-gradient(90deg,rgba(3,23,49,.38) 0%,rgba(3,23,49,.12) 52%,rgba(3,23,49,0) 100%),url("diagnosis-hero-background.png")!important;background-size:cover!important;background-position:center center!important}
 html body .diag-hero-shell::before,html body .diag-hero-shell::after{display:none!important}
+
+/* 관리자 전용 페이지 이동 링크 — 자가진단 하단에만 표시 */
+.diag-admin-footer{display:flex;justify-content:flex-end;margin:18px 3px 0;padding:0 0 12px}
+.diag-admin-footer a{font-size:12px;font-weight:650;color:#54718d;text-decoration:none;padding:7px 9px;border-radius:7px}
+.diag-admin-footer a:hover,.diag-admin-footer a:focus-visible{color:#0874d7;background:rgba(255,255,255,.75);text-decoration:underline}
 </style>
 </head>
 <body>
@@ -349,6 +354,7 @@ html body .diag-hero-shell::before,html body .diag-hero-shell::after{display:non
 <a id="consultLink" class="diag-primary" style="display:block;text-align:center;text-decoration:none" href="contact.html">최종 인증 대상 여부 문의하기 →</a>
 <a href="#diagForm" class="diag-secondary">입력 내용 수정하기</a>
 </section>
+<div class="diag-admin-footer"><a href="diagnosis-admin.html" aria-label="자가진단 관리자 로그인">관리자 로그인</a></div>
 </main>
 <script>
 const form=document.getElementById('diagForm');
