@@ -592,16 +592,48 @@ form.addEventListener('submit',e=>{
  }else{
   resultAdd(items,'전자파 적합성평가','확인 필요','입력된 제품명과 전원 정보만으로는 전자회로 및 기능을 충분히 확인하기 어렵습니다. 정확한 판단을 위해 제품 매뉴얼 및 실제 기능 확인이 필요합니다.');
  }
- if(lowVoltageBody){
-  resultAdd(items,'전기안전','비대상 가능성 높음','일반적인 저전압 본체를 기준으로 합니다. 배터리·충전기·동봉 어댑터는 별도 확인 대상입니다.');
- }else if(safetyHousehold&&ac){
-  resultAdd(items,'전기안전','대상 가능성 높음','일반적인 AC 전원 '+category+' 제품을 기준으로 합니다. 정격·용도 및 세부 안전관리 품목을 최종 확인합니다.');
- }else if(safetySupply&&ac){
-  resultAdd(items,'전기안전','대상 가능성 높음','AC 전원 관련 제품의 일반적인 안전관리 품목을 기준으로 합니다. 제품별 적용 조건과 예외를 확인합니다.');
- }else if(isPassive&&!electricConnection&&!passiveAccessory){
-  resultAdd(items,'전기안전','비대상 가능성 높음','안전관리 대상 전기부품이 없는 단순 수동 제품이라는 전제입니다.');
+ // 전기용품 및 생활용품 안전관리 운용요령(2026-273호) 별표 1·2·3·3의2에 따른
+ // 예비 품목 후보 검색. 별표의 정격·제외조건을 완전히 검증하지 않은 품목은 확정하지 않습니다.
+ // 법정 품목명과 제품 통칭이 다를 수 있으므로 불명확한 제품은 반드시 확인 필요로 둡니다.
+ const safetyCatalog=[
+  {kind:'안전인증',name:'전선·케이블',terms:['전원코드','전원케이블','전선','전기케이블'],check:'전선 종류·정격·용도와 적용 제외 여부'},
+  {kind:'안전인증',name:'전기접속기기',terms:['멀티탭','멀티콘센트','콘센트','전원플러그','변환플러그','연장코드'],check:'정격전압·전류, 플러그·콘센트 구조 및 세부 품목'},
+  {kind:'안전인증',name:'전기기기용 스위치',terms:['전기기기용스위치'],check:'사용처와 스위치의 정격·구조'},
+  {kind:'안전인증',name:'전기밥솥',terms:['전기압력밥솥','전기밥솥','전기보온밥솥'],check:'가열 방식과 정격·세부 품목'},
+  {kind:'안전인증',name:'전기다리미',terms:['전기다리미','스팀다리미'],check:'정격과 용도'},
+  {kind:'안전인증',name:'전기세탁기',terms:['드럼세탁기','세탁기'],check:'제품의 기능과 정격'},
+  {kind:'안전인증',name:'전기냉장·냉동기기',terms:['김치냉장고','냉장고','냉동고'],check:'냉장·냉동 방식과 정격'},
+  {kind:'안전인증',name:'전기청소기',terms:['진공청소기','전기청소기','청소기'],check:'배터리식·충전기 구성과 세부 품목'},
+  {kind:'안전인증',name:'전기주전자',terms:['전기주전자','전기포트'],check:'가열 방식과 정격'},
+  {kind:'안전인증',name:'전기모발건조기',terms:['헤어드라이어','헤어드라이기','헤어드라이','드라이기'],check:'정격과 용도'},
+  {kind:'안전인증',name:'전기난방·온열기기',terms:['전기장판','전기담요','전기요','전기매트','전기히터','전기난로'],check:'가열 구조·사용처·정격'},
+  {kind:'안전인증',name:'전기조리기기',terms:['전자레인지','에어프라이어','전기오븐','전기레인지','인덕션'],check:'가열 방식·정격·세부 품목'},
+  {kind:'안전인증',name:'전기선풍기',terms:['선풍기','서큘레이터'],check:'AC/DC 구동, 휴대용 여부 및 정격'},
+  {kind:'안전확인',name:'전지·배터리 관련 품목',terms:['리튬이온배터리','리튬폴리머배터리','배터리팩','보조배터리','파워뱅크'],check:'전지 화학계·셀/팩 구분·용도·정격·적용 예외'},
+  {kind:'안전확인',name:'전원공급장치 관련 품목',terms:['ac어댑터','ac아답터','전원어댑터','전원공급장치','smps','파워서플라이','충전기'],check:'AC/DC 입력·출력, 제품 용도와 별표상 세부 품목'},
+  {kind:'안전확인',name:'정보·영상·음향기기 관련 품목',terms:['모니터','텔레비전','tv수상기','프로젝터','오디오앰프'],check:'전원·정격·기기 종류 및 적용 제외 조건'},
+  {kind:'공급자적합성확인',name:'정보기기 관련 품목',terms:['데스크탑','데스크톱','컴퓨터','노트북','랩톱','태블릿','스마트폰'],check:'세부 품목·용도·전원 구성 및 2026-11-01 변경사항'},
+  {kind:'공급자적합성확인',name:'정보기기 주변기기 관련 품목',terms:['키보드','마우스','프린터','스캐너'],check:'본체·전원장치·배터리의 구분 및 세부 품목'}
+ ];
+ const safetyHits=safetyCatalog.flatMap(x=>x.terms.map(t=>({...x,term:normalizeName(t)})))
+  .filter(x=>queryName.includes(x.term)).sort((a,b)=>b.term.length-a.term.length);
+ const safetyHit=safetyHits[0];
+ const safetyKinds=[...new Set(safetyHits.filter(x=>x.term.length===safetyHit?.term.length).map(x=>x.kind))];
+ const inputIsAC=ac||powers.includes('DC 어댑터');
+ const onlyPassive=isPassive&&wireless==='없음';
+ if(safetyHit){
+  const ambiguous=safetyKinds.length>1;
+  const needsPowerCheck=!ac && !['전지·배터리 관련 품목','정보기기 관련 품목','정보기기 주변기기 관련 품목'].includes(safetyHit.name);
+  const status='확인 필요';
+  const kindText=ambiguous?'안전관리 유형 재확인':safetyHit.kind+' 대상 품목 후보';
+  resultAdd(items,'전기안전',status,
+   '품목 검색 결과: '+safetyHit.name+' / '+kindText+'. '+
+   (needsPowerCheck?'현재 입력 전원 방식이 일반적인 품목 적용 조건과 다를 수 있습니다. ':'')+
+   '확인 항목: '+safetyHit.check+'. 제품 사양과 현행 고시 별표의 적용 범위·제외조건을 대조해야 최종 분류할 수 있습니다.');
+ }else if(onlyPassive&&!electricConnection&&!passiveAccessory){
+  resultAdd(items,'전기안전','비대상 가능성 높음','능동 전기기능이 없는 단순 수동 제품이라는 입력을 전제로 한 예비 판단입니다. 전기부품·배터리 등이 별도로 포함되면 재검토가 필요합니다.');
  }else{
-  resultAdd(items,'전기안전','확인 필요',ac?'AC 전원을 사용하더라도 모든 제품이 전기안전 대상은 아닙니다. 제품 매뉴얼 및 실제 기능 확인이 필요합니다.':'제품 종류와 전원 구성에 따라 전기안전 대상 여부가 달라질 수 있습니다.');
+  resultAdd(items,'전기안전','확인 필요','입력된 제품명만으로 법정 세부 품목을 일치시킬 수 없습니다. AC/DC 전원 여부만으로 안전관리 대상·비대상을 결정하지 않으며, 안전인증·안전확인·공급자적합성확인·안전성검사 및 적용 제외 여부를 확인해야 합니다.');
  }
  if(conflict){
   resultAdd(items,'무선 인증','확인 필요','제품명과 무선 기능 입력이 서로 다릅니다.');
